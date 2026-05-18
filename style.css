@@ -58,6 +58,8 @@ to{
     61%, 80%{
         content: "Data entry";
     }
+    81%, 100%{
+        content: "Data Analyst";
     }
 }
 
