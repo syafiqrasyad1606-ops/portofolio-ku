@@ -50,7 +50,7 @@ to{
         content: "web developer";
     }
     21%, 40%{
-        content: "Developer";
+        content: "UI/UX Design";
     }
     41%, 60%{
         content: "web designer";
@@ -58,8 +58,6 @@ to{
     61%, 80%{
         content: "Data entry";
     }
-    81%, 100%{
-        content: "script writer";
     }
 }
 
