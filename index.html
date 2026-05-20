@@ -3,15 +3,279 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Portfolio Syafiq Rasyad — Programmer, Web Designer, UI/UX Designer">
+  <meta name="description" content="Portfolio Syafiq Rasyad — , Web Designer, UI/UX Designer">
   <meta name="theme-color" content="#07080f">
   <title>Portfolio Syafiq Rasyad</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/clash-display" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/cabinet-grotesk" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(7,8,15,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.25rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal-box {
+    background: #13141f;
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    width: 100%; max-width: 540px;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 2rem 1.75rem;
+    position: relative;
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(127,255,110,0.2) transparent;
+  }
+  .modal-overlay.open .modal-box { transform: translateY(0) scale(1); }
+
+  .modal-close {
+    position: absolute; top: 1.1rem; right: 1.1rem;
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 50%; width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1rem; color: #7a7a9a;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .modal-close:hover, .modal-close:active { background: rgba(255,255,255,0.12); color: #eeeeff; }
+
+  .modal-emoji { font-size: 2.8rem; margin-bottom: 0.75rem; display: block; }
+  .modal-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: #eeeeff; margin-bottom: 0.5rem;
+  }
+  .modal-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem; color: #7fff6e;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .modal-desc {
+    font-size: 0.92rem; color: #9a9abb; line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+  .modal-section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #7a7a9a;
+    margin-bottom: 0.6rem;
+  }
+  .modal-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 1.4rem; }
+  .modal-tag {
+    font-family: 'Space Mono', monospace; font-size: 0.68rem;
+    padding: 4px 13px; border-radius: 100px;
+    background: rgba(127,255,110,0.07);
+    color: #7fff6e; border: 0.5px solid rgba(127,255,110,0.2);
+  }
+  .modal-highlights { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+  .modal-highlight-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.87rem; color: #9a9abb; line-height: 1.6;
+  }
+  .modal-highlight-item .icon { flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+  .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .modal-btn {
+    flex: 1; min-width: 120px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 11px 20px; border-radius: 12px;
+    font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700;
+    text-decoration: none; cursor: pointer; border: none;
+    transition: all 0.25s cubic-bezier(.34,1.56,.64,1);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .modal-btn-primary {
+    background: linear-gradient(135deg, #7fff6e, #7eb8ff);
+    color: #07080f;
+  }
+  .modal-btn-primary:hover, .modal-btn-primary:active { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 24px rgba(127,255,110,0.3); }
+  .modal-btn-secondary {
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    color: #eeeeff;
+  }
+  .modal-btn-secondary:hover, .modal-btn-secondary:active { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+  .cmd-overlay {
+    position: fixed; inset: 0; z-index: 600;
+    background: rgba(7,8,15,0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex; align-items: flex-start; justify-content: center;
+    padding-top: clamp(3rem, 12vh, 8rem);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .cmd-overlay.open { opacity: 1; pointer-events: all; }
+
+  .cmd-box {
+    background: #0e0f1a;
+    border: 0.5px solid rgba(127,255,110,0.2);
+    border-radius: 18px;
+    width: 100%; max-width: 520px;
+    margin: 0 1.25rem;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(127,255,110,0.05);
+    transform: translateY(-16px) scale(0.97);
+    transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
+  }
+  .cmd-overlay.open .cmd-box { transform: translateY(0) scale(1); }
+
+  .cmd-input-wrap {
+    display: flex; align-items: center; gap: 12px;
+    padding: 1rem 1.25rem;
+    border-bottom: 0.5px solid rgba(255,255,255,0.07);
+  }
+  .cmd-icon { font-size: 1.1rem; color: #7fff6e; flex-shrink: 0; }
+  .cmd-input {
+    flex: 1; background: transparent; border: none; outline: none;
+    font-family: 'Space Mono', monospace; font-size: 0.9rem;
+    color: #eeeeff; caret-color: #7fff6e;
+  }
+  .cmd-input::placeholder { color: #7a7a9a; }
+  .cmd-kbd {
+    font-family: 'Space Mono', monospace; font-size: 0.6rem;
+    color: #7a7a9a; background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 5px; padding: 2px 7px; white-space: nowrap;
+  }
+
+  .cmd-results { max-height: 340px; overflow-y: auto; padding: 0.5rem 0; }
+  .cmd-section-header {
+    font-family: 'Space Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: #7a7a9a; padding: 0.5rem 1.25rem 0.3rem;
+  }
+  .cmd-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 0.7rem 1.25rem; cursor: pointer;
+    transition: background 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .cmd-item:hover, .cmd-item.active {
+    background: rgba(127,255,110,0.07);
+  }
+  .cmd-item-icon {
+    width: 34px; height: 34px; border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+    background: rgba(255,255,255,0.05);
+    border: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .cmd-item-text { flex: 1; }
+  .cmd-item-name { font-size: 0.88rem; color: #eeeeff; font-weight: 700; }
+  .cmd-item-sub { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #7a7a9a; margin-top: 1px; }
+  .cmd-item-enter {
+    font-family: 'Space Mono', monospace; font-size: 0.6rem;
+    color: #7a7a9a; opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .cmd-item:hover .cmd-item-enter, .cmd-item.active .cmd-item-enter { opacity: 1; }
+
+  .cmd-footer {
+    border-top: 0.5px solid rgba(255,255,255,0.07);
+    padding: 0.6rem 1.25rem;
+    display: flex; gap: 1.25rem; align-items: center;
+  }
+  .cmd-footer-hint {
+    font-family: 'Space Mono', monospace; font-size: 0.6rem; color: #7a7a9a;
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  .cmd-hint-btn {
+    position: fixed; bottom: 1.25rem; left: 1.25rem; z-index: 90;
+    background: rgba(14,15,26,0.9);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 6px 12px;
+    font-family: 'Space Mono', monospace; font-size: 0.62rem;
+    color: #7a7a9a; cursor: pointer;
+    display: flex; align-items: center; gap: 7px;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    backdrop-filter: blur(8px);
+  }
+  .cmd-hint-btn:hover, .cmd-hint-btn:active {
+    border-color: rgba(127,255,110,0.3); color: #7fff6e;
+  }
+  .cmd-hint-btn kbd {
+    background: rgba(255,255,255,0.08); border-radius: 4px;
+    padding: 1px 5px; font-size: 0.6rem;
+  }
+
+  #particles-canvas {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0;
+    opacity: 0.55;
+  }
+
+  body.light .modal-box { background: #ffffff; border-color: rgba(0,0,0,0.1); }
+  body.light .modal-title { color: #18181f; }
+  body.light .modal-desc { color: #555570; }
+  body.light .cmd-box { background: #f4f4f8; border-color: rgba(61,181,46,0.3); }
+  body.light .cmd-input { color: #18181f; }
+  body.light .cmd-item-name { color: #18181f; }
+  body.light .cmd-item:hover, body.light .cmd-item.active { background: rgba(61,181,46,0.08); }
+  body.light .cmd-hint-btn { background: rgba(244,244,248,0.9); }
+  </style>
 </head>
 <body>
+
+  <canvas id="particles-canvas"></canvas>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle tema">
+    <span class="toggle-icon" id="themeIcon">☀️</span>
+    <span id="themeLabel">Light</span>
+  </button>
+
+  <button class="cmd-hint-btn" onclick="openCmd()" aria-label="Buka command palette">
+    <kbd>Ctrl</kbd><kbd>K</kbd> <span>Command palette</span>
+  </button>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" onclick="closeModal()" aria-label="Tutup">✕</button>
+      <span class="modal-emoji" id="modalEmoji"></span>
+      <div class="modal-subtitle" id="modalSubtitle"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-section-title">Tech Stack</div>
+      <div class="modal-tags" id="modalTags"></div>
+      <div class="modal-section-title">Highlights</div>
+      <div class="modal-highlights" id="modalHighlights"></div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <div class="cmd-overlay" id="cmdOverlay" onclick="closeCmdOutside(event)">
+    <div class="cmd-box">
+      <div class="cmd-input-wrap">
+        <span class="cmd-icon">⌘</span>
+        <input class="cmd-input" id="cmdInput" placeholder="Cari sesuatu... (project, link, section)" autocomplete="off" spellcheck="false">
+        <span class="cmd-kbd">ESC untuk tutup</span>
+      </div>
+      <div class="cmd-results" id="cmdResults"></div>
+      <div class="cmd-footer">
+        <span class="cmd-footer-hint">↑↓ navigasi</span>
+        <span class="cmd-footer-hint">↵ pilih</span>
+        <span class="cmd-footer-hint">ESC tutup</span>
+      </div>
+    </div>
+  </div>
 
   <div class="blob-container">
     <div class="blob blob-1"></div>
@@ -21,8 +285,7 @@
 
   <div class="container">
 
-    <!-- ── HERO ── -->
-    <section class="hero">
+    <section class="hero" id="section-hero">
       <div class="avatar-wrap">
         <div class="cat-ear cat-ear-left"></div>
         <div class="cat-ear cat-ear-right"></div>
@@ -32,8 +295,13 @@
         <div class="status-badge">🟢 open to work</div>
       </div>
 
-      <h1 class="glitch-title" data-text="Hello, I'm Syafiq Rasyad">Hello, I'm <span>Syafiq Rasyad</span></h1>
-      <h3 class="typing-text">I'm a <span></span></h3>
+      <h1 class="hero-name">Hello, I'm <span class="highlight">Syafiq Rasyad</span></h1>
+
+      <div class="typing-wrap" style="margin: 0.6rem 0 0.3rem;">
+        <span class="typing-text" id="typingText"></span>
+        <span class="typing-cursor"></span>
+      </div>
+
       <div class="hero-role">
         <span class="role-tag r1">💻 Web Developer</span>
         <span class="role-tag r2">🎨 Web Designer</span>
@@ -41,54 +309,57 @@
       </div>
 
       <p class="hero-bio">
-        I am an informatics student, currently studying at Bina Sarana Informatika University.I like to build beautiful and functional things —
-. Currently open to new opportunities!
+        I like to build beautiful and functional things —
+        from wireframes to deployment. Currently open to new opportunities!
       </p>
+
+      <div class="visitor-counter">
+<div class="visitor-counter">
+  <span class="visitor-dot"></span>
+  <span>👀</span>
+  <img 
+    src="https://hits.sh/syafiqrasyad1606-ops.github.io/Portofolio.svg?style=flat&label=visitors&color=7eb8ff&labelColor=0e0f1a&extraCount=0" 
+    alt="visitor count"
+    style="height:18px; vertical-align:middle; border-radius:4px;"
+  >
+</div>
     </section>
 
     <!-- ── MARQUEE ── -->
-    <div class="marquee-wrap">
+    <div class="marquee-wrap reveal">
       <div class="marquee-track">
         <span class="marquee-item"><span class="marquee-sep">✦</span> Python</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> TypeScript</span>
         <span class="marquee-item"><span class="marquee-sep">✦</span> JavaScript</span>
         <span class="marquee-item"><span class="marquee-sep">✦</span> PHP</span>
         <span class="marquee-item"><span class="marquee-sep">✦</span> HTML &amp; CSS</span>
         <span class="marquee-item"><span class="marquee-sep">✦</span> Web Development</span>
         <span class="marquee-item"><span class="marquee-sep">✦</span> Web Design</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> Tailwind CSS</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> UI/UX Design</span>
-      </div>
-    </div>
-
-    <!-- ── STATS ── -->
-    <div class="stats-row">
-      <div class="stat-card" data-icon="🚀">
+        <span class="marquee-item"><span class="marquee-sep">✦</span> Python</span>
+        <span class="marquee-item"><span class="marquee-sep">✦</span> JavaScript</span>
+        <span class="marquee-item"><span class="marquee-sep">✦</span> PHP</span>
+        <span class="marquee-item"><span class="marquee-sep">✦</span> HTML &amp; CSS</span>
         <span class="marquee-item"><span class="marquee-sep">✦</span> Web Development</span>
         <span class="marquee-item"><span class="marquee-sep">✦</span> Web Design</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> Tailwind CSS</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> UI/UX Design</span>
       </div>
     </div>
 
-    <!-- ── STATS ── -->
     <div class="stats-row">
-      <div class="stat-card" data-icon="🚀">
-        <div class="stat-num">4</div>
+      <div class="stat-card reveal reveal-delay-1" data-icon="🚀">
+        <div class="stat-num">3</div>
         <div class="stat-label">Projects selesai</div>
       </div>
-      <div class="stat-card" data-icon="📅">
-        <div class="stat-num">1</div>
-        <div class="stat-label">Tahun pengalaman</div>
+      <div class="stat-card reveal reveal-delay-2" data-icon="📅">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Semester</div>
       </div>
-      <div class="stat-card" data-icon="🏸">
+      <div class="stat-card reveal reveal-delay-3" data-icon="🏸">
         <div class="stat-num" style="font-size:1.3rem;">Hobi</div>
         <div class="stat-label">Badminton</div>
       </div>
     </div>
 
     <!-- ── SKILLS ── -->
-    <section class="skills-section">
+    <section class="skills-section reveal" id="section-skills">
       <div class="section-label">✦ Skills &amp; Tools</div>
       <div class="skills-grid">
         <span class="skill-pill a1">HTML &amp; CSS</span>
@@ -96,17 +367,14 @@
         <span class="skill-pill a2">Python</span>
         <span class="skill-pill a3">PHP</span>
         <span class="skill-pill a3">Node.js</span>
-        <span class="skill-pill a3">Tailwind CSS</span>
         <span class="skill-pill a4">Git &amp; GitHub</span>
       </div>
     </section>
 
-    <!-- ── PROJECTS ── -->
-    <section class="projects-section">
+    <section class="projects-section reveal" id="section-projects">
       <div class="section-label">✦ Featured Projects</div>
 
-      <!-- Ganti href dengan URL project asli lo -->
-      <a href="https://link-project-1.com" target="_blank" rel="noopener noreferrer" class="project-card" data-icon="🐱">
+      <div class="project-card reveal reveal-delay-1" data-icon="🐱" data-project="p1" onclick="openModal('p1')" style="cursor:pointer;">
         <div class="project-top">
           <span class="project-name">Project Web Server #1 🚀</span>
           <span class="project-arrow">↗</span>
@@ -117,9 +385,9 @@
           <span class="project-tag">Nginx</span>
           <span class="project-tag">JavaScript</span>
         </div>
-      </a>
+      </div>
 
-      <a href="https://link-project-2.com" target="_blank" rel="noopener noreferrer" class="project-card" data-icon="🐾">
+      <div class="project-card reveal reveal-delay-2" data-icon="🐾" data-project="p2" onclick="openModal('p2')" style="cursor:pointer;">
         <div class="project-top">
           <span class="project-name">Project Portofolio Web #2 ✨</span>
           <span class="project-arrow">↗</span>
@@ -130,9 +398,9 @@
           <span class="project-tag">HTML/CSS</span>
           <span class="project-tag">JavaScript</span>
         </div>
-      </a>
+      </div>
 
-      <a href="https://link-project-3.com" target="_blank" rel="noopener noreferrer" class="project-card" data-icon="😺">
+      <div class="project-card reveal reveal-delay-3" data-icon="😺" data-project="p3" onclick="openModal('p3')" style="cursor:pointer;">
         <div class="project-top">
           <span class="project-name">Project Web Kelompok #3 🎨</span>
           <span class="project-arrow">↗</span>
@@ -143,21 +411,19 @@
           <span class="project-tag">MySQL</span>
           <span class="project-tag">HTML/CSS</span>
         </div>
-      </a>
+      </div>
     </section>
 
-    <!-- ── MEOW EASTER EGG ── -->
-    <div class="meow-section">
+    <div class="meow-section reveal">
       <button class="meow-btn" onclick="meow()">psst... klik ini dungs 🐾</button>
       <div class="meow-output" id="meow-out"></div>
     </div>
 
-    <!-- ── LINKS ── -->
-    <section class="links-section">
+    <section class="links-section reveal" id="section-links">
       <div class="section-label">✦ Find Me At</div>
       <div class="links-grid">
 
-        <a href="https://linkedin.com/in/syafiqrasyad" target="_blank" rel="noopener noreferrer" class="link-btn l1">
+        <a href="https://linkedin.com/in/syafiqrasyad" target="_blank" rel="noopener noreferrer" class="link-btn l1 reveal reveal-delay-1">
           <div class="link-icon" style="background:rgba(127,255,110,0.08);">💼</div>
           <div class="link-text">
             <div class="link-name">LinkedIn</div>
@@ -166,7 +432,7 @@
           <span class="link-arrow">→</span>
         </a>
 
-        <a href="https://github.com/syafiqrasyad1606-ops" target="_blank" rel="noopener noreferrer" class="link-btn l2">
+        <a href="https://github.com/syafiqrasyad1606-ops" target="_blank" rel="noopener noreferrer" class="link-btn l2 reveal reveal-delay-2">
           <div class="link-icon" style="background:rgba(255,143,171,0.08);">🐙</div>
           <div class="link-text">
             <div class="link-name">GitHub</div>
@@ -175,16 +441,7 @@
           <span class="link-arrow">→</span>
         </a>
 
-<a href="https://jobstreet.co.id/Syafiq Rasyad" target="_blank" rel="noopener noreferrer" class="link-btn l2">
-          <div class="link-icon" style="background:rgba(255,143,171,0.08);">🐙</div>
-          <div class="link-text">
-            <div class="link-name">JobStreet</div>
-            <div class="link-sub">Syafiq Rasyad</div>
-          </div>
-          <span class="link-arrow">→</span>
-        </a>
-
-        <a href="mailto:Syadodoi16@gmail.com" class="link-btn l4">
+        <a href="mailto:Syadodoi16@gmail.com" class="link-btn l4 reveal reveal-delay-3">
           <div class="link-icon" style="background:rgba(201,177,255,0.08);">✉️</div>
           <div class="link-text">
             <div class="link-name">My Email</div>
@@ -196,39 +453,427 @@
       </div>
     </section>
 
-    <div class="divider">
+    <div class="divider reveal">
       <div class="divider-line"></div>
       <div class="divider-icon">🐾</div>
       <div class="divider-line"></div>
     </div>
 
-    <div class="footer">
-      <p>dibuat dengan <span class="heart">♥</span> dan secangkir kopi &nbsp;<span class="cat">🐱</span> &nbsp;·&nbsp; © 2025 Syafiq Rasyad</p>
+    <div class="footer reveal">
+      <p>dibuat dengan <span class="heart">♥</span> dan secangkir kopi &nbsp;<span class="cat">🐱</span>© 2025 Syafiq Rasyad</p>
       <p style="margin-top:6px;opacity:0.45;">designed &amp; coded by Syafiq Rasyad</p>
     </div>
 
   </div>
 
   <script>
-    const meows = [
-      "meow~ (artinya: gw siap nerima offer 😸)",
-      "purrr... gw bisa React. lo bisa?",
-      "MEOW!! 🐾  hire me please hehe",
-      "nyaa~ let's build something cool together!",
-      "mrrrow... available for freelance juga lho~",
-      "*knocks your codebase off the table* 😈",
-      "gw punya 9 nyawa. 8 buat debugging. 🐛",
-      "fun fact: kucing tidur 12-16 jam. gw ngoding cuma 5 jam doang hehe.",
-    ];
-    let lastIdx = -1;
-    function meow() {
-      let idx;
-      do { idx = Math.floor(Math.random() * meows.length); } while (idx === lastIdx);
-      lastIdx = idx;
-      const el = document.getElementById('meow-out');
-      el.style.opacity = 0;
-      setTimeout(() => { el.textContent = meows[idx]; el.style.opacity = 1; }, 160);
+  const projectData = {
+    p1: {
+      emoji: '🚀',
+      subtitle: 'Project #1 · Infrastructure',
+      title: 'Web Server Linux dengan Nginx',
+      desc: 'Membangun dan mengkonfigurasi web server berbasis Linux menggunakan Nginx sebagai reverse proxy. Project ini mencakup setup virtual host, konfigurasi SSL, dan deployment aplikasi web sederhana.',
+      tags: ['PHP', 'Nginx', 'JavaScript', 'Linux', 'SSL'],
+      highlights: [
+        { icon: '⚙️', text: 'Setup Nginx sebagai reverse proxy dan web server utama' },
+        { icon: '🔒', text: 'Konfigurasi SSL/HTTPS untuk keamanan koneksi' },
+        { icon: '🐧', text: 'Manajemen server Linux dari command line' },
+      ],
+      demoUrl: 'https://link-project-1.com',   
+      githubUrl: 'https://github.com/syafiqrasyad1606-ops/Web-Kelompok',
+    },
+    p2: {
+      emoji: '✨',
+      subtitle: 'Project #2 · Web Development',
+      title: 'Portofolio Web Pribadi',
+      desc: 'Website portofolio pribadi yang menampilkan semua project, skill, dan informasi kontak. Dibangun dengan HTML, CSS, dan JavaScript murni dengan desain yang responsif dan interaktif.',
+      tags: ['HTML/CSS', 'JavaScript', 'UI/UX', 'Responsive Design'],
+      highlights: [
+        { icon: '🎨', text: 'Desain dark mode dengan animasi CSS yang smooth' },
+        { icon: '📱', text: 'Fully responsive — tampil sempurna di HP maupun desktop' },
+        { icon: '⚡', text: 'Interaktif: typing animation, scroll reveal, confetti, dan command palette' },
+      ],
+      demoUrl: 'https://syafiqrasyad1606-ops.github.io/Portofolio',
+      githubUrl: 'https://github.com/syafiqrasyad1606-ops/Portofolio',
+    },
+    p3: {
+      emoji: '🎨',
+      subtitle: 'Project #3 · Team Project',
+      title: 'Web Kelompok — Sistem Operasi',
+      desc: 'Project web kelompok yang dibuat dalam mata kuliah Sistem Operasi. Aplikasi web berbasis PHP dan MySQL yang menampilkan konsep-konsep sistem operasi secara interaktif.',
+      tags: ['PHP', 'MySQL', 'HTML/CSS', 'Team Project'],
+      highlights: [
+        { icon: '👥', text: 'Dikerjakan bersama tim dalam mata kuliah Sistem Operasi' },
+        { icon: '🗄️', text: 'Backend PHP dengan database MySQL' },
+        { icon: '📚', text: 'Menampilkan materi Sistem Operasi secara visual dan interaktif' },
+      ],
+      demoUrl: 'https://link-project-3.com',
+      githubUrl: 'https://github.com/syafiqrasyad1606-ops/Web-Kelompok', 
+    },
+  };
+
+  function openModal(key) {
+    const d = projectData[key];
+    if (!d) return;
+    document.getElementById('modalEmoji').textContent    = d.emoji;
+    document.getElementById('modalSubtitle').textContent = d.subtitle;
+    document.getElementById('modalTitle').textContent    = d.title;
+    document.getElementById('modalDesc').textContent     = d.desc;
+
+    document.getElementById('modalTags').innerHTML =
+      d.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+
+    document.getElementById('modalHighlights').innerHTML =
+      d.highlights.map(h => `
+        <div class="modal-highlight-item">
+          <span class="icon">${h.icon}</span>
+          <span>${h.text}</span>
+        </div>`).join('');
+
+    document.getElementById('modalActions').innerHTML = `
+      <a href="${d.demoUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary">
+        🌐 Lihat Demo
+      </a>
+      <a href="${d.githubUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-secondary">
+        🐙 GitHub
+      </a>`;
+
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+
+  const cmdItems = [
+    { section: '📍 Navigasi', icon: '👤', name: 'Tentang Gw', sub: 'Scroll ke section hero', action: () => scrollTo('section-hero') },
+    { section: '📍 Navigasi', icon: '🛠️', name: 'Skills & Tools', sub: 'Scroll ke section skills', action: () => scrollTo('section-skills') },
+    { section: '📍 Navigasi', icon: '🚀', name: 'Projects', sub: 'Scroll ke section projects', action: () => scrollTo('section-projects') },
+    { section: '📍 Navigasi', icon: '🔗', name: 'Find Me At', sub: 'Scroll ke section links', action: () => scrollTo('section-links') },
+    // Projects
+    { section: '🗂️ Projects', icon: '🚀', name: 'Web Server Linux', sub: 'PHP · Nginx · JavaScript', action: () => { closeCmd(); openModal('p1'); } },
+    { section: '🗂️ Projects', icon: '✨', name: 'Portofolio Web', sub: 'HTML/CSS · JavaScript · UI/UX', action: () => { closeCmd(); openModal('p2'); } },
+    { section: '🗂️ Projects', icon: '🎨', name: 'Web Kelompok', sub: 'PHP · MySQL · HTML/CSS', action: () => { closeCmd(); openModal('p3'); } },
+    { section: '🔗 Links', icon: '💼', name: 'LinkedIn', sub: 'linkedin.com/in/syafiqrasyad', action: () => window.open('https://linkedin.com/in/syafiqrasyad', '_blank') },
+    { section: '🔗 Links', icon: '🐙', name: 'GitHub', sub: '@syafiqrasyad1606-ops', action: () => window.open('https://github.com/syafiqrasyad1606-ops', '_blank') },
+    { section: '🔗 Links', icon: '✉️', name: 'Email', sub: 'Syadodoi16@gmail.com', action: () => window.location.href = 'mailto:Syadodoi16@gmail.com' },
+    { section: '⚡ Actions', icon: '🌙', name: 'Toggle Dark/Light Mode', sub: 'Ganti tema halaman', action: toggleTheme },
+    { section: '⚡ Actions', icon: '🐾', name: 'Meow!', sub: 'Easter egg rahasia~', action: () => { closeCmd(); meow(); } },
+  ];
+
+  let cmdActive = -1;
+  let filteredItems = [...cmdItems];
+
+  function openCmd() {
+    document.getElementById('cmdOverlay').classList.add('open');
+    document.getElementById('cmdInput').value = '';
+    cmdActive = -1;
+    renderCmdResults('');
+    setTimeout(() => document.getElementById('cmdInput').focus(), 80);
+  }
+
+  function closeCmd() {
+    document.getElementById('cmdOverlay').classList.remove('open');
+    cmdActive = -1;
+  }
+
+  function closeCmdOutside(e) {
+    if (e.target === document.getElementById('cmdOverlay')) closeCmd();
+  }
+
+  function scrollTo(id) {
+    closeCmd();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function renderCmdResults(query) {
+    const q = query.toLowerCase().trim();
+    filteredItems = q
+      ? cmdItems.filter(i =>
+          i.name.toLowerCase().includes(q) ||
+          i.sub.toLowerCase().includes(q) ||
+          i.section.toLowerCase().includes(q))
+      : cmdItems;
+
+    if (filteredItems.length === 0) {
+      document.getElementById('cmdResults').innerHTML =
+        `<div style="padding:1.5rem;text-align:center;font-family:'Space Mono',monospace;font-size:0.75rem;color:#7a7a9a;">Gak ada hasil untuk "${query}" 😿</div>`;
+      return;
     }
+
+    const grouped = {};
+    filteredItems.forEach(item => {
+      if (!grouped[item.section]) grouped[item.section] = [];
+      grouped[item.section].push(item);
+    });
+
+    let html = '';
+    let globalIdx = 0;
+    for (const [sec, items] of Object.entries(grouped)) {
+      html += `<div class="cmd-section-header">${sec}</div>`;
+      items.forEach(item => {
+        const idx = globalIdx++;
+        html += `
+          <div class="cmd-item ${idx === cmdActive ? 'active' : ''}" data-idx="${idx}" onclick="runCmdItem(${idx})">
+            <div class="cmd-item-icon">${item.icon}</div>
+            <div class="cmd-item-text">
+              <div class="cmd-item-name">${item.name}</div>
+              <div class="cmd-item-sub">${item.sub}</div>
+            </div>
+            <span class="cmd-item-enter">↵</span>
+          </div>`;
+      });
+    }
+    document.getElementById('cmdResults').innerHTML = html;
+  }
+
+  function runCmdItem(idx) {
+    const item = filteredItems[idx];
+    if (item) { closeCmd(); item.action(); }
+  }
+
+  document.getElementById('cmdInput').addEventListener('input', e => {
+    cmdActive = -1;
+    renderCmdResults(e.target.value);
+  });
+
+  document.getElementById('cmdInput').addEventListener('keydown', e => {
+    const total = filteredItems.length;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      cmdActive = (cmdActive + 1) % total;
+      renderCmdResults(document.getElementById('cmdInput').value);
+      document.querySelector('.cmd-item.active')?.scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      cmdActive = (cmdActive - 1 + total) % total;
+      renderCmdResults(document.getElementById('cmdInput').value);
+      document.querySelector('.cmd-item.active')?.scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Enter') {
+      if (cmdActive >= 0) runCmdItem(cmdActive);
+      else if (filteredItems.length > 0) runCmdItem(0);
+    } else if (e.key === 'Escape') {
+      closeCmd();
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      document.getElementById('cmdOverlay').classList.contains('open') ? closeCmd() : openCmd();
+    }
+    if (e.key === 'Escape') {
+      closeCmd();
+      closeModal();
+    }
+  });
+
+
+  const pCanvas = document.getElementById('particles-canvas');
+  const pCtx    = pCanvas.getContext('2d');
+  let mouse = { x: -9999, y: -9999 };
+  let dots  = [];
+  const DOT_COUNT  = 70;
+  const MAX_DIST   = 130;
+  const DOT_COLOR  = '127,255,110';
+  const LINE_COLOR = '127,255,110';
+
+  function resizeP() {
+    pCanvas.width  = window.innerWidth;
+    pCanvas.height = window.innerHeight;
+  }
+  resizeP();
+  window.addEventListener('resize', () => { resizeP(); initDots(); });
+
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  window.addEventListener('touchmove', e => {
+    mouse.x = e.touches[0].clientX;
+    mouse.y = e.touches[0].clientY;
+  }, { passive: true });
+  window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+  function initDots() {
+    dots = Array.from({ length: DOT_COUNT }, () => ({
+      x:  Math.random() * pCanvas.width,
+      y:  Math.random() * pCanvas.height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      r:  Math.random() * 2 + 1,
+    }));
+  }
+  initDots();
+
+  function drawParticles() {
+    pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+
+    dots.forEach(d => {
+      // Move
+      d.x += d.vx; d.y += d.vy;
+      if (d.x < 0 || d.x > pCanvas.width)  d.vx *= -1;
+      if (d.y < 0 || d.y > pCanvas.height) d.vy *= -1;
+
+      const dx = d.x - mouse.x, dy = d.y - mouse.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 90) {
+        const force = (90 - dist) / 90 * 1.2;
+        d.vx += (dx / dist) * force * 0.08;
+        d.vy += (dy / dist) * force * 0.08;
+        const spd = Math.sqrt(d.vx*d.vx + d.vy*d.vy);
+        if (spd > 2.5) { d.vx = d.vx/spd*2.5; d.vy = d.vy/spd*2.5; }
+      }
+
+      pCtx.beginPath();
+      pCtx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      pCtx.fillStyle = `rgba(${DOT_COLOR},0.45)`;
+      pCtx.fill();
+    });
+    for (let i = 0; i < dots.length; i++) {
+      for (let j = i + 1; j < dots.length; j++) {
+        const dx = dots[i].x - dots[j].x;
+        const dy = dots[i].y - dots[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < MAX_DIST) {
+          const alpha = (1 - dist / MAX_DIST) * 0.25;
+          pCtx.beginPath();
+          pCtx.moveTo(dots[i].x, dots[i].y);
+          pCtx.lineTo(dots[j].x, dots[j].y);
+          pCtx.strokeStyle = `rgba(${LINE_COLOR},${alpha})`;
+          pCtx.lineWidth = 0.8;
+          pCtx.stroke();
+        }
+      }
+      const mx = dots[i].x - mouse.x, my = dots[i].y - mouse.y;
+      const md = Math.sqrt(mx*mx + my*my);
+      if (md < MAX_DIST * 1.4) {
+        const alpha = (1 - md / (MAX_DIST * 1.4)) * 0.5;
+        pCtx.beginPath();
+        pCtx.moveTo(dots[i].x, dots[i].y);
+        pCtx.lineTo(mouse.x, mouse.y);
+        pCtx.strokeStyle = `rgba(${LINE_COLOR},${alpha})`;
+        pCtx.lineWidth = 1;
+        pCtx.stroke();
+      }
+    }
+
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+
+
+  const roles = ['Web Designer 🎨','Web Developer ✦','Problem Solver 🧩','Open to Work 🚀'];
+  let roleIdx = 0, charIdx = 0, deleting = false;
+  const typingEl = document.getElementById('typingText');
+  function typeLoop() {
+    const cur = roles[roleIdx];
+    typingEl.textContent = cur.slice(0, deleting ? --charIdx : ++charIdx);
+    if (!deleting && charIdx === cur.length)  { deleting = true; setTimeout(typeLoop, 1800); return; }
+    if (deleting && charIdx === 0)            { deleting = false; roleIdx = (roleIdx + 1) % roles.length; }
+    setTimeout(typeLoop, deleting ? 45 : 90);
+  }
+  typeLoop();
+
+
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+
+  const themeIcon  = document.getElementById('themeIcon');
+  const themeLabel = document.getElementById('themeLabel');
+  if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light');
+    themeIcon.textContent  = '🌙';
+    themeLabel.textContent = 'Dark';
+  }
+  function toggleTheme() {
+    const isLight = document.body.classList.toggle('light');
+    themeIcon.textContent  = isLight ? '🌙' : '☀️';
+    themeLabel.textContent = isLight ? 'Dark' : 'Light';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  }
+
+
+  const countEl = document.getElementById('visitorCount');
+  fetch('https://api.counterapi.dev/v1/syafiqrasyad/portfolio/hit')
+    .then(r => r.json())
+    .then(d => { countEl.textContent = (d.count || d.value || 0).toLocaleString('id-ID'); })
+    .catch(() => {
+      const local = parseInt(localStorage.getItem('visits') || '0') + 1;
+      localStorage.setItem('visits', local);
+      countEl.textContent = local.toLocaleString('id-ID');
+    });
+
+
+  const meows = [
+    'meow~ (artinya: gw siap nerima offer 😸)',
+    'purrr... gw bisa Html & CSS. lo bisa?',
+    'MEOW!! 🐾  hire me please hehe',
+    'nyaa~ let\'s build something cool together!',
+    'mrrrow... available for freelance juga lho~',
+    '*knocks your codebase off the table* 😈',
+    'gw punya 9 nyawa. 8 buat debugging. 🐛',
+    'fun fact: kucing tidur 12-16 jam. gw ngoding cuma 5 jam doang hehe.',
+  ];
+  let lastMeow = -1;
+  function meow() {
+    let idx;
+    do { idx = Math.floor(Math.random() * meows.length); } while (idx === lastMeow);
+    lastMeow = idx;
+    const el = document.getElementById('meow-out');
+    el.style.opacity = 0;
+    setTimeout(() => { el.textContent = meows[idx]; el.style.opacity = 1; }, 160);
+    launchConfetti();
+  }
+
+  const cCanvas = document.getElementById('confetti-canvas');
+  const cCtx    = cCanvas.getContext('2d');
+  const COLORS  = ['#7fff6e','#ff8fab','#7eb8ff','#c9b1ff','#ffe066','#ff6b6b'];
+  let cParticles = [], cFrame = null;
+
+  function resizeC() { cCanvas.width = window.innerWidth; cCanvas.height = window.innerHeight; }
+  resizeC();
+  window.addEventListener('resize', resizeC);
+
+  function launchConfetti() {
+    resizeC();
+    for (let i = 0; i < 90; i++) {
+      cParticles.push({
+        x: window.innerWidth/2, y: window.innerHeight*0.75,
+        vx: (Math.random()-0.5)*12, vy: -(Math.random()*10+4),
+        color: COLORS[Math.floor(Math.random()*COLORS.length)],
+        size: Math.random()*7+4, rot: Math.random()*360,
+        rotV: (Math.random()-0.5)*8, alpha: 1,
+        shape: Math.random()>0.5 ? 'rect' : 'circle',
+      });
+    }
+    if (!cFrame) animConfetti();
+  }
+
+  function animConfetti() {
+    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+    cParticles.forEach(p => {
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.35; p.vx*=0.99; p.rot+=p.rotV; p.alpha-=0.014;
+      cCtx.save();
+      cCtx.globalAlpha = Math.max(0, p.alpha);
+      cCtx.translate(p.x, p.y);
+      cCtx.rotate(p.rot*Math.PI/180);
+      cCtx.fillStyle = p.color;
+      if (p.shape==='rect') cCtx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.5);
+      else { cCtx.beginPath(); cCtx.arc(0,0,p.size/2,0,Math.PI*2); cCtx.fill(); }
+      cCtx.restore();
+    });
+    cParticles = cParticles.filter(p => p.alpha > 0);
+    if (cParticles.length > 0) { cFrame = requestAnimationFrame(animConfetti); }
+    else { cCtx.clearRect(0,0,cCanvas.width,cCanvas.height); cFrame = null; }
+  }
   </script>
 
 </body>
