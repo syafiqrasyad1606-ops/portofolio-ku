@@ -231,8 +231,28 @@
   body.light .cmd-hint-btn { background: rgba(244,244,248,0.9); }
   </style>
 </head>
+<div class="music-widget">
+
+  <div class="music-icon">🎵</div>
+
+  <div class="music-info">
+    <div class="music-title">Resonance</div>
+    <div class="music-artist">HOME</div>
+  </div>
+
+  <div class="music-bars">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+</div>
+<div class="welcome-toast" id="welcomeToast">
+  ✨ Heyy welcome to my portfolio! Thanks for visiting my portfolio~
+</div>
 <body>
 
+  <div id="scrollProgress"></div>
   <canvas id="particles-canvas"></canvas>
 
   <canvas id="confetti-canvas"></canvas>
@@ -369,6 +389,53 @@
         <span class="skill-pill a3">Node.js</span>
         <span class="skill-pill a4">Git &amp; GitHub</span>
       </div>
+      <div class="skill-bars">
+
+  <div class="skill-progress">
+    <div class="skill-progress-top">
+      <span>HTML & CSS</span>
+      <span>80%</span>
+    </div>
+
+    <div class="skill-progress-bar">
+      <div class="skill-progress-fill" data-width="80%"></div>
+    </div>
+  </div>
+
+  <div class="skill-progress">
+    <div class="skill-progress-top">
+      <span>Python</span>
+      <span>80%</span>
+    </div>
+
+    <div class="skill-progress-bar">
+      <div class="skill-progress-fill" data-width="80%"></div>
+    </div>
+  </div>
+
+  <div class="skill-progress">
+    <div class="skill-progress-top">
+      <span>JavaScript</span>
+      <span>70%</span>
+    </div>
+
+    <div class="skill-progress-bar">
+      <div class="skill-progress-fill" data-width="70%"></div>
+    </div>
+  </div>
+
+  <div class="skill-progress">
+    <div class="skill-progress-top">
+      <span>PHP</span>
+      <span>50%</span>
+    </div>
+
+    <div class="skill-progress-bar">
+      <div class="skill-progress-fill" data-width="50%"></div>
+    </div>
+  </div>
+
+</div>
     </section>
 
     <section class="projects-section reveal" id="section-projects">
@@ -385,6 +452,11 @@
           <span class="project-tag">Nginx</span>
           <span class="project-tag">JavaScript</span>
         </div>
+        <div class="reaction-bar">
+  <button class="reaction-btn">❤️ <span>0</span></button>
+  <button class="reaction-btn">🔥 <span>0</span></button>
+  <button class="reaction-btn">⭐ <span>0</span></button>
+      </div>
       </div>
 
       <div class="project-card reveal reveal-delay-2" data-icon="🐾" data-project="p2" onclick="openModal('p2')" style="cursor:pointer;">
@@ -398,6 +470,11 @@
           <span class="project-tag">HTML/CSS</span>
           <span class="project-tag">JavaScript</span>
         </div>
+        <div class="reaction-bar">
+  <button class="reaction-btn">❤️ <span>0</span></button>
+  <button class="reaction-btn">🔥 <span>0</span></button>
+  <button class="reaction-btn">⭐ <span>0</span></button>
+</div>
       </div>
 
       <div class="project-card reveal reveal-delay-3" data-icon="😺" data-project="p3" onclick="openModal('p3')" style="cursor:pointer;">
@@ -411,6 +488,11 @@
           <span class="project-tag">MySQL</span>
           <span class="project-tag">HTML/CSS</span>
         </div>
+        <div class="reaction-bar">
+  <button class="reaction-btn">❤️ <span>0</span></button>
+  <button class="reaction-btn">🔥 <span>0</span></button>
+  <button class="reaction-btn">⭐ <span>0</span></button>
+</div>
       </div>
     </section>
 
@@ -874,6 +956,90 @@
     if (cParticles.length > 0) { cFrame = requestAnimationFrame(animConfetti); }
     else { cCtx.clearRect(0,0,cCanvas.width,cCanvas.height); cFrame = null; }
   }
+
+  window.addEventListener('scroll', () => {
+
+    const scrollTop = window.scrollY;
+
+    const docHeight =
+        document.body.scrollHeight - window.innerHeight;
+
+    const progress =
+        (scrollTop / docHeight) * 100;
+
+    document.getElementById('scrollProgress')
+        .style.width = progress + '%';
+
+});
+
+document.querySelectorAll('.reaction-btn').forEach(btn => {
+
+    btn.addEventListener('click', (e) => {
+
+        e.stopPropagation();
+
+        btn.classList.toggle('active');
+
+        const count = btn.querySelector('span');
+
+        let num = parseInt(count.textContent);
+
+        if(btn.classList.contains('active')){
+            num++;
+        } else {
+            num--;
+        }
+
+        count.textContent = num;
+
+    });
+
+});
+
+window.addEventListener('load', () => {
+
+    const toast =
+        document.getElementById('welcomeToast');
+
+    setTimeout(() => {
+
+        toast.classList.add('show');
+
+    }, 500);
+
+    setTimeout(() => {
+
+        toast.classList.remove('show');
+
+    }, 3500);
+
+});
+
+const skillObserver = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.querySelectorAll(
+                '.skill-progress-fill'
+            ).forEach(bar => {
+
+                bar.style.width =
+                    bar.dataset.width;
+
+            });
+
+        }
+
+    });
+
+},{
+    threshold:0.4
+});
+
+document.querySelectorAll('.skill-bars')
+.forEach(el => skillObserver.observe(el));
   </script>
 
 </body>
