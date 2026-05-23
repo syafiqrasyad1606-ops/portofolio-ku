@@ -260,7 +260,7 @@
   <!-- ── [NEW] WELCOME TOAST ── -->
   <div id="welcome-toast">
     <div class="toast-dot"></div>
-    <span>👋 Heyy! Thanks for visiting my website~</span>
+    <span>👋 Heyy! Thanks for visiting~</span>
     <button class="toast-close" onclick="dismissToast()" aria-label="Tutup">✕</button>
   </div>
 
@@ -412,37 +412,37 @@
         <div class="skill-bar-item">
           <div class="skill-bar-meta">
             <span class="skill-bar-name">HTML &amp; CSS</span>
-            <span class="skill-bar-pct">80%</span>
+            <span class="skill-bar-pct">90%</span>
           </div>
           <div class="skill-bar-track">
-            <div class="skill-bar-fill sbar-a1" data-width="80"></div>
+            <div class="skill-bar-fill sbar-a1" data-width="90"></div>
           </div>
         </div>
         <div class="skill-bar-item">
           <div class="skill-bar-meta">
             <span class="skill-bar-name">JavaScript</span>
-            <span class="skill-bar-pct">60%</span>
+            <span class="skill-bar-pct">75%</span>
           </div>
           <div class="skill-bar-track">
-            <div class="skill-bar-fill sbar-a2" data-width="60"></div>
+            <div class="skill-bar-fill sbar-a2" data-width="75"></div>
           </div>
         </div>
         <div class="skill-bar-item">
           <div class="skill-bar-meta">
             <span class="skill-bar-name">Python</span>
-            <span class="skill-bar-pct">80%</span>
+            <span class="skill-bar-pct">70%</span>
           </div>
           <div class="skill-bar-track">
-            <div class="skill-bar-fill sbar-a3" data-width="80"></div>
+            <div class="skill-bar-fill sbar-a3" data-width="70"></div>
           </div>
         </div>
         <div class="skill-bar-item">
           <div class="skill-bar-meta">
             <span class="skill-bar-name">PHP</span>
-            <span class="skill-bar-pct">50%</span>
+            <span class="skill-bar-pct">65%</span>
           </div>
           <div class="skill-bar-track">
-            <div class="skill-bar-fill sbar-a4" data-width="50"></div>
+            <div class="skill-bar-fill sbar-a4" data-width="65"></div>
           </div>
         </div>
         <div class="skill-bar-item">
@@ -582,7 +582,7 @@
   </div><!-- /container -->
 
   <script>
-
+ 
   const projectData = {
     p1: {
       emoji: '🚀',
@@ -628,6 +628,7 @@
     },
   };
 
+
   function openModal(key) {
     const d = projectData[key];
     if (!d) return;
@@ -660,7 +661,6 @@
   function closeModalOutside(e) {
     if (e.target === document.getElementById('modalOverlay')) closeModal();
   }
-
 
   const progressBar = document.getElementById('scroll-progress');
   window.addEventListener('scroll', () => {
@@ -709,42 +709,93 @@
   }
 
 
-  const RXN_TYPES = { like: 'rxn-active-like', fire: 'rxn-active-fire', star: 'rxn-active-star' };
+  const RXN_PREFIX  = 'syafiqrasyad_portfolio_2025';
+  const API_BASE    = 'https://countapi.mileshilliard.com/api/v1';
+  const PROJECTS    = ['p1', 'p2', 'p3'];
+  const RXN_CLASS   = { like: 'rxn-active-like', fire: 'rxn-active-fire', star: 'rxn-active-star' };
 
-  function getRxnState(project, type) {
-    return JSON.parse(localStorage.getItem(`rxn_${project}_${type}`) || '{"count":0,"active":false}');
+  // localStorage: cek apakah pengunjung INI sudah react
+  function hasReacted(project, type) {
+    return localStorage.getItem(`rxn_${project}_${type}`) === '1';
   }
-  function setRxnState(project, type, state) {
-    localStorage.setItem(`rxn_${project}_${type}`, JSON.stringify(state));
-  }
-
-  function initReactions() {
-    ['p1','p2','p3'].forEach(proj => {
-      ['like','fire','star'].forEach(type => {
-        const btn   = document.getElementById(`rxn-${proj}-${type}`);
-        if (!btn) return;
-        const state = getRxnState(proj, type);
-        btn.querySelector('.rxn-count').textContent = state.count;
-        if (state.active) btn.classList.add(RXN_TYPES[type]);
-      });
-    });
+  function setReacted(project, type, val) {
+    if (val) localStorage.setItem(`rxn_${project}_${type}`, '1');
+    else     localStorage.removeItem(`rxn_${project}_${type}`);
   }
 
-  function handleReaction(project, type, btn) {
-    const state = getRxnState(project, type);
-    if (state.active) {
-      state.active = false;
-      state.count  = Math.max(0, state.count - 1);
-      btn.classList.remove(RXN_TYPES[type]);
+  // Ambil angka dari API tanpa nambah
+  async function fetchCount(key) {
+    try {
+      const r = await fetch(`${API_BASE}/get/${RXN_PREFIX}_${key}`);
+      if (!r.ok) return 0;
+      const d = await r.json();
+      return parseInt(d.value) || 0;
+    } catch { return 0; }
+  }
+
+  // Tambah +1
+  async function hitCount(key) {
+    try {
+      const r = await fetch(`${API_BASE}/hit/${RXN_PREFIX}_${key}`);
+      const d = await r.json();
+      return parseInt(d.value) || 0;
+    } catch { return null; }
+  }
+
+  // Kurang -1 (unlike)
+  async function decrementCount(key, curVal) {
+    try {
+      const newVal = Math.max(0, curVal - 1);
+      const r = await fetch(`${API_BASE}/set/${RXN_PREFIX}_${key}?value=${newVal}`);
+      const d = await r.json();
+      return parseInt(d.value) || 0;
+    } catch { return null; }
+  }
+
+  // Update tampilan tombol
+  function updateBtn(project, type, count, active) {
+    const btn = document.getElementById(`rxn-${project}-${type}`);
+    if (!btn) return;
+    btn.querySelector('.rxn-count').textContent = count;
+    btn.className = 'rxn-btn' + (active ? ` ${RXN_CLASS[type]}` : '');
+  }
+
+  // Load semua counter saat halaman dibuka
+  async function initReactions() {
+    for (const proj of PROJECTS) {
+      for (const type of ['like', 'fire', 'star']) {
+        const count  = await fetchCount(`${proj}_${type}`);
+        const active = hasReacted(proj, type);
+        updateBtn(proj, type, count, active);
+      }
+    }
+  }
+
+  // Handler klik — optimistic update dulu, lalu sinkron ke server
+  async function handleReaction(project, type, btn) {
+    const countEl  = btn.querySelector('.rxn-count');
+    const isActive = hasReacted(project, type);
+    const key      = `${project}_${type}`;
+    const curVal   = parseInt(countEl.textContent) || 0;
+
+    if (isActive) {
+      // Unlike: kurangi
+      setReacted(project, type, false);
+      updateBtn(project, type, Math.max(0, curVal - 1), false);
+      await decrementCount(key, curVal);
     } else {
-      state.active = true;
-      state.count  = state.count + 1;
-      btn.classList.add(RXN_TYPES[type]);
+      // Like: tambahkan + animasi pop
+      setReacted(project, type, true);
+      updateBtn(project, type, curVal + 1, true);
       btn.classList.add('rxn-pop');
       btn.addEventListener('animationend', () => btn.classList.remove('rxn-pop'), { once: true });
+      await hitCount(key);
     }
-    btn.querySelector('.rxn-count').textContent = state.count;
-    setRxnState(project, type, state);
+
+    // Sinkron angka real dari server setelah API selesai
+    const realCount  = await fetchCount(key);
+    const stillActive = hasReacted(project, type);
+    updateBtn(project, type, realCount, stillActive);
   }
 
   initReactions();
@@ -767,9 +818,8 @@
   }, { threshold: 0.25 });
   if (skillSection) skillObs.observe(skillSection);
 
-
   const cmdItems = [
-    { section: '📍 Navigasi', icon: '👤', name: 'About Me', sub: 'Scroll ke section hero', action: () => scrollTo('section-hero') },
+    { section: '📍 Navigasi', icon: '👤', name: 'Tentang Gw', sub: 'Scroll ke section hero', action: () => scrollTo('section-hero') },
     { section: '📍 Navigasi', icon: '🛠️', name: 'Skills & Tools', sub: 'Scroll ke section skills', action: () => scrollTo('section-skills') },
     { section: '📍 Navigasi', icon: '🚀', name: 'Projects', sub: 'Scroll ke section projects', action: () => scrollTo('section-projects') },
     { section: '📍 Navigasi', icon: '🔗', name: 'Find Me At', sub: 'Scroll ke section links', action: () => scrollTo('section-links') },
@@ -872,6 +922,7 @@
     }
     if (e.key === 'Escape') { closeCmd(); closeModal(); }
   });
+
 
   const pCanvas = document.getElementById('particles-canvas');
   const pCtx    = pCanvas.getContext('2d');
@@ -1001,8 +1052,7 @@
     setTimeout(() => { el.textContent = meows[idx]; el.style.opacity = 1; }, 160);
     launchConfetti();
   }
-
-
+    
   const cCanvas = document.getElementById('confetti-canvas');
   const cCtx    = cCanvas.getContext('2d');
   const COLORS  = ['#7fff6e','#ff8fab','#7eb8ff','#c9b1ff','#ffe066','#ff6b6b'];
