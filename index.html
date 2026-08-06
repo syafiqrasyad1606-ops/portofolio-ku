@@ -173,6 +173,10 @@
       <a href="#section-skills" class="nav-link" data-target="section-skills">Skills</a>
       <a href="#section-projects" class="nav-link" data-target="section-projects">Projects</a>
       <a href="#section-links" class="nav-link" data-target="section-links">Links</a>
+      <button class="nav-theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle tema">
+        <span class="toggle-icon" id="themeIcon">🌙</span>
+        <span id="themeLabel">Dark</span>
+      </button>
     </div>
   </nav>
   <!-- ── WELCOME TOAST ── -->
@@ -197,10 +201,6 @@
   </div>
   <canvas id="particles-canvas"></canvas>
   <canvas id="confetti-canvas"></canvas>
-  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle tema">
-    <span class="toggle-icon" id="themeIcon">🌙</span>
-    <span id="themeLabel">Dark</span>
-  </button>
   <button class="cmd-hint-btn" onclick="openCmd()" aria-label="Buka command palette">
     <kbd>Ctrl</kbd><kbd>K</kbd> <span>Command palette</span>
   </button>
