@@ -223,11 +223,11 @@ body::before {
 .reveal-delay-3 { transition-delay: 0.24s; }
 .reveal-delay-4 { transition-delay: 0.24s; }
 
-/* ── THEME TOGGLE ── */
-.theme-toggle { position: fixed; top: 1.1rem; right: 1.1rem; z-index: 100; background: var(--accent5); border: 2.5px solid #17171f; border-radius: 100px; padding: 7px 15px; font-size: 0.78rem; font-weight: 700; font-family: 'Space Mono', monospace; color: #17171f; cursor: pointer; display: flex; align-items: center; gap: 7px; box-shadow: 3px 3px 0 #17171f; transition: all 0.2s cubic-bezier(.34,1.56,.64,1); -webkit-tap-highlight-color: transparent; touch-action: manipulation; min-height: 40px; }
-.theme-toggle:hover, .theme-toggle:active { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #17171f; }
-.theme-toggle .toggle-icon { font-size: 1rem; transition: transform 0.4s ease; }
-.theme-toggle:active .toggle-icon { transform: rotate(20deg); }
+/* ── THEME TOGGLE (lives inside the sticky nav now, can never overlap it) ── */
+.nav-theme-toggle { flex-shrink: 0; margin-left: 4px; padding: 7px 10px 7px 14px; border: none; border-left: 2px solid rgba(23,23,31,0.15); border-radius: 0; background: transparent; font-size: 0.78rem; font-weight: 700; font-family: 'Space Mono', monospace; color: var(--ink); cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: color 0.2s ease; -webkit-tap-highlight-color: transparent; }
+.nav-theme-toggle:hover { color: var(--accent5); }
+.nav-theme-toggle .toggle-icon { font-size: 0.95rem; transition: transform 0.4s ease; }
+.nav-theme-toggle:active .toggle-icon { transform: rotate(20deg); }
 
 /* ── VISITOR COUNTER ── */
 .visitor-counter { display: inline-flex; align-items: center; gap: 8px; background: var(--card); border: 2px solid var(--ink); border-radius: 100px; padding: 6px 18px; font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; color: var(--ink); margin: 0.5rem auto 0; box-shadow: 2px 2px 0 var(--ink); transition: all 0.2s ease; animation: fadeUp 0.8s 0.5s ease both; }
@@ -307,7 +307,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* ── SAFE-AREA: keep fixed UI clear of notches / home-indicator on phones ── */
 .container { padding-left: max(1.5rem, env(safe-area-inset-left)); padding-right: max(1.5rem, env(safe-area-inset-right)); }
-.theme-toggle { top: max(1.1rem, env(safe-area-inset-top)); right: max(1.1rem, env(safe-area-inset-right)); }
+.site-nav { padding-top: max(10px, env(safe-area-inset-top)); }
 .cmd-hint-btn { bottom: max(1.25rem, env(safe-area-inset-bottom)); left: max(1.25rem, env(safe-area-inset-left)); }
 #now-playing { bottom: max(4.5rem, calc(4.5rem + env(safe-area-inset-bottom))); left: max(1.25rem, env(safe-area-inset-left)); }
 #welcome-toast.show { bottom: max(1.5rem, calc(1.5rem + env(safe-area-inset-bottom))); }
@@ -350,7 +350,7 @@ body.light {
     --accent1: #4ade80; --accent2: #ff8fab; --accent3: #7eb8ff; --accent4: #c9b1ff; --accent5: #ffc966;
 }
 body.light .shadow-sm, body.light .role-tag, body.light .stat-card, body.light .project-card,
-body.light .link-btn, body.light .meow-btn, body.light .theme-toggle, body.light .visitor-counter,
+body.light .link-btn, body.light .meow-btn, body.light .visitor-counter,
 body.light #welcome-toast, body.light #now-playing, body.light .cmd-hint-btn, body.light .rxn-btn,
 body.light .site-nav-inner, body.light .filter-chip {
     box-shadow: none;
