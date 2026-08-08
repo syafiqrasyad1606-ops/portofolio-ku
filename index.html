@@ -311,59 +311,55 @@
     <!-- ── ANIMATED SKILL BARS ── -->
     <section class="skills-section reveal" id="section-skills">
       <div class="section-label">✦ Skills &amp; Tools</div>
-      <div class="skill-bars-grid" id="skillBarsGrid">
-        <div class="skill-bar-item">
-          <div class="skill-bar-meta">
-            <span class="skill-bar-name">HTML &amp; CSS</span>
-            <span class="skill-bar-pct">80%</span>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-icon-grid">
+          <div class="skill-icon-item">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="36" height="36" loading="lazy" decoding="async">
+            <span>HTML5</span>
           </div>
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill sbar-a1" data-width="80"></div>
+          <div class="skill-icon-item">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="36" height="36" loading="lazy" decoding="async">
+            <span>CSS3</span>
           </div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-meta">
-            <span class="skill-bar-name">JavaScript</span>
-            <span class="skill-bar-pct">60%</span>
+          <div class="skill-icon-item">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="36" height="36" loading="lazy" decoding="async">
+            <span>JavaScript</span>
           </div>
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill sbar-a2" data-width="60"></div>
+          <div class="skill-icon-item">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="36" height="36" loading="lazy" decoding="async">
+            <span>Python</span>
           </div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-meta">
-            <span class="skill-bar-name">Python</span>
-            <span class="skill-bar-pct">80%</span>
-          </div>
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill sbar-a3" data-width="80"></div>
+          <div class="skill-icon-item">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" width="36" height="36" loading="lazy" decoding="async">
+            <span>PHP</span>
           </div>
         </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-meta">
-            <span class="skill-bar-name">PHP</span>
-            <span class="skill-bar-pct">30%</span>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Frameworks &amp; Tools</div>
+        <div class="skill-icon-grid">
+          <div class="skill-icon-item">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" width="36" height="36" loading="lazy" decoding="async">
+            <span>React</span>
           </div>
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill sbar-a4" data-width="30"></div>
+          <div class="skill-icon-item">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" width="36" height="36" loading="lazy" decoding="async">
+            <span>Node.js</span>
           </div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-meta">
-            <span class="skill-bar-name">Node.js</span>
-            <span class="skill-bar-pct">55%</span>
+          <div class="skill-icon-item">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" width="36" height="36" loading="lazy" decoding="async">
+            <span>MySQL</span>
           </div>
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill sbar-a5" data-width="55"></div>
+          <div class="skill-icon-item">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" width="36" height="36" loading="lazy" decoding="async">
+            <span>Git</span>
           </div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-meta">
-            <span class="skill-bar-name">React</span>
-            <span class="skill-bar-pct">50%</span>
-          </div>
-          <div class="skill-bar-track">
-            <div class="skill-bar-fill sbar-a6" data-width="50"></div>
+          <div class="skill-icon-item">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" width="36" height="36" loading="lazy" decoding="async">
+            <span>GitHub</span>
           </div>
         </div>
       </div>
@@ -704,20 +700,6 @@
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   navSections.forEach(sec => navObs.observe(sec));
 
-  let skillAnimated = false;
-  const skillSection = document.getElementById('section-skills');
-  function animateSkillBars() {
-    if (skillAnimated) return;
-    skillAnimated = true;
-    document.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
-      const target = bar.dataset.width + '%';
-      setTimeout(() => { bar.style.width = target; }, i * 120);
-    });
-  }
-  const skillObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) animateSkillBars(); });
-  }, { threshold: 0.25 });
-  if (skillSection) skillObs.observe(skillSection);
   const cmdItems = [
     { section: '📍 Navigasi', icon: '👤', name: 'About Me', sub: 'Scroll ke section hero', action: () => scrollTo('section-hero') },
     { section: '📍 Navigasi', icon: '🛠️', name: 'Skills & Tools', sub: 'Scroll ke section skills', action: () => scrollTo('section-skills') },
