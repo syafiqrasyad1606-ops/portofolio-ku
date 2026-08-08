@@ -133,19 +133,14 @@ body::before {
 
 /* ── SKILLS SECTION ── */
 .skills-section { margin: 2.25rem 0; }
-.skill-bars-grid { display: flex; flex-direction: column; gap: 14px; }
-.skill-bar-item {}
-.skill-bar-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.skill-bar-name { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--text); font-weight: 700; }
-.skill-bar-pct  { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); }
-.skill-bar-track { height: 10px; background: var(--card); border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; }
-.skill-bar-fill { height: 100%; width: 0%; border-radius: 4px; transition: width 1.2s cubic-bezier(.22,1,.36,1); }
-.sbar-a1 { background: var(--accent1); }
-.sbar-a2 { background: var(--accent3); }
-.sbar-a3 { background: var(--accent2); }
-.sbar-a4 { background: var(--accent4); }
-.sbar-a5 { background: var(--accent5); }
-.sbar-a6 { background: var(--accent1); }
+.skill-group { margin-bottom: 1.5rem; }
+.skill-group:last-child { margin-bottom: 0; }
+.skill-group-title { font-family: 'Space Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.skill-icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 10px; }
+.skill-icon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--card); border: 2.5px solid var(--ink); border-radius: var(--radius-sm); padding: 14px 8px; box-shadow: var(--shadow-sm); transition: all 0.2s cubic-bezier(.34,1.56,.64,1); }
+.skill-icon-item:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
+.skill-icon-item img { width: 36px; height: 36px; object-fit: contain; background: #ffffff; border-radius: 8px; padding: 4px; }
+.skill-icon-item span { font-family: 'Space Mono', monospace; font-size: 0.66rem; font-weight: 700; color: var(--text); text-align: center; }
 
 /* ── PROJECTS ── */
 .projects-section { margin: 2.25rem 0; }
@@ -358,4 +353,3 @@ body.light .site-nav-inner, body.light .filter-chip {
 body.light .hero-name, body.light .project-name, body.light .link-name, body.light .section-label { color: var(--text); }
 body.light .np-track  { color: var(--text); }
 body.light .np-artist { color: var(--muted); }
-body.light .skill-bar-track { background: var(--card2); }
