@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
-    --bg: #fbfbf7;
-    --surface: #f2f4ee;
+    --bg: #ffffff;
+    --surface: #ffffff;
     --card: #ffffff;
-    --card2: #f4f6f0;
+    --card2: #ffffff;
 
     --accent1: #34c759;   
     --accent2: #ff6f91;  
@@ -12,13 +12,13 @@
     --accent4: #a689ff;   
     --accent5: #ffb238;   
 
-    --text: #17171f;
+    --text: #000000;
     --muted: #6b6b80;
 
     /* thick comic-style outlines instead of hairlines */
-    --border: #17171f;
-    --border-hover: #17171f;
-    --ink: #17171f;
+    --border: #000000;
+    --border-hover: #000000;
+    --ink: #000000;
 
     /* hard, offset "sticker" shadow — the core saweria signature */
     --shadow-sm: 3px 3px 0 var(--ink);
@@ -45,19 +45,13 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* soft dot grid instead of neon graph paper */
+/* plain white background — no dot grid */
 body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: radial-gradient(rgba(23,23,31,0.08) 1.5px, transparent 1.5px);
-    background-size: 26px 26px;
-    pointer-events: none; z-index: 0;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 100%);
+    content: none;
 }
 
-/* ── BLOBS — softened for a light, cheerful backdrop ── */
-.blob-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+/* ── BLOBS — turned off for a plain white background ── */
+.blob-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; display: none; }
 .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.22; animation: blobFloat 16s ease-in-out infinite; }
 .blob-1 { width: 500px; height: 500px; background: var(--accent1); top: -150px; left: -80px; animation-delay: 0s; }
 .blob-2 { width: 400px; height: 400px; background: var(--accent2); top: 45%; right: -100px; animation-delay: -6s; }
@@ -345,8 +339,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 body.light {
-    --bg: #14151c; --surface: #1c1d27; --card: #1c1d27; --card2: #21222d;
-    --text: #f4f4fb; --muted: #9a9ab0; --ink: #f4f4fb;
+    --bg: #000000; --surface: #000000; --card: #000000; --card2: #000000;
+    --text: #ffffff; --muted: #9a9ab0; --ink: #ffffff;
     --accent1: #4ade80; --accent2: #ff8fab; --accent3: #7eb8ff; --accent4: #c9b1ff; --accent5: #ffc966;
 }
 body.light .shadow-sm, body.light .role-tag, body.light .stat-card, body.light .project-card,
