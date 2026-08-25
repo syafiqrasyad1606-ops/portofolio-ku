@@ -50,19 +50,6 @@ body::before {
     content: none;
 }
 
-/* ── BLOBS — turned off for a plain white background ── */
-.blob-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; display: none; }
-.blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.22; animation: blobFloat 16s ease-in-out infinite; }
-.blob-1 { width: 500px; height: 500px; background: var(--accent1); top: -150px; left: -80px; animation-delay: 0s; }
-.blob-2 { width: 400px; height: 400px; background: var(--accent2); top: 45%; right: -100px; animation-delay: -6s; }
-.blob-3 { width: 350px; height: 350px; background: var(--accent3); bottom: -80px; left: 30%; animation-delay: -11s; }
-.blob-4 { width: 350px; height: 350px; background: var(--accent5); bottom: -80px; left: 30%; animation-delay: -11s; }
-@keyframes blobFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    40%       { transform: translate(28px, -32px) scale(1.05); }
-    70%       { transform: translate(-20px, 22px) scale(0.95); }
-}
-
 /* ── LAYOUT ── */
 .container { max-width: 680px; margin: 0 auto; padding: 2rem 1.5rem 5rem; position: relative; z-index: 1; }
 #section-hero, #section-skills, #section-projects, #section-links { scroll-margin-top: 70px; }
@@ -224,9 +211,6 @@ body::before {
 .visitor-counter:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
 .visitor-dot { width: 6px; height: 6px; background: var(--accent1); border-radius: 50%; animation: pulse-dot 2s ease infinite; }
 @keyframes pulse-dot { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:0.5} }
-
-/* ── CONFETTI CANVAS ── */
-#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
 
 /* ── SCROLL PROGRESS BAR ── */
 #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 5px; background: var(--accent1); border-bottom: 2px solid var(--ink); z-index: 9999; transition: width 0.08s linear; }
