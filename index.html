@@ -35,7 +35,7 @@
   <meta name="twitter:title" content="Syafiq Rasyad — Web Developer &amp; UI/UX Designer">
   <meta name="twitter:description" content="Portfolio Syafiq Rasyad: web developer & UI/UX designer, mahasiswa Informatika BSI.">
   <meta name="twitter:image" content="https://syafiqrasyad1606-ops.github.io/Portofolio/SYAD.jpeg">
-  <meta name="theme-color" content="#fbfbf7">
+  <meta name="theme-color" content="#ffffff">
   <title>Portfolio Syafiq Rasyad</title>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -129,9 +129,6 @@
   .cmd-footer { border-top: 2.5px solid #17171f; padding: 0.6rem 1.25rem; display: flex; gap: 1.25rem; align-items: center; background: #f2f4ee; }
   .cmd-footer-hint { font-family: 'Space Mono', monospace; font-size: 0.6rem; font-weight: 700; color: #6b6b80; display: flex; align-items: center; gap: 5px; }
 
-  /* ── PARTICLES — tuned down for a light backdrop ── */
-  #particles-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.35; }
-
   /* ── DARK MODE OVERRIDES (toggle) ── */
   body.light .modal-box { background: #1c1d27; border-color: #f4f4fb; box-shadow: 8px 8px 0 rgba(0,0,0,0.4); }
   body.light .modal-close { background: #ffc966; border-color: #f4f4fb; }
@@ -184,8 +181,6 @@
       <div class="np-bar" id="npBar4"></div>
     </div>
   </div>
-  <canvas id="particles-canvas"></canvas>
-  <canvas id="confetti-canvas"></canvas>
   <button class="cmd-hint-btn" onclick="openCmd()" aria-label="Buka command palette">
     <kbd>Ctrl</kbd><kbd>K</kbd> <span>Command palette</span>
   </button>
@@ -219,12 +214,6 @@
         <span class="cmd-footer-hint">ESC tutup</span>
       </div>
     </div>
-  </div>
-  <div class="blob-container">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-    <div class="blob blob-4"></div>
   </div>
   <div class="container" id="main-content" tabindex="-1">
     <!-- ── HERO ── -->
@@ -784,82 +773,6 @@
     }
     if (e.key === 'Escape') { closeCmd(); closeModal(); }
   });
-  const pCanvas = document.getElementById('particles-canvas');
-  const pCtx    = pCanvas.getContext('2d');
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let mouse = { x: -9999, y: -9999 };
-  let dots  = [];
-  // fewer particles on small/low-power screens keeps this smooth on mid-range phones
-  function pickDotCount() { return window.innerWidth < 640 ? 28 : (window.innerWidth < 1024 ? 45 : 70); }
-  let DOT_COUNT    = pickDotCount();
-  const MAX_DIST   = 130;
-  const DOT_COLOR  = '23,23,31';
-  const LINE_COLOR = '23,23,31';
-  function resizeP() { pCanvas.width = window.innerWidth; pCanvas.height = window.innerHeight; }
-  resizeP();
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => { resizeP(); DOT_COUNT = pickDotCount(); initDots(); }, 150);
-  });
-  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-  window.addEventListener('touchmove', e => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; }, { passive: true });
-  window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-  function initDots() {
-    dots = Array.from({ length: DOT_COUNT }, () => ({
-      x: Math.random() * pCanvas.width, y: Math.random() * pCanvas.height,
-      vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
-      r: Math.random() * 2 + 1,
-    }));
-  }
-  initDots();
-  function drawParticles() {
-    pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-    dots.forEach(d => {
-      d.x += d.vx; d.y += d.vy;
-      if (d.x < 0 || d.x > pCanvas.width)  d.vx *= -1;
-      if (d.y < 0 || d.y > pCanvas.height) d.vy *= -1;
-      const dx = d.x - mouse.x, dy = d.y - mouse.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < 90) {
-        const force = (90 - dist) / 90 * 1.2;
-        d.vx += (dx / dist) * force * 0.08;
-        d.vy += (dy / dist) * force * 0.08;
-        const spd = Math.sqrt(d.vx*d.vx + d.vy*d.vy);
-        if (spd > 2.5) { d.vx = d.vx/spd*2.5; d.vy = d.vy/spd*2.5; }
-      }
-      pCtx.beginPath();
-      pCtx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      pCtx.fillStyle = `rgba(${DOT_COLOR},0.35)`;
-      pCtx.fill();
-    });
-    for (let i = 0; i < dots.length; i++) {
-      for (let j = i + 1; j < dots.length; j++) {
-        const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < MAX_DIST) {
-          pCtx.beginPath();
-          pCtx.moveTo(dots[i].x, dots[i].y);
-          pCtx.lineTo(dots[j].x, dots[j].y);
-          pCtx.strokeStyle = `rgba(${LINE_COLOR},${(1 - dist / MAX_DIST) * 0.18})`;
-          pCtx.lineWidth = 0.8;
-          pCtx.stroke();
-        }
-      }
-      const mx = dots[i].x - mouse.x, my = dots[i].y - mouse.y;
-      const md = Math.sqrt(mx*mx + my*my);
-      if (md < MAX_DIST * 1.4) {
-        pCtx.beginPath();
-        pCtx.moveTo(dots[i].x, dots[i].y);
-        pCtx.lineTo(mouse.x, mouse.y);
-        pCtx.strokeStyle = `rgba(${LINE_COLOR},${(1 - md / (MAX_DIST * 1.4)) * 0.4})`;
-        pCtx.lineWidth = 1;
-        pCtx.stroke();
-      }
-    }
-    requestAnimationFrame(drawParticles);
-  }
-  if (!prefersReducedMotion) drawParticles();
   const roles = ['Web Designer 🎨','Web Developer ✦','Problem Solver 🧩','Open to Work 🚀'];
   let roleIdx = 0, charIdx = 0, deleting = false;
   const typingEl = document.getElementById('typingText');
@@ -918,46 +831,6 @@
     const el = document.getElementById('meow-out');
     el.style.opacity = 0;
     setTimeout(() => { el.textContent = meows[idx]; el.style.opacity = 1; }, 160);
-    launchConfetti();
-  }
-  const cCanvas = document.getElementById('confetti-canvas');
-  const cCtx    = cCanvas.getContext('2d');
-  const COLORS  = ['#34c759','#ff6f91','#59c1f0','#a689ff','#ffb238','#17171f'];
-  let cParticles = [], cFrame = null;
-  function resizeC() { cCanvas.width = window.innerWidth; cCanvas.height = window.innerHeight; }
-  resizeC();
-  window.addEventListener('resize', resizeC);
-  function launchConfetti() {
-    if (prefersReducedMotion) return;
-    resizeC();
-    for (let i = 0; i < 90; i++) {
-      cParticles.push({
-        x: window.innerWidth/2, y: window.innerHeight*0.75,
-        vx: (Math.random()-0.5)*12, vy: -(Math.random()*10+4),
-        color: COLORS[Math.floor(Math.random()*COLORS.length)],
-        size: Math.random()*7+4, rot: Math.random()*360,
-        rotV: (Math.random()-0.5)*8, alpha: 1,
-        shape: Math.random()>0.5 ? 'rect' : 'circle',
-      });
-    }
-    if (!cFrame) animConfetti();
-  }
-  function animConfetti() {
-    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
-    cParticles.forEach(p => {
-      p.x+=p.vx; p.y+=p.vy; p.vy+=0.35; p.vx*=0.99; p.rot+=p.rotV; p.alpha-=0.014;
-      cCtx.save();
-      cCtx.globalAlpha = Math.max(0, p.alpha);
-      cCtx.translate(p.x, p.y);
-      cCtx.rotate(p.rot*Math.PI/180);
-      cCtx.fillStyle = p.color;
-      if (p.shape==='rect') cCtx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.5);
-      else { cCtx.beginPath(); cCtx.arc(0,0,p.size/2,0,Math.PI*2); cCtx.fill(); }
-      cCtx.restore();
-    });
-    cParticles = cParticles.filter(p => p.alpha > 0);
-    if (cParticles.length > 0) { cFrame = requestAnimationFrame(animConfetti); }
-    else { cCtx.clearRect(0,0,cCanvas.width,cCanvas.height); cFrame = null; }
   }
   </script>
 </body>
