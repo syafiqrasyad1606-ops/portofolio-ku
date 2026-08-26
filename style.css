@@ -52,7 +52,7 @@ body::before {
 
 /* ── LAYOUT ── */
 .container { max-width: 680px; margin: 0 auto; padding: 2rem 1.5rem 5rem; position: relative; z-index: 1; }
-#section-hero, #section-skills, #section-projects, #section-links { scroll-margin-top: 70px; }
+#section-hero, #section-skills, #section-github, #section-projects, #section-links, #section-contact { scroll-margin-top: 70px; }
 
 /* ── HERO ── */
 .hero { text-align: center; padding: 3.5rem 0 2rem; animation: fadeUp 0.8s ease both; }
@@ -124,6 +124,13 @@ body::before {
 .skill-icon-item img { width: 36px; height: 36px; object-fit: contain; background: #ffffff; border-radius: 8px; padding: 4px; }
 .skill-icon-item span { font-family: 'Space Mono', monospace; font-size: 0.66rem; font-weight: 700; color: var(--text); text-align: center; }
 
+/* ── GITHUB STATS ── */
+.github-stats-section { margin: 2.25rem 0; }
+.github-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.github-stats-card { width: 100%; height: auto; border: 2.5px solid var(--ink); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); background: var(--card); display: block; }
+.github-stats-link { display: inline-block; margin-top: 12px; font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--ink); padding-bottom: 1px; transition: opacity 0.2s ease; }
+.github-stats-link:hover { opacity: 0.6; }
+
 /* ── PROJECTS ── */
 .projects-section { margin: 2.25rem 0; }
 .project-card { background: var(--card); border: 2.5px solid var(--ink); border-radius: var(--radius-md); padding: 1.35rem 1.5rem; margin-bottom: 1.1rem; box-shadow: var(--shadow-md); transition: all 0.2s ease; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
@@ -174,6 +181,20 @@ body::before {
 .link-sub  { font-size: 0.72rem; color: var(--muted); font-family: 'Space Mono', monospace; margin-top: 2px; overflow-wrap: break-word; word-break: break-word; }
 .link-arrow { color: var(--ink); font-size: 1rem; transition: transform 0.2s, color 0.2s; }
 .link-btn:hover .link-arrow, .link-btn:active .link-arrow { transform: translateX(4px); color: var(--accent1); }
+
+/* ── CONTACT FORM ── */
+.contact-section { margin: 2.25rem 0; }
+.contact-form { display: flex; flex-direction: column; gap: 14px; background: var(--card); border: 2.5px solid var(--ink); border-radius: var(--radius-md); padding: 1.5rem; box-shadow: var(--shadow-md); }
+.form-row { display: flex; flex-direction: column; gap: 6px; }
+.form-row label { font-family: 'Space Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.form-row input, .form-row textarea { font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif; font-size: 0.9rem; color: var(--text); background: var(--card2); border: 2px solid var(--ink); border-radius: 10px; padding: 10px 14px; outline: none; resize: vertical; transition: box-shadow 0.2s ease; }
+.form-row input:focus, .form-row textarea:focus { box-shadow: 3px 3px 0 var(--ink); }
+.contact-submit { align-self: flex-start; font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; background: var(--accent1); color: #17171f; border: 2.5px solid var(--ink); border-radius: 100px; padding: 10px 24px; cursor: pointer; box-shadow: var(--shadow-sm); transition: all 0.2s cubic-bezier(.34,1.56,.64,1); -webkit-tap-highlight-color: transparent; }
+.contact-submit:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
+.contact-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.contact-status { font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; min-height: 1rem; }
+.contact-status.success { color: var(--accent1); }
+.contact-status.error { color: var(--accent2); }
 
 /* ── FOOTER ── */
 .footer { text-align: center; padding-top: 2.5rem; font-family: 'Space Mono', monospace; font-size: 0.66rem; color: var(--muted); }
