@@ -348,12 +348,26 @@
     <section class="github-stats-section reveal" id="section-github">
       <div class="section-label">✦ GitHub Activity</div>
       <div class="github-stats-grid">
-        <img class="github-stats-card" loading="lazy"
-             src="https://github-readme-stats.vercel.app/api?username=syafiqrasyad1606-ops&show_icons=true&hide_border=true&bg_color=00000000&title_color=000000&icon_color=000000&text_color=000000&hide_title=true"
-             alt="GitHub stats for syafiqrasyad1606-ops">
-        <img class="github-stats-card" loading="lazy"
-             src="https://github-readme-stats.vercel.app/api/top-langs/?username=syafiqrasyad1606-ops&layout=compact&hide_border=true&bg_color=00000000&title_color=000000&text_color=000000&hide=jupyter%20notebook"
-             alt="Top languages for syafiqrasyad1606-ops">
+        <div class="github-stats-card-wrap">
+          <img class="github-stats-card" loading="lazy"
+               src="https://github-readme-stats.vercel.app/api?username=syafiqrasyad1606-ops&show_icons=true&hide_border=true&bg_color=00000000&title_color=000000&icon_color=000000&text_color=000000&hide_title=true"
+               alt="GitHub stats for syafiqrasyad1606-ops"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="github-stats-fallback">
+            <span>📊</span>
+            <p>Stats lagi gak bisa dimuat (server publiknya lagi sibuk). Cek langsung di GitHub ya.</p>
+          </div>
+        </div>
+        <div class="github-stats-card-wrap">
+          <img class="github-stats-card" loading="lazy"
+               src="https://github-readme-stats.vercel.app/api/top-langs/?username=syafiqrasyad1606-ops&layout=compact&hide_border=true&bg_color=00000000&title_color=000000&text_color=000000&hide=jupyter%20notebook"
+               alt="Top languages for syafiqrasyad1606-ops"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="github-stats-fallback">
+            <span>🧩</span>
+            <p>Top languages lagi gak bisa dimuat (server publiknya lagi sibuk). Cek langsung di GitHub ya.</p>
+          </div>
+        </div>
       </div>
       <a href="https://github.com/syafiqrasyad1606-ops" target="_blank" rel="noopener noreferrer" class="github-stats-link">Lihat GitHub lengkap →</a>
     </section>
@@ -862,7 +876,7 @@
   // ── CONTACT FORM (Formspree) ──
   // Ganti FORMSPREE_ENDPOINT di bawah ini dengan endpoint form kamu sendiri.
   // Daftar gratis di https://formspree.io -> buat form baru -> copy URL endpoint-nya (bentuknya https://formspree.io/f/xxxxxxx)
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mljrqqya';
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
   const contactForm   = document.getElementById('contactForm');
   const contactStatus = document.getElementById('contactStatus');
   const contactSubmit = document.getElementById('contactSubmit');
