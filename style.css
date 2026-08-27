@@ -127,7 +127,11 @@ body::before {
 /* ── GITHUB STATS ── */
 .github-stats-section { margin: 2.25rem 0; }
 .github-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
-.github-stats-card { width: 100%; height: auto; border: 2.5px solid var(--ink); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); background: var(--card); display: block; }
+.github-stats-card-wrap { border: 2.5px solid var(--ink); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); background: var(--card); overflow: hidden; min-height: 120px; }
+.github-stats-card { width: 100%; height: auto; display: block; }
+.github-stats-fallback { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 1.5rem 1.25rem; min-height: 120px; }
+.github-stats-fallback span { font-size: 1.8rem; }
+.github-stats-fallback p { font-size: 0.75rem; color: var(--muted); line-height: 1.6; max-width: 260px; }
 .github-stats-link { display: inline-block; margin-top: 12px; font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--ink); padding-bottom: 1px; transition: opacity 0.2s ease; }
 .github-stats-link:hover { opacity: 0.6; }
 
@@ -308,6 +312,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 #welcome-toast.show { bottom: max(1.5rem, calc(1.5rem + env(safe-area-inset-bottom))); }
 
 /* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+    #now-playing, .cmd-hint-btn { display: none; }
+}
 @media (max-width: 480px) {
     .container   { padding: 1.25rem 1rem 4rem; }
     .hero        { padding: 2.5rem 0 1.5rem; }
@@ -325,7 +332,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     .role-tag    { font-size: 0.75rem; padding: 4px 13px; }
     .section-label { font-size: 0.78rem; }
     .marquee-item  { font-size: 0.68rem; }
-    #now-playing { bottom: 4rem; max-width: 180px; }
     #welcome-toast { right: 0.75rem; left: 0.75rem; max-width: unset; }
     .site-nav-inner { max-width: calc(100vw - 1.25rem); }
     .nav-link { font-size: 0.68rem; padding: 6px 11px; }
