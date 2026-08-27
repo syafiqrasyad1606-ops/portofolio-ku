@@ -237,6 +237,9 @@ body::before {
 .visitor-dot { width: 6px; height: 6px; background: var(--accent1); border-radius: 50%; animation: pulse-dot 2s ease infinite; }
 @keyframes pulse-dot { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:0.5} }
 
+/* ── CONFETTI CANVAS (click-triggered easter egg, not a passive background effect) ── */
+#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
 /* ── SCROLL PROGRESS BAR ── */
 #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 5px; background: var(--accent1); border-bottom: 2px solid var(--ink); z-index: 9999; transition: width 0.08s linear; }
 
