@@ -3,177 +3,1662 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Portfolio Syafiq Rasyad — Web Designer">
-  <link rel="canonical" href="https://syafiqrasyad1606-ops.github.io/Portofolio/">
-  <link rel="icon" type="image/png" href="image/cat.png">
-  <link rel="apple-touch-icon" href="image/cat.png">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Syafiq Rasyad",
-    "url": "https://syafiqrasyad1606-ops.github.io/Portofolio/",
-    "image": "https://syafiqrasyad1606-ops.github.io/Portofolio/SYAD.jpeg",
-    "jobTitle": "Web Developer",
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "Universitas Bina Sarana Informatika"
-    },
-    "sameAs": [
-      "https://linkedin.com/in/syafiqrasyad",
-      "https://github.com/syafiqrasyad1606-ops"
-    ]
-  }
-  </script>
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Syafiq Rasyad — Web Developer">
-  <meta property="og:description" content="Portfolio Syafiq Rasyad: web developer, mahasiswa Informatika BSI. Lihat project, skill, dan cara menghubungi saya.">
-  <meta property="og:image" content="https://syafiqrasyad1606-ops.github.io/Portofolio/SYAD.jpeg">
-  <meta property="og:url" content="https://syafiqrasyad1606-ops.github.io/Portofolio/">
-  <meta property="og:locale" content="id_ID">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Syafiq Rasyad — Web Developer &amp; UI/UX Designer">
-  <meta name="twitter:description" content="Portfolio Syafiq Rasyad: web developer & UI/UX designer, mahasiswa Informatika BSI.">
-  <meta name="twitter:image" content="https://syafiqrasyad1606-ops.github.io/Portofolio/SYAD.jpeg">
+  <meta name="description" content="Portfolio Syafiq Rasyad — Web Developer">
   <meta name="theme-color" content="#ffffff">
   <title>Portfolio Syafiq Rasyad</title>
+
+  <link rel="icon" type="image/png" href="image/cat.png">
+  <link rel="apple-touch-icon" href="image/cat.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
   <style>
-  /* ── MODAL (saweria style: white card, thick black border, hard shadow) ── */
-  .modal-overlay {
-    position: fixed; inset: 0; z-index: 500;
-    background: rgba(23,23,31,0.55);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    display: flex; align-items: center; justify-content: center;
-    padding: 1.25rem;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
-  .modal-box {
-    background: #ffffff;
-    border: 3px solid #17171f;
-    border-radius: 24px;
-    width: 100%; max-width: 540px;
-    max-height: 88vh;
-    overflow-y: auto;
-    padding: 2rem 1.75rem;
-    position: relative;
-    box-shadow: 8px 8px 0 #17171f;
-    transform: translateY(24px) scale(0.97);
-    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
-    scrollbar-width: thin;
-    scrollbar-color: #34c759 transparent;
-  }
-  .modal-overlay.open .modal-box { transform: translateY(0) scale(1); }
-  .modal-close {
-    position: absolute; top: 1.1rem; right: 1.1rem;
-    background: #ffb238;
-    border: 2px solid #17171f;
-    border-radius: 50%; width: 34px; height: 34px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 1rem; color: #17171f;
-    box-shadow: 2px 2px 0 #17171f;
-    transition: all 0.2s ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .modal-close:hover, .modal-close:active { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 #17171f; }
-  .modal-screenshot-wrap { width: 100%; aspect-ratio: 16/10; border: 2.5px solid #000000; border-radius: 14px; overflow: hidden; background: #f2f4ee; margin-bottom: 1.25rem; position: relative; }
-  .modal-screenshot-wrap::before { content: 'Loading preview…'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #6b6b80; }
-  .modal-screenshot { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
-  .modal-emoji { font-size: 2.8rem; margin-bottom: 0.75rem; display: block; }
-  .modal-title { font-family: 'Baloo 2', sans-serif; font-size: 1.5rem; font-weight: 700; color: #17171f; margin-bottom: 0.5rem; }
-  .modal-subtitle { font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; color: #34c759; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
-  .modal-desc { font-size: 0.92rem; color: #55556b; line-height: 1.8; margin-bottom: 1.25rem; overflow-wrap: break-word; font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif; }
-  .modal-section-title { font-family: 'Space Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6b80; margin-bottom: 0.6rem; }
-  .modal-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 1.4rem; }
-  .modal-tag { font-family: 'Space Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 4px 13px; border-radius: 100px; background: #f2f4ee; color: #17171f; border: 1.5px solid #17171f; }
-  .modal-highlights { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
-  .modal-highlight-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.87rem; color: #55556b; line-height: 1.6; }
-  .modal-highlight-item .icon { flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
-  .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-  .modal-btn { flex: 1; min-width: 120px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 20px; border-radius: 12px; font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; text-decoration: none; cursor: pointer; border: 2.5px solid #17171f; box-shadow: 3px 3px 0 #17171f; transition: all 0.2s cubic-bezier(.34,1.56,.64,1); -webkit-tap-highlight-color: transparent; }
-  .modal-btn-primary { background: #59c1f0; color: #17171f; }
-  .modal-btn-primary:hover, .modal-btn-primary:active { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #17171f; }
-  .modal-btn-secondary { background: #ffb238; color: #17171f; }
-  .modal-btn-secondary:hover, .modal-btn-secondary:active { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #17171f; }
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --card: #ffffff;
+      --card2: #f7f7f8;
+      --accent1: #34c759;
+      --accent2: #ff6f91;
+      --accent3: #59c1f0;
+      --accent4: #a689ff;
+      --accent5: #ffb238;
+      --text: #000000;
+      --muted: #6b6b80;
+      --border: #000000;
+      --ink: #000000;
+      --shadow-sm: 3px 3px 0 var(--ink);
+      --shadow-md: 5px 5px 0 var(--ink);
+      --shadow-lg: 7px 7px 0 var(--ink);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+    }
 
-  /* ── COMMAND PALETTE ── */
-  .cmd-overlay {
-    position: fixed; inset: 0; z-index: 600;
-    background: rgba(23,23,31,0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    display: flex; align-items: flex-start; justify-content: center;
-    padding-top: clamp(3rem, 12vh, 8rem);
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.2s ease;
-  }
-  .cmd-overlay.open { opacity: 1; pointer-events: all; }
-  .cmd-box { background: #ffffff; border: 3px solid #17171f; border-radius: 18px; width: 100%; max-width: 520px; margin: 0 1.25rem; overflow: hidden; box-shadow: 8px 8px 0 #17171f; transform: translateY(-16px) scale(0.97); transition: transform 0.25s cubic-bezier(.34,1.56,.64,1); }
-  .cmd-overlay.open .cmd-box { transform: translateY(0) scale(1); }
-  .cmd-input-wrap { display: flex; align-items: center; gap: 12px; padding: 1rem 1.25rem; border-bottom: 2.5px solid #17171f; background: #f2f4ee; }
-  .cmd-icon { font-size: 1.1rem; color: #34c759; flex-shrink: 0; }
-  .cmd-input { flex: 1; background: transparent; border: none; outline: none; font-family: 'Space Mono', monospace; font-size: 0.9rem; color: #17171f; caret-color: #34c759; }
-  .cmd-input::placeholder { color: #6b6b80; }
-  .cmd-kbd { font-family: 'Space Mono', monospace; font-size: 0.6rem; font-weight: 700; color: #17171f; background: #ffffff; border: 1.5px solid #17171f; border-radius: 5px; padding: 2px 7px; white-space: nowrap; }
-  .cmd-results { max-height: 340px; overflow-y: auto; padding: 0.5rem 0; }
-  .cmd-section-header { font-family: 'Space Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6b6b80; padding: 0.5rem 1.25rem 0.3rem; }
-  .cmd-item { display: flex; align-items: center; gap: 12px; padding: 0.7rem 1.25rem; cursor: pointer; transition: background 0.15s ease; -webkit-tap-highlight-color: transparent; }
-  .cmd-item:hover, .cmd-item.active { background: #f2f4ee; }
-  .cmd-item-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; background: #ffffff; border: 2px solid #17171f; }
-  .cmd-item-text { flex: 1; }
-  .cmd-item-name { font-size: 0.88rem; color: #17171f; font-weight: 700; }
-  .cmd-item-sub { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #6b6b80; margin-top: 1px; }
-  .cmd-item-enter { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: #6b6b80; opacity: 0; transition: opacity 0.15s; }
-  .cmd-item:hover .cmd-item-enter, .cmd-item.active .cmd-item-enter { opacity: 1; }
-  .cmd-footer { border-top: 2.5px solid #17171f; padding: 0.6rem 1.25rem; display: flex; gap: 1.25rem; align-items: center; background: #f2f4ee; }
-  .cmd-footer-hint { font-family: 'Space Mono', monospace; font-size: 0.6rem; font-weight: 700; color: #6b6b80; display: flex; align-items: center; gap: 5px; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* ── DARK MODE OVERRIDES (toggle) ── */
-  body.light .modal-box { background: #1c1d27; border-color: #f4f4fb; box-shadow: 8px 8px 0 rgba(0,0,0,0.4); }
-  body.light .modal-close { background: #ffc966; border-color: #f4f4fb; }
-  body.light .modal-title { color: #f4f4fb; }
-  body.light .modal-desc { color: #c4c4d6; }
-  body.light .modal-tag { background: #21222d; color: #f4f4fb; border-color: #f4f4fb; }
-  body.light .modal-highlight-item { color: #c4c4d6; }
-  body.light .cmd-box { background: #1c1d27; border-color: #f4f4fb; }
-  body.light .cmd-input-wrap, body.light .cmd-footer { background: #21222d; border-color: #f4f4fb; }
-  body.light .cmd-input { color: #f4f4fb; }
-  body.light .cmd-item:hover, body.light .cmd-item.active { background: #21222d; }
-  body.light .cmd-item-name { color: #f4f4fb; }
-  body.light .cmd-item-icon { background: #1c1d27; border-color: #f4f4fb; }
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    body::before {
+      content: none;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    #section-hero, #section-skills, #section-github,
+    #section-projects, #section-links, #section-contact {
+      scroll-margin-top: 80px;
+    }
+
+    /* BACK TO TOP */
+    #backToTop {
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      z-index: 9990;
+      width: 50px;
+      height: 50px;
+      border: 2.5px solid var(--ink);
+      border-radius: 50%;
+      background: var(--accent2);
+      color: var(--ink);
+      font-size: 24px;
+      font-weight: 800;
+      cursor: pointer;
+      display: none;
+      box-shadow: var(--shadow-sm);
+      transition: .25s ease;
+    }
+
+    #backToTop:hover {
+      transform: translate(-2px, -3px);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    #backToTop:active {
+      transform: scale(.94);
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 3.5rem 0 2rem;
+      animation: fadeUp .8s ease both;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      width: 124px;
+      height: 124px;
+      margin: 0 auto 1.75rem;
+    }
+
+    .cat-ear {
+      position: absolute;
+      top: -14px;
+      z-index: 3;
+      width: 0;
+      height: 0;
+    }
+
+    .cat-ear-left {
+      left: 12px;
+      border-left: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-bottom: 22px solid var(--accent1);
+      filter: drop-shadow(2px 2px 0 var(--ink));
+      animation: earWiggle 4s ease-in-out infinite;
+    }
+
+    .cat-ear-right {
+      right: 12px;
+      border-left: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-bottom: 22px solid var(--accent1);
+      filter: drop-shadow(2px 2px 0 var(--ink));
+      animation: earWiggle 4s ease-in-out infinite .4s;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 3px solid var(--ink);
+      box-shadow: var(--shadow-md);
+      z-index: 0;
+    }
+
+    .avatar-inner {
+      position: absolute;
+      inset: 3px;
+      background: var(--bg);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .avatar-wrap img {
+      position: absolute;
+      inset: 8px;
+      width: calc(100% - 16px);
+      height: calc(100% - 16px);
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      z-index: 2;
+    }
+
+    .status-badge {
+      position: absolute;
+      bottom: 0;
+      right: -14px;
+      background: var(--accent1);
+      border: 2.5px solid var(--ink);
+      border-radius: 100px;
+      padding: 3px 11px;
+      font-size: .62rem;
+      font-weight: 800;
+      color: var(--ink);
+      z-index: 4;
+      white-space: nowrap;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .hero-name {
+      font-family: "Baloo 2", sans-serif;
+      font-size: clamp(2.4rem, 9vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: .5rem;
+      color: var(--ink);
+    }
+
+    .hero-name .highlight {
+      color: var(--accent1);
+    }
+
+    .hero-role {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: .85rem 0;
+    }
+
+    .role-tag {
+      background: #fff;
+      border: 2.5px solid #17171f;
+      border-radius: 100px;
+      padding: 5px 16px;
+      font-size: .8rem;
+      font-weight: 700;
+      color: #17171f;
+      box-shadow: 3px 3px 0 #17171f;
+      transition: .2s cubic-bezier(.34,1.56,.64,1);
+      user-select: none;
+    }
+
+    .role-tag:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 #17171f;
+    }
+
+    .hero-bio {
+      font-size: clamp(.875rem, .78rem + .5vw, 1rem);
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 460px;
+      margin: .85rem auto 0;
+      overflow-wrap: break-word;
+    }
+
+    .typing-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 1.6em;
+    }
+
+    .typing-text {
+      font-family: "Space Mono", monospace;
+      font-size: clamp(.85rem, 3vw, 1.05rem);
+      font-weight: 700;
+      color: var(--accent1);
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: var(--ink);
+      margin-left: 3px;
+      border-radius: 2px;
+      animation: blink .75s step-end infinite;
+    }
+
+    .visitor-counter {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 2px solid var(--ink);
+      border-radius: 100px;
+      padding: 6px 18px;
+      font-family: "Space Mono", monospace;
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: .8rem auto 0;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .visitor-counter img {
+      height: 18px;
+      vertical-align: middle;
+      border-radius: 4px;
+      max-width: 170px;
+    }
+
+    .visitor-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent1);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease infinite;
+    }
+
+    /* SECTION */
+    .section-label {
+      font-family: "Baloo 2", sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::after {
+      content: "";
+      flex: 1;
+      height: 3px;
+      background: repeating-linear-gradient(90deg, var(--ink) 0 6px, transparent 6px 12px);
+      opacity: .35;
+      border-radius: 3px;
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 3px solid #17171f;
+      border-bottom: 3px solid #17171f;
+      background: var(--accent5);
+      padding: 11px 0;
+      margin: 2.25rem 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      animation: marquee 24s linear infinite;
+    }
+
+    .marquee-item {
+      font-family: "Space Mono", monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: #17171f;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* STATS */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 2.25rem 0;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 2.5px solid var(--ink);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: .2s cubic-bezier(.34,1.56,.64,1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: attr(data-icon);
+      position: absolute;
+      bottom: -4px;
+      right: 8px;
+      font-size: 2.2rem;
+      opacity: .14;
+      transform: rotate(8deg);
+    }
+
+    .stat-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .stat-num {
+      font-family: "Baloo 2", sans-serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--accent1);
+    }
+
+    .stat-label {
+      font-size: .72rem;
+      color: var(--muted);
+      margin-top: 5px;
+      font-weight: 700;
+    }
+
+    /* SKILLS */
+    .skills-section,
+    .github-stats-section,
+    .projects-section,
+    .links-section,
+    .contact-section {
+      margin: 2.25rem 0;
+    }
+
+    .skill-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-group-title {
+      font-family: "Space Mono", monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .skill-icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+      gap: 10px;
+    }
+
+    .skill-icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 2.5px solid var(--ink);
+      border-radius: var(--radius-sm);
+      padding: 14px 8px;
+      box-shadow: var(--shadow-sm);
+      transition: .2s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .skill-icon-item:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .skill-icon-item img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 8px;
+      padding: 4px;
+    }
+
+    .skill-icon-item span {
+      font-family: "Space Mono", monospace;
+      font-size: .66rem;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+    }
+
+    /* GITHUB */
+    .github-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .github-stats-card-wrap {
+      border: 2.5px solid var(--ink);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+      background: var(--card);
+      overflow: hidden;
+      min-height: 120px;
+    }
+
+    .github-stats-card {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .github-stats-fallback {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      padding: 1.5rem 1.25rem;
+      min-height: 120px;
+    }
+
+    .github-stats-fallback p {
+      font-size: .75rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    .github-stats-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-family: "Space Mono", monospace;
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    /* PROJECTS */
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .filter-chip {
+      font-family: "Space Mono", monospace;
+      font-size: .7rem;
+      font-weight: 700;
+      background: var(--card);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 100px;
+      padding: 6px 15px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: .2s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .filter-chip:hover,
+    .filter-chip.active {
+      transform: translate(-1px, -1px);
+    }
+
+    .filter-chip.active {
+      background: var(--accent1);
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 2.5px solid var(--ink);
+      border-radius: var(--radius-md);
+      padding: 1.35rem 1.5rem;
+      margin-bottom: 1.1rem;
+      box-shadow: var(--shadow-md);
+      transition: .2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--accent1);
+    }
+
+    .project-card[data-project="p2"]::before {
+      background: var(--accent3);
+    }
+
+    .project-card[data-project="p3"]::before {
+      background: var(--accent2);
+    }
+
+    .project-card::after {
+      content: attr(data-icon);
+      position: absolute;
+      right: 1.25rem;
+      bottom: .5rem;
+      font-size: 3rem;
+      opacity: .1;
+      pointer-events: none;
+    }
+
+    .project-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 7px;
+    }
+
+    .project-name {
+      font-family: "Baloo 2", sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+      overflow-wrap: break-word;
+    }
+
+    .project-arrow {
+      font-size: 1.1rem;
+      color: var(--ink);
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+
+    .project-desc {
+      font-size: .86rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .project-tags,
+    .modal-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .project-tag,
+    .modal-tag {
+      font-family: "Space Mono", monospace;
+      font-size: .62rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--card2);
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+    }
+
+    /* REACTIONS */
+    .reaction-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 1rem;
+      padding-top: .85rem;
+      border-top: 2px dashed rgba(23,23,31,.18);
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .rxn-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--card2);
+      border: 2px solid var(--ink);
+      border-radius: 100px;
+      padding: 5px 13px;
+      font-family: "Space Mono", monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: .2s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .rxn-btn:hover {
+      transform: translate(-1px,-1px);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .rxn-btn.rxn-active-like { background: var(--accent2); }
+    .rxn-btn.rxn-active-fire { background: var(--accent5); }
+    .rxn-btn.rxn-active-star { background: var(--accent4); }
+    .rxn-btn.rxn-pop { animation: rxnPop .3s cubic-bezier(.34,1.56,.64,1); }
+
+    /* MEOW */
+    .meow-section {
+      text-align: center;
+      margin: 2.5rem 0 .5rem;
+    }
+
+    .meow-btn {
+      font-family: "Space Mono", monospace;
+      font-size: .75rem;
+      font-weight: 700;
+      background: var(--card);
+      color: var(--ink);
+      border: 2.5px solid var(--ink);
+      border-radius: 100px;
+      padding: 9px 22px;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: .2s cubic-bezier(.34,1.56,.64,1);
+      min-height: 44px;
+    }
+
+    .meow-btn:hover {
+      background: var(--accent1);
+      transform: translate(-2px,-2px);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .meow-output {
+      margin-top: .65rem;
+      font-family: "Space Mono", monospace;
+      font-size: .72rem;
+      color: var(--muted);
+      min-height: 1.2rem;
+      padding: 0 1rem;
+    }
+
+    /* LINKS */
+    .links-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card);
+      border: 2.5px solid var(--ink);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+      text-decoration: none;
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+      transition: .2s cubic-bezier(.34,1.56,.64,1);
+      min-height: 64px;
+    }
+
+    .link-btn:hover {
+      transform: translate(-3px,-3px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .link-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      border: 2px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .link-text { flex: 1; }
+    .link-name {
+      font-family: "Baloo 2", sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--ink);
+    }
+
+    .link-sub {
+      font-size: .72rem;
+      color: var(--muted);
+      font-family: "Space Mono", monospace;
+      margin-top: 2px;
+      overflow-wrap: break-word;
+    }
+
+    .link-arrow {
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    /* CONTACT */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: var(--card);
+      border: 2.5px solid var(--ink);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-row label {
+      font-family: "Space Mono", monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-row input,
+    .form-row textarea {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: .9rem;
+      color: var(--text);
+      background: var(--card2);
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      padding: 10px 14px;
+      outline: none;
+      resize: vertical;
+      transition: box-shadow .2s ease;
+    }
+
+    .form-row input:focus,
+    .form-row textarea:focus {
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .contact-submit {
+      align-self: flex-start;
+      font-family: "Space Mono", monospace;
+      font-size: .78rem;
+      font-weight: 700;
+      background: var(--accent1);
+      color: var(--ink);
+      border: 2.5px solid var(--ink);
+      border-radius: 100px;
+      padding: 10px 24px;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: .2s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .contact-submit:hover:not(:disabled) {
+      transform: translate(-2px,-2px);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .contact-submit:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .contact-status {
+      font-family: "Space Mono", monospace;
+      font-size: .75rem;
+      font-weight: 700;
+      min-height: 1rem;
+    }
+
+    .contact-status.success { color: var(--accent1); }
+    .contact-status.error { color: var(--accent2); }
+
+    /* NAV */
+    .site-nav {
+      position: sticky;
+      top: 5px;
+      z-index: 80;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    .site-nav-inner {
+      display: flex;
+      gap: 4px;
+      background: var(--card);
+      border: 2.5px solid var(--ink);
+      border-radius: 100px;
+      padding: 5px;
+      box-shadow: var(--shadow-sm);
+      max-width: calc(100vw - 2rem);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .site-nav-inner::-webkit-scrollbar { display: none; }
+
+    .nav-link {
+      flex-shrink: 0;
+      font-family: "Space Mono", monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 7px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: var(--ink);
+    }
+
+    .nav-link.active {
+      background: var(--accent1);
+      color: var(--ink);
+    }
+
+    .nav-theme-toggle {
+      flex-shrink: 0;
+      margin-left: 4px;
+      padding: 7px 10px 7px 14px;
+      border: none;
+      border-left: 2px solid rgba(23,23,31,.15);
+      background: transparent;
+      font-size: .78rem;
+      font-weight: 700;
+      font-family: "Space Mono", monospace;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    /* FIXED WIDGETS */
+    #now-playing,
+    .cmd-hint-btn {
+      position: fixed;
+      left: 1.25rem;
+      z-index: 90;
+      background: var(--card);
+      border: 2.5px solid var(--ink);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+    }
+
+    #now-playing {
+      bottom: 4.5rem;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      cursor: pointer;
+      max-width: 220px;
+    }
+
+    .np-cover {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 2px solid var(--ink);
+      background: var(--accent3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      animation: npSpin 5s linear infinite;
+    }
+
+    .np-cover.paused { animation-play-state: paused; }
+    .np-info { flex: 1; min-width: 0; }
+
+    .np-track {
+      font-family: "Space Mono", monospace;
+      font-size: .62rem;
+      color: var(--ink);
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .np-artist {
+      font-family: "Space Mono", monospace;
+      font-size: .58rem;
+      color: var(--muted);
+    }
+
+    .np-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .np-bar {
+      width: 3px;
+      background: var(--accent1);
+      border-radius: 2px;
+      animation: npBar .7s ease infinite;
+    }
+
+    .np-bar:nth-child(2) { animation-delay: .15s; }
+    .np-bar:nth-child(3) { animation-delay: .30s; }
+    .np-bar:nth-child(4) { animation-delay: .45s; }
+    .np-bar.paused { animation-play-state: paused; height: 4px; }
+
+    .cmd-hint-btn {
+      bottom: 1.25rem;
+      padding: 6px 12px;
+      font-family: "Space Mono", monospace;
+      font-size: .62rem;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .cmd-hint-btn kbd,
+    .cmd-kbd {
+      background: var(--card2);
+      border: 1.5px solid var(--ink);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: .6rem;
+    }
+
+    /* TOAST */
+    #welcome-toast {
+      position: fixed;
+      bottom: -100px;
+      right: 1.25rem;
+      z-index: 9998;
+      background: var(--card);
+      border: 2.5px solid var(--ink);
+      border-radius: var(--radius-sm);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Space Mono", monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--ink);
+      max-width: 300px;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      transition: bottom .5s cubic-bezier(.34,1.56,.64,1), opacity .4s ease;
+    }
+
+    #welcome-toast.show {
+      bottom: 1.5rem;
+      opacity: 1;
+    }
+
+    .toast-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent1);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse-dot 1.8s ease infinite;
+    }
+
+    .toast-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: .85rem;
+      margin-left: 4px;
+    }
+
+    /* PROGRESS */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 5px;
+      background: var(--accent1);
+      border-bottom: 2px solid var(--ink);
+      z-index: 9999;
+      transition: width .08s linear;
+    }
+
+    /* MODAL */
+    .modal-overlay,
+    .cmd-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+
+    .modal-overlay {
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background: rgba(23,23,31,.55);
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-overlay.open,
+    .cmd-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: #fff;
+      border: 3px solid #17171f;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 540px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 2rem 1.75rem;
+      position: relative;
+      box-shadow: 8px 8px 0 #17171f;
+      transform: translateY(24px) scale(.97);
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .modal-overlay.open .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      background: var(--accent5);
+      border: 2px solid #17171f;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #17171f;
+      box-shadow: 2px 2px 0 #17171f;
+    }
+
+    .modal-screenshot-wrap {
+      width: 100%;
+      aspect-ratio: 16/10;
+      border: 2.5px solid #000;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #f2f4ee;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+
+    .modal-screenshot {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    .modal-emoji {
+      font-size: 2.8rem;
+      margin-bottom: .75rem;
+      display: block;
+    }
+
+    .modal-title {
+      font-family: "Baloo 2", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #17171f;
+      margin-bottom: .5rem;
+    }
+
+    .modal-subtitle {
+      font-family: "Space Mono", monospace;
+      font-size: .7rem;
+      font-weight: 700;
+      color: #34c759;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .modal-desc {
+      font-size: .92rem;
+      color: #55556b;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-section-title {
+      font-family: "Space Mono", monospace;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #6b6b80;
+      margin-bottom: .6rem;
+    }
+
+    .modal-tags {
+      margin-bottom: 1.4rem;
+    }
+
+    .modal-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .87rem;
+      color: #55556b;
+      line-height: 1.6;
+    }
+
+    .modal-highlight-item .icon {
+      flex-shrink: 0;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .modal-btn {
+      flex: 1;
+      min-width: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 12px;
+      font-family: "Space Mono", monospace;
+      font-size: .75rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: 2.5px solid #17171f;
+      box-shadow: 3px 3px 0 #17171f;
+      color: #17171f;
+    }
+
+    .modal-btn-primary { background: var(--accent3); }
+    .modal-btn-secondary { background: var(--accent5); }
+
+    /* COMMAND PALETTE */
+    .cmd-overlay {
+      z-index: 600;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: clamp(3rem, 12vh, 8rem);
+      background: rgba(23,23,31,.5);
+      backdrop-filter: blur(8px);
+    }
+
+    .cmd-box {
+      background: #fff;
+      border: 3px solid #17171f;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 1.25rem;
+      overflow: hidden;
+      box-shadow: 8px 8px 0 #17171f;
+      transform: translateY(-16px) scale(.97);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .cmd-overlay.open .cmd-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .cmd-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 1rem 1.25rem;
+      border-bottom: 2.5px solid #17171f;
+      background: #f2f4ee;
+    }
+
+    .cmd-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: "Space Mono", monospace;
+      font-size: .9rem;
+      color: #17171f;
+    }
+
+    .cmd-results {
+      max-height: 340px;
+      overflow-y: auto;
+      padding: .5rem 0;
+    }
+
+    .cmd-section-header {
+      font-family: "Space Mono", monospace;
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #6b6b80;
+      padding: .5rem 1.25rem .3rem;
+    }
+
+    .cmd-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: .7rem 1.25rem;
+      cursor: pointer;
+      transition: background .15s ease;
+    }
+
+    .cmd-item:hover,
+    .cmd-item.active {
+      background: #f2f4ee;
+    }
+
+    .cmd-item-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 2px solid #17171f;
+    }
+
+    .cmd-item-text {
+      flex: 1;
+    }
+
+    .cmd-item-name {
+      font-size: .88rem;
+      color: #17171f;
+      font-weight: 700;
+    }
+
+    .cmd-item-sub {
+      font-family: "Space Mono", monospace;
+      font-size: .65rem;
+      color: #6b6b80;
+    }
+
+    .cmd-footer {
+      border-top: 2.5px solid #17171f;
+      padding: .6rem 1.25rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      background: #f2f4ee;
+    }
+
+    .cmd-footer-hint {
+      font-family: "Space Mono", monospace;
+      font-size: .6rem;
+      font-weight: 700;
+      color: #6b6b80;
+    }
+
+    /* FOOTER */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem 0 0;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 3px;
+      background: repeating-linear-gradient(90deg, var(--ink) 0 6px, transparent 6px 12px);
+      opacity: .3;
+    }
+
+    .divider-icon {
+      font-size: 1.1rem;
+      opacity: .6;
+    }
+
+    .footer {
+      text-align: center;
+      padding-top: 2.5rem;
+      font-family: "Space Mono", monospace;
+      font-size: .66rem;
+      color: var(--muted);
+    }
+
+    .footer .heart { color: var(--accent2); }
+
+    /* ACCESSIBILITY */
+    .skip-link {
+      position: fixed;
+      top: -60px;
+      left: 1rem;
+      z-index: 10000;
+      background: var(--accent1);
+      color: var(--ink);
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 2.5px solid var(--ink);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      font-family: "Space Mono", monospace;
+      font-weight: 700;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid var(--accent3);
+      outline-offset: 3px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* DARK VARIANT */
+    body.light {
+      --bg: #000000;
+      --surface: #000000;
+      --card: #111217;
+      --card2: #1c1d27;
+      --text: #ffffff;
+      --muted: #9a9ab0;
+      --ink: #ffffff;
+      --accent1: #4ade80;
+      --accent2: #ff8fab;
+      --accent3: #7eb8ff;
+      --accent4: #c9b1ff;
+      --accent5: #ffc966;
+    }
+
+    body.light .role-tag,
+    body.light .modal-box,
+    body.light .cmd-box {
+      background: #1c1d27;
+      color: #fff;
+    }
+
+    body.light .role-tag,
+    body.light .modal-box,
+    body.light .cmd-box,
+    body.light .cmd-input-wrap,
+    body.light .cmd-footer {
+      border-color: #fff;
+    }
+
+    body.light .modal-title,
+    body.light .modal-desc,
+    body.light .modal-highlight-item,
+    body.light .cmd-item-name,
+    body.light .cmd-input {
+      color: #f4f4fb;
+    }
+
+    body.light .modal-tag,
+    body.light .cmd-item-icon {
+      background: #21222d;
+      color: #fff;
+      border-color: #fff;
+    }
+
+    body.light .cmd-input-wrap,
+    body.light .cmd-footer,
+    body.light .cmd-item:hover,
+    body.light .cmd-item.active {
+      background: #21222d;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes earWiggle {
+      0%,100% { transform: rotate(0); }
+      20% { transform: rotate(-6deg); }
+      60% { transform: rotate(5deg); }
+    }
+
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes pulse-dot {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: .5; }
+    }
+
+    @keyframes marquee {
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes rxnPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes npSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes npBar {
+      0%,100% { height: 3px; }
+      50% { height: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #now-playing,
+      .cmd-hint-btn {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 1.25rem 1rem 4rem;
+      }
+
+      .hero {
+        padding: 2.5rem 0 1.5rem;
+      }
+
+      .hero-name {
+        font-size: 2rem;
+      }
+
+      .avatar-wrap {
+        width: 108px;
+        height: 108px;
+      }
+
+      .status-badge {
+        right: -6px;
+      }
+
+      .stats-row {
+        gap: 8px;
+      }
+
+      .stat-card {
+        padding: 1rem .75rem;
+      }
+
+      .stat-num {
+        font-size: 1.7rem;
+      }
+
+      .project-card {
+        padding: 1.1rem 1.15rem;
+      }
+
+      .link-btn {
+        padding: .85rem 1rem;
+      }
+
+      .site-nav-inner {
+        max-width: calc(100vw - 1.25rem);
+      }
+
+      .nav-link {
+        font-size: .68rem;
+        padding: 6px 11px;
+      }
+
+      #welcome-toast {
+        right: .75rem;
+        left: .75rem;
+        max-width: none;
+      }
+
+      #backToTop {
+        right: 18px;
+        bottom: 18px;
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero-name { font-size: 1.75rem; }
+      .stat-num { font-size: 1.5rem; }
+      .stat-card { padding: .85rem .5rem; }
+    }
   </style>
 </head>
+
 <body>
   <button id="backToTop" aria-label="Kembali ke atas">↑</button>
   <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
-  <!-- ── SCROLL PROGRESS BAR ── -->
   <div id="scroll-progress"></div>
-  <!-- ── STICKY NAV + SCROLLSPY ── -->
-  <nav class="site-nav" id="siteNav" aria-label="Navigasi utama">
-    <div class="site-nav-inner" id="siteNavInner">
-      <a href="#section-hero" class="nav-link" data-target="section-hero">Home</a>
+
+  <nav class="site-nav" aria-label="Navigasi utama">
+    <div class="site-nav-inner">
+      <a href="#section-hero" class="nav-link active" data-target="section-hero">Home</a>
       <a href="#section-skills" class="nav-link" data-target="section-skills">Skills</a>
       <a href="#section-github" class="nav-link" data-target="section-github">GitHub</a>
       <a href="#section-projects" class="nav-link" data-target="section-projects">Projects</a>
       <a href="#section-links" class="nav-link" data-target="section-links">Links</a>
       <a href="#section-contact" class="nav-link" data-target="section-contact">Contact</a>
-      <button class="nav-theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle tema">
-        <span class="toggle-icon" id="themeIcon">🌙</span>
+      <button class="nav-theme-toggle" id="themeToggle" type="button">
+        <span id="themeIcon">🌙</span>
         <span id="themeLabel">Dark</span>
       </button>
     </div>
   </nav>
-  <!-- ── WELCOME TOAST ── -->
+
   <div id="welcome-toast">
     <div class="toast-dot"></div>
     <span>👋 Heyy! Thanks for visiting my website~</span>
     <button class="toast-close" onclick="dismissToast()" aria-label="Tutup">✕</button>
   </div>
-  <!-- ── NOW PLAYING WIDGET ── -->
+
   <div id="now-playing" onclick="toggleNowPlaying()" title="Click to pause/play">
     <div class="np-cover" id="npCover">🎵</div>
     <div class="np-info">
@@ -181,21 +1666,24 @@
       <div class="np-artist" id="npArtist">• lo-fi hip hop</div>
     </div>
     <div class="np-bars">
-      <div class="np-bar" id="npBar1"></div>
-      <div class="np-bar" id="npBar2"></div>
-      <div class="np-bar" id="npBar3"></div>
-      <div class="np-bar" id="npBar4"></div>
+      <div class="np-bar"></div>
+      <div class="np-bar"></div>
+      <div class="np-bar"></div>
+      <div class="np-bar"></div>
     </div>
   </div>
+
   <canvas id="confetti-canvas"></canvas>
+
   <button class="cmd-hint-btn" onclick="openCmd()" aria-label="Buka command palette">
-    <kbd>Ctrl</kbd><kbd>K</kbd> <span>Command palette</span>
+    <kbd>Ctrl</kbd><kbd>K</kbd><span>Command palette</span>
   </button>
-  <!-- ── MODAL ── -->
+
+  <!-- MODAL PROJECT -->
   <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-    <div class="modal-box" id="modalBox">
+    <div class="modal-box">
       <button class="modal-close" onclick="closeModal()" aria-label="Tutup">✕</button>
-      <div class="modal-screenshot-wrap" id="modalScreenshotWrap">
+      <div class="modal-screenshot-wrap">
         <img class="modal-screenshot" id="modalScreenshot" alt="" loading="lazy">
       </div>
       <span class="modal-emoji" id="modalEmoji"></span>
@@ -209,13 +1697,14 @@
       <div class="modal-actions" id="modalActions"></div>
     </div>
   </div>
-  <!-- ── COMMAND PALETTE ── -->
+
+  <!-- COMMAND PALETTE -->
   <div class="cmd-overlay" id="cmdOverlay" onclick="closeCmdOutside(event)">
     <div class="cmd-box">
       <div class="cmd-input-wrap">
-        <span class="cmd-icon">⌘</span>
-        <input class="cmd-input" id="cmdInput" placeholder="Cari sesuatu... (project, link, section)" aria-label="Cari section, project, atau link" autocomplete="off" spellcheck="false">
-        <span class="cmd-kbd">ESC untuk tutup</span>
+        <span>⌘</span>
+        <input class="cmd-input" id="cmdInput" placeholder="Cari sesuatu... (project, link, section)" aria-label="Cari section, project, atau link" autocomplete="off">
+        <span class="cmd-kbd">ESC</span>
       </div>
       <div class="cmd-results" id="cmdResults"></div>
       <div class="cmd-footer">
@@ -225,8 +1714,8 @@
       </div>
     </div>
   </div>
-  <div class="container" id="main-content" tabindex="-1">
-    <!-- ── HERO ── -->
+
+  <main class="container" id="main-content" tabindex="-1">
     <section class="hero" id="section-hero">
       <div class="avatar-wrap">
         <div class="cat-ear cat-ear-left"></div>
@@ -236,61 +1725,63 @@
         <img src="SYAD.jpeg" alt="Syafiq Rasyad" decoding="async" fetchpriority="high">
         <div class="status-badge">🟢</div>
       </div>
+
       <h1 class="hero-name">Hello, I'm <span class="highlight">Syafiq Rasyad</span></h1>
-      <div class="typing-wrap" style="margin: 0.6rem 0 0.3rem;">
+
+      <div class="typing-wrap" style="margin:.6rem 0 .3rem">
         <span class="typing-text" id="typingText"></span>
         <span class="typing-cursor"></span>
       </div>
+
       <div class="hero-role">
-        <span class="role-tag r1">💻 Web Developer</span>
+        <span class="role-tag">💻 Web Developer</span>
       </div>
+
       <p class="hero-bio">
-        I am an informatics student, currently studying at Bina Sarana Informatika University. I like to build beautiful and functional things —
-        from wireframes to deployment. Currently open to new opportunities!
+        I am an informatics student, currently studying at Bina Sarana Informatika University.
+        I like to build beautiful and functional things — from wireframes to deployment.
+        Currently open to new opportunities!
       </p>
+
       <div class="visitor-counter">
         <span class="visitor-dot"></span>
         <span>👀</span>
-        <img
-          src="https://hits.sh/syafiqrasyad1606-ops.github.io/Portofolio.svg?style=flat&label=visitors&color=59c1f0&labelColor=ffffff&extraCount=0"
-          alt="visitor count"
-          style="height:18px; vertical-align:middle; border-radius:4px;"
-        >
+        <img src="https://hits.sh/syafiqrasyad1606-ops.github.io/Portofolio.svg?style=flat&label=visitors&color=59c1f0&labelColor=ffffff&extraCount=0" alt="visitor count">
       </div>
     </section>
-    <!-- ── MARQUEE ── -->
+
     <div class="marquee-wrap reveal">
       <div class="marquee-track">
-        <span class="marquee-item"><span class="marquee-sep">✦</span> Python</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> JavaScript</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> PHP</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> HTML &amp; CSS</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> Web Development</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> Web Design</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> Python</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> JavaScript</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> PHP</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> HTML &amp; CSS</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> Web Development</span>
-        <span class="marquee-item"><span class="marquee-sep">✦</span> Web Design</span>
+        <span class="marquee-item">✦ Python</span>
+        <span class="marquee-item">✦ JavaScript</span>
+        <span class="marquee-item">✦ PHP</span>
+        <span class="marquee-item">✦ HTML &amp; CSS</span>
+        <span class="marquee-item">✦ Web Development</span>
+        <span class="marquee-item">✦ Web Design</span>
+        <span class="marquee-item">✦ Python</span>
+        <span class="marquee-item">✦ JavaScript</span>
+        <span class="marquee-item">✦ PHP</span>
+        <span class="marquee-item">✦ HTML &amp; CSS</span>
+        <span class="marquee-item">✦ Web Development</span>
+        <span class="marquee-item">✦ Web Design</span>
       </div>
     </div>
-    <!-- ── STATS ── -->
+
     <div class="stats-row">
-      <div class="stat-card reveal reveal-delay-1" data-icon="🚀">
+      <div class="stat-card reveal" data-icon="🚀">
         <div class="stat-num">3</div>
         <div class="stat-label">Projects selesai</div>
       </div>
-      <div class="stat-card reveal reveal-delay-2" data-icon="📅">
+      <div class="stat-card reveal" data-icon="📅">
         <div class="stat-num">3</div>
         <div class="stat-label">Semester</div>
       </div>
-      <div class="stat-card reveal reveal-delay-3" data-icon="🏸">
-        <div class="stat-num" style="font-size:1.3rem;">Hobi</div>
+      <div class="stat-card reveal" data-icon="🏸">
+        <div class="stat-num" style="font-size:1.3rem">Hobi</div>
         <div class="stat-label">Badminton</div>
       </div>
     </div>
-    <!-- ── SKILLS: ICON GRID ── -->
+
     <section class="skills-section reveal" id="section-skills">
       <div class="section-label">✦ Skills &amp; Tools</div>
 
@@ -298,23 +1789,23 @@
         <div class="skill-group-title">Languages</div>
         <div class="skill-icon-grid">
           <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="36" height="36" loading="lazy" decoding="async">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" loading="lazy">
             <span>HTML5</span>
           </div>
           <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="36" height="36" loading="lazy" decoding="async">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" loading="lazy">
             <span>CSS3</span>
           </div>
           <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="36" height="36" loading="lazy" decoding="async">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy">
             <span>JavaScript</span>
           </div>
           <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="36" height="36" loading="lazy" decoding="async">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy">
             <span>Python</span>
           </div>
           <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" width="36" height="36" loading="lazy" decoding="async">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" loading="lazy">
             <span>PHP</span>
           </div>
         </div>
@@ -324,59 +1815,60 @@
         <div class="skill-group-title">Frameworks &amp; Tools</div>
         <div class="skill-icon-grid">
           <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" width="36" height="36" loading="lazy" decoding="async">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy">
             <span>React</span>
           </div>
           <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" width="36" height="36" loading="lazy" decoding="async">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy">
             <span>Node.js</span>
           </div>
           <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" width="36" height="36" loading="lazy" decoding="async">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy">
             <span>MySQL</span>
           </div>
           <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" width="36" height="36" loading="lazy" decoding="async">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy">
             <span>Git</span>
           </div>
           <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" width="36" height="36" loading="lazy" decoding="async">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy">
             <span>GitHub</span>
           </div>
         </div>
       </div>
     </section>
-    <!-- ── GITHUB STATS ── -->
+
     <section class="github-stats-section reveal" id="section-github">
       <div class="section-label">✦ GitHub Activity</div>
       <div class="github-stats-grid">
         <div class="github-stats-card-wrap">
           <img class="github-stats-card" loading="lazy"
                src="https://github-readme-stats.vercel.app/api?username=syafiqrasyad1606-ops&show_icons=true&hide_border=true&bg_color=00000000&title_color=000000&icon_color=000000&text_color=000000&hide_title=true"
-               alt="GitHub stats for syafiqrasyad1606-ops"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+               alt="GitHub stats"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="github-stats-fallback">
             <span>📊</span>
-            <p>Stats lagi gak bisa dimuat (server publiknya lagi sibuk). Cek langsung di GitHub ya.</p>
+            <p>Stats lagi gak bisa dimuat. Cek langsung di GitHub ya.</p>
           </div>
         </div>
+
         <div class="github-stats-card-wrap">
           <img class="github-stats-card" loading="lazy"
                src="https://github-readme-stats.vercel.app/api/top-langs/?username=syafiqrasyad1606-ops&layout=compact&hide_border=true&bg_color=00000000&title_color=000000&text_color=000000&hide=jupyter%20notebook"
-               alt="Top languages for syafiqrasyad1606-ops"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+               alt="Top languages"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="github-stats-fallback">
             <span>🧩</span>
-            <p>Top languages lagi gak bisa dimuat (server publiknya lagi sibuk). Cek langsung di GitHub ya.</p>
+            <p>Top languages lagi gak bisa dimuat. Cek langsung di GitHub ya.</p>
           </div>
         </div>
       </div>
       <a href="https://github.com/syafiqrasyad1606-ops" target="_blank" rel="noopener noreferrer" class="github-stats-link">Lihat GitHub lengkap →</a>
     </section>
-    <!-- ── PROJECTS ── -->
+
     <section class="projects-section reveal" id="section-projects">
       <div class="section-label">✦ Featured Projects</div>
-      <!-- Filter by tech stack -->
+
       <div class="filter-row" id="filterRow">
         <button class="filter-chip active" data-filter="all">Semua</button>
         <button class="filter-chip" data-filter="html">HTML</button>
@@ -384,28 +1876,27 @@
         <button class="filter-chip" data-filter="javascript">JavaScript</button>
         <button class="filter-chip" data-filter="php">PHP</button>
         <button class="filter-chip" data-filter="mysql">MySQL</button>
-        <button class="filter-chip" data-filter="ui/ux">UI/UX</button>
       </div>
-      <!-- Project 1 -->
-      <div class="project-card reveal reveal-delay-1" data-icon="🐱" data-project="p1" data-tags="css,html,javascript" onclick="openModal('p1')" style="cursor:pointer;">
+
+      <div class="project-card reveal" data-icon="🐱" data-project="p1" data-tags="css,html,javascript" onclick="openModal('p1')">
         <div class="project-top">
           <span class="project-name">Program Pencatatan Keuangan #1 🚀</span>
           <span class="project-arrow">↗</span>
         </div>
-        <p class="project-desc">Membuat program Pencatatan Keuangan yg interaktif.</p>
+        <p class="project-desc">Membuat program pencatatan keuangan yang interaktif.</p>
         <div class="project-tags">
-          <span class="project-tag">Css</span>
-          <span class="project-tag">Html</span>
+          <span class="project-tag">CSS</span>
+          <span class="project-tag">HTML</span>
           <span class="project-tag">JavaScript</span>
         </div>
         <div class="reaction-row" onclick="event.stopPropagation()">
-          <button class="rxn-btn" id="rxn-p1-like" onclick="handleReaction('p1','like',this)">❤️ <span class="rxn-count" aria-live="polite">0</span></button>
-          <button class="rxn-btn" id="rxn-p1-fire" onclick="handleReaction('p1','fire',this)">🔥 <span class="rxn-count" aria-live="polite">0</span></button>
-          <button class="rxn-btn" id="rxn-p1-star" onclick="handleReaction('p1','star',this)">⭐ <span class="rxn-count" aria-live="polite">0</span></button>
+          <button class="rxn-btn" id="rxn-p1-like" onclick="handleReaction('p1','like',this)">❤️ <span class="rxn-count">0</span></button>
+          <button class="rxn-btn" id="rxn-p1-fire" onclick="handleReaction('p1','fire',this)">🔥 <span class="rxn-count">0</span></button>
+          <button class="rxn-btn" id="rxn-p1-star" onclick="handleReaction('p1','star',this)">⭐ <span class="rxn-count">0</span></button>
         </div>
       </div>
-      <!-- Project 2 -->
-      <div class="project-card reveal reveal-delay-2" data-icon="🐾" data-project="p2" data-tags="html,css,javascript" onclick="openModal('p2')" style="cursor:pointer;">
+
+      <div class="project-card reveal" data-icon="🐾" data-project="p2" data-tags="html,css,javascript" onclick="openModal('p2')">
         <div class="project-top">
           <span class="project-name">Project Portofolio Web #2 ✨</span>
           <span class="project-arrow">↗</span>
@@ -416,13 +1907,13 @@
           <span class="project-tag">JavaScript</span>
         </div>
         <div class="reaction-row" onclick="event.stopPropagation()">
-          <button class="rxn-btn" id="rxn-p2-like" onclick="handleReaction('p2','like',this)">❤️ <span class="rxn-count" aria-live="polite">0</span></button>
-          <button class="rxn-btn" id="rxn-p2-fire" onclick="handleReaction('p2','fire',this)">🔥 <span class="rxn-count" aria-live="polite">0</span></button>
-          <button class="rxn-btn" id="rxn-p2-star" onclick="handleReaction('p2','star',this)">⭐ <span class="rxn-count" aria-live="polite">0</span></button>
+          <button class="rxn-btn" id="rxn-p2-like" onclick="handleReaction('p2','like',this)">❤️ <span class="rxn-count">0</span></button>
+          <button class="rxn-btn" id="rxn-p2-fire" onclick="handleReaction('p2','fire',this)">🔥 <span class="rxn-count">0</span></button>
+          <button class="rxn-btn" id="rxn-p2-star" onclick="handleReaction('p2','star',this)">⭐ <span class="rxn-count">0</span></button>
         </div>
       </div>
-      <!-- Project 3 -->
-      <div class="project-card reveal reveal-delay-3" data-icon="😺" data-project="p3" data-tags="php,mysql,html,css" onclick="openModal('p3')" style="cursor:pointer;">
+
+      <div class="project-card reveal" data-icon="😺" data-project="p3" data-tags="php,mysql,html,css" onclick="openModal('p3')">
         <div class="project-top">
           <span class="project-name">Project Web Kelompok #3 🎨</span>
           <span class="project-arrow">↗</span>
@@ -434,39 +1925,41 @@
           <span class="project-tag">HTML/CSS</span>
         </div>
         <div class="reaction-row" onclick="event.stopPropagation()">
-          <button class="rxn-btn" id="rxn-p3-like" onclick="handleReaction('p3','like',this)">❤️ <span class="rxn-count" aria-live="polite">0</span></button>
-          <button class="rxn-btn" id="rxn-p3-fire" onclick="handleReaction('p3','fire',this)">🔥 <span class="rxn-count" aria-live="polite">0</span></button>
-          <button class="rxn-btn" id="rxn-p3-star" onclick="handleReaction('p3','star',this)">⭐ <span class="rxn-count" aria-live="polite">0</span></button>
+          <button class="rxn-btn" id="rxn-p3-like" onclick="handleReaction('p3','like',this)">❤️ <span class="rxn-count">0</span></button>
+          <button class="rxn-btn" id="rxn-p3-fire" onclick="handleReaction('p3','fire',this)">🔥 <span class="rxn-count">0</span></button>
+          <button class="rxn-btn" id="rxn-p3-star" onclick="handleReaction('p3','star',this)">⭐ <span class="rxn-count">0</span></button>
         </div>
       </div>
     </section>
-    <!-- ── MEOW SECTION ── -->
+
     <div class="meow-section reveal">
       <button class="meow-btn" onclick="meow()">psst... klik ini dungs 🐾</button>
       <div class="meow-output" id="meow-out" aria-live="polite"></div>
     </div>
-    <!-- ── LINKS ── -->
+
     <section class="links-section reveal" id="section-links">
       <div class="section-label">✦ Find Me At</div>
       <div class="links-grid">
-        <a href="https://linkedin.com/in/syafiqrasyad" target="_blank" rel="noopener noreferrer" class="link-btn l1 reveal reveal-delay-1">
-          <div class="link-icon" style="background:#59c1f0;">💼</div>
+        <a href="https://linkedin.com/in/syafiqrasyad" target="_blank" rel="noopener noreferrer" class="link-btn">
+          <div class="link-icon" style="background:#59c1f0">💼</div>
           <div class="link-text">
             <div class="link-name">LinkedIn</div>
             <div class="link-sub">Syafiq Rasyad</div>
           </div>
           <span class="link-arrow">→</span>
         </a>
-        <a href="https://github.com/syafiqrasyad1606-ops" target="_blank" rel="noopener noreferrer" class="link-btn l2 reveal reveal-delay-2">
-          <div class="link-icon" style="background:#ff6f91;">🐙</div>
+
+        <a href="https://github.com/syafiqrasyad1606-ops" target="_blank" rel="noopener noreferrer" class="link-btn">
+          <div class="link-icon" style="background:#ff6f91">🐙</div>
           <div class="link-text">
             <div class="link-name">GitHub</div>
             <div class="link-sub">@syafiqrasyad1606-ops</div>
           </div>
           <span class="link-arrow">→</span>
         </a>
-        <a href="mailto:Syadodoi16@gmail.com" class="link-btn l4 reveal reveal-delay-3">
-          <div class="link-icon" style="background:#a689ff;">✉️</div>
+
+        <a href="mailto:Syadodoi16@gmail.com" class="link-btn">
+          <div class="link-icon" style="background:#a689ff">✉️</div>
           <div class="link-text">
             <div class="link-name">My Email</div>
             <div class="link-sub">Syadodoi16@gmail.com</div>
@@ -475,7 +1968,7 @@
         </a>
       </div>
     </section>
-    <!-- ── CONTACT FORM ── -->
+
     <section class="contact-section reveal" id="section-contact">
       <div class="section-label">✦ Send a Message</div>
       <form class="contact-form" id="contactForm">
@@ -483,527 +1976,749 @@
           <label for="cf-name">Nama</label>
           <input type="text" id="cf-name" name="name" placeholder="Nama kamu" required>
         </div>
+
         <div class="form-row">
           <label for="cf-email">Email</label>
           <input type="email" id="cf-email" name="email" placeholder="email@kamu.com" required>
         </div>
+
         <div class="form-row">
           <label for="cf-message">Pesan</label>
           <textarea id="cf-message" name="message" rows="4" placeholder="Tulis pesan kamu di sini..." required></textarea>
         </div>
+
         <button type="submit" class="contact-submit" id="contactSubmit">Kirim Pesan</button>
         <div class="contact-status" id="contactStatus" aria-live="polite"></div>
       </form>
     </section>
+
     <div class="divider reveal">
       <div class="divider-line"></div>
       <div class="divider-icon">🐾</div>
       <div class="divider-line"></div>
     </div>
-    <div class="footer reveal">
-      <p>dibuat dengan <span class="heart">♥</span> dan secangkir kopi &nbsp;<span class="cat">🐱</span>© 2025 Syafiq Rasyad</p>
-      <p style="margin-top:6px;opacity:0.6;">designed &amp; coded by Syafiq Rasyad</p>
-    </div>
-  </div><!-- /container -->
+
+    <footer class="footer reveal">
+      <p>dibuat dengan <span class="heart">♥</span> dan secangkir kopi &nbsp;🐱 © 2025 Syafiq Rasyad</p>
+      <p style="margin-top:6px;opacity:.6">designed &amp; coded by Syafiq Rasyad</p>
+    </footer>
+  </main>
+
   <script>
+    /* =========================
+       BACK TO TOP
+    ========================= */
+    const backToTop = document.getElementById("backToTop");
 
-const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      backToTop.style.display = window.scrollY > 400 ? "block" : "none";
+    }, { passive: true });
 
-
-// Menampilkan / menyembunyikan button
-window.addEventListener("scroll", function () {
-
-    if (window.scrollY > 400) {
-        backToTop.style.display = "block";
-    } else {
-        backToTop.style.display = "none";
-    }
-
-});
-
-
-// Kembali ke atas
-backToTop.addEventListener("click", function () {
-
-    window.scrollTo({
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({
         top: 0,
         behavior: "smooth"
-    });
-
-});
-    
-  const projectData = {
-    p1: {
-      emoji: '🚀',
-      subtitle: 'Project #1 · Program Pencatatan Keuangan',
-      title: 'Program Pencatatan Keuangan',
-      desc: 'Menghasilkan laporan keuangan secara instan (seperti laba rugi dan arus kas).',
-      tags: ['Html', 'Css', 'JavaScript',],
-      highlights: [
-        { icon: '⚙️', text: 'Dikerjakan dengan sepenuh hati' },
-        { icon: '🐧', text: 'Menampilkan Pencatatan Keuangan yg interktif dan keren' },
-      ],
-      demoUrl: 'https://syafiqrasyad1606-ops.github.io/Pencatatan-Keuangan/',
-      githubUrl: 'https://github.com/syafiqrasyad1606-ops/Pencatatan-Keuangan',
-    },
-    p2: {
-      emoji: '✨',
-      subtitle: 'Project #2 · Web Development',
-      title: 'Portofolio Web Pribadi',
-      desc: 'Website portofolio pribadi yang menampilkan semua project, skill, dan informasi kontak. Dibangun dengan HTML, CSS, dan JavaScript murni dengan desain yang responsif dan interaktif.',
-      tags: ['HTML/CSS', 'JavaScript', 'Responsive Design'],
-      highlights: [
-        { icon: '🎨', text: 'Desain dark mode dengan animasi CSS yang smooth' },
-        { icon: '📱', text: 'Fully responsive — tampil sempurna di HP maupun desktop' },
-        { icon: '⚡', text: 'Interaktif: typing animation, scroll reveal, confetti, dan command palette' },
-      ],
-      demoUrl: 'https://syafiqrasyad1606-ops.github.io/portofolio-ku/',
-      githubUrl: 'https://github.com/syafiqrasyad1606-ops/Portofolio',
-    },
-    p3: {
-      emoji: '🎨',
-      subtitle: 'Project #3 · Team Project',
-      title: 'Web Kelompok — Sistem Operasi',
-      desc: 'Project web kelompok yang dibuat dalam mata kuliah Sistem Operasi. Aplikasi web berbasis PHP dan MySQL yang menampilkan konsep-konsep sistem operasi secara interaktif.',
-      tags: ['PHP', 'MySQL', 'HTML/CSS', 'Team Project'],
-      highlights: [
-        { icon: '👥', text: 'Dikerjakan bersama tim dalam mata kuliah Sistem Operasi' },
-        { icon: '🗄️', text: 'Backend PHP dengan database MySQL' },
-        { icon: '📚', text: 'Menampilkan materi Sistem Operasi secara visual dan interaktif' },
-      ],
-      demoUrl: 'https://syafiqrasyad1606-ops.github.io/Web-Kelompok/',
-      githubUrl: 'https://github.com/syafiqrasyad1606-ops/Web-Kelompok',
-    },
-  };
-  function openModal(key) {
-    const d = projectData[key];
-    if (!d) return;
-    const shot = document.getElementById('modalScreenshot');
-    shot.src = `https://api.microlink.io/?url=${encodeURIComponent(d.demoUrl)}&screenshot=true&meta=false&embed=screenshot.url&colorScheme=light&viewport.width=1280&viewport.height=800`;
-    shot.alt = `Screenshot ${d.title}`;
-    document.getElementById('modalEmoji').textContent    = d.emoji;
-    document.getElementById('modalSubtitle').textContent = d.subtitle;
-    document.getElementById('modalTitle').textContent    = d.title;
-    document.getElementById('modalDesc').textContent     = d.desc;
-    document.getElementById('modalTags').innerHTML =
-      d.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
-    document.getElementById('modalHighlights').innerHTML =
-      d.highlights.map(h => `
-        <div class="modal-highlight-item">
-          <span class="icon">${h.icon}</span>
-          <span>${h.text}</span>
-        </div>`).join('');
-    document.getElementById('modalActions').innerHTML = `
-      <a href="${d.demoUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary">
-        🌐 Lihat Demo
-      </a>
-      <a href="${d.githubUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-secondary">
-        🐙 GitHub
-      </a>`;
-    document.getElementById('modalOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() {
-    document.getElementById('modalOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  function closeModalOutside(e) {
-    if (e.target === document.getElementById('modalOverlay')) closeModal();
-  }
-  const progressBar = document.getElementById('scroll-progress');
-  window.addEventListener('scroll', () => {
-    const scrollTop  = document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollH    = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const pct        = scrollH > 0 ? (scrollTop / scrollH) * 100 : 0;
-    progressBar.style.width = pct + '%';
-  }, { passive: true });
-  function dismissToast() {
-    const t = document.getElementById('welcome-toast');
-    t.classList.remove('show');
-  }
-  setTimeout(() => {
-    document.getElementById('welcome-toast').classList.add('show');
-    setTimeout(dismissToast, 5000);
-  }, 1500);
-  const tracks = [
-    { track: 'Lofi Coding Beats', artist: '• lo-fi hip hop' },
-    { track: 'Study With Me', artist: '• chill vibes' },
-    { track: 'Rainy Day Focus', artist: '• ambient lo-fi' },
-    { track: 'Midnight Coffee', artist: '• jazz & beats' },
-  ];
-  let npPlaying = true;
-  let npIdx = 0;
-  function toggleNowPlaying() {
-    npPlaying = !npPlaying;
-    const cover = document.getElementById('npCover');
-    const bars  = document.querySelectorAll('.np-bar');
-    if (npPlaying) {
-      cover.classList.remove('paused');
-      bars.forEach(b => b.classList.remove('paused'));
-      npIdx = (npIdx + 1) % tracks.length;
-      document.getElementById('npTrack').textContent  = tracks[npIdx].track;
-      document.getElementById('npArtist').textContent = tracks[npIdx].artist;
-    } else {
-      cover.classList.add('paused');
-      bars.forEach(b => b.classList.add('paused'));
-    }
-  }
-  const RXN_PREFIX  = 'syafiqrasyad_portfolio_2025';
-  const API_BASE    = 'https://countapi.mileshilliard.com/api/v1';
-  const PROJECTS    = ['p1', 'p2', 'p3'];
-  const RXN_CLASS   = { like: 'rxn-active-like', fire: 'rxn-active-fire', star: 'rxn-active-star' };
-  function hasReacted(project, type) {
-    return localStorage.getItem(`rxn_${project}_${type}`) === '1';
-  }
-  function setReacted(project, type, val) {
-    if (val) localStorage.setItem(`rxn_${project}_${type}`, '1');
-    else     localStorage.removeItem(`rxn_${project}_${type}`);
-  }
-  async function fetchCount(key) {
-    try {
-      const r = await fetch(`${API_BASE}/get/${RXN_PREFIX}_${key}`);
-      if (!r.ok) return 0;
-      const d = await r.json();
-      return parseInt(d.value) || 0;
-    } catch { return 0; }
-  }
-  async function hitCount(key) {
-    try {
-      const r = await fetch(`${API_BASE}/hit/${RXN_PREFIX}_${key}`);
-      const d = await r.json();
-      return parseInt(d.value) || 0;
-    } catch { return null; }
-  }
-  async function decrementCount(key, curVal) {
-    try {
-      const newVal = Math.max(0, curVal - 1);
-      const r = await fetch(`${API_BASE}/set/${RXN_PREFIX}_${key}?value=${newVal}`);
-      const d = await r.json();
-      return parseInt(d.value) || 0;
-    } catch { return null; }
-  }
-  function updateBtn(project, type, count, active) {
-    const btn = document.getElementById(`rxn-${project}-${type}`);
-    if (!btn) return;
-    btn.querySelector('.rxn-count').textContent = count;
-    btn.className = 'rxn-btn' + (active ? ` ${RXN_CLASS[type]}` : '');
-  }
-  async function initReactions() {
-    for (const proj of PROJECTS) {
-      for (const type of ['like', 'fire', 'star']) {
-        const count  = await fetchCount(`${proj}_${type}`);
-        const active = hasReacted(proj, type);
-        updateBtn(proj, type, count, active);
-      }
-    }
-  }
-  async function handleReaction(project, type, btn) {
-    const countEl  = btn.querySelector('.rxn-count');
-    const isActive = hasReacted(project, type);
-    const key      = `${project}_${type}`;
-    const curVal   = parseInt(countEl.textContent) || 0;
-    if (isActive) {
-      setReacted(project, type, false);
-      updateBtn(project, type, Math.max(0, curVal - 1), false);
-      await decrementCount(key, curVal);
-    } else {
-      setReacted(project, type, true);
-      updateBtn(project, type, curVal + 1, true);
-      btn.classList.add('rxn-pop');
-      btn.addEventListener('animationend', () => btn.classList.remove('rxn-pop'), { once: true });
-      await hitCount(key);
-    }
-    const realCount  = await fetchCount(key);
-    const stillActive = hasReacted(project, type);
-    updateBtn(project, type, realCount, stillActive);
-  }
-  initReactions();
-
-  // ── FILTER PROJECTS BY TECH STACK ──
-  const filterChips = document.querySelectorAll('.filter-chip');
-  const projectCards = document.querySelectorAll('.project-card[data-tags]');
-  filterChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      filterChips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      const filter = chip.dataset.filter;
-      projectCards.forEach(card => {
-        const tags = (card.dataset.tags || '').split(',');
-        const show = filter === 'all' || tags.includes(filter);
-        card.style.display = show ? '' : 'none';
       });
     });
-  });
 
-  // ── STICKY NAV: SCROLLSPY + SMOOTH SCROLL ──
-  const navLinks = document.querySelectorAll('.nav-link');
-  const navSections = [...navLinks].map(l => document.getElementById(l.dataset.target)).filter(Boolean);
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      document.getElementById(link.dataset.target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    /* =========================
+       PROJECT DATA + MODAL
+    ========================= */
+    const projectData = {
+      p1: {
+        emoji: "🚀",
+        subtitle: "Project #1 · Program Pencatatan Keuangan",
+        title: "Program Pencatatan Keuangan",
+        desc: "Menghasilkan laporan keuangan secara instan (seperti laba rugi dan arus kas).",
+        tags: ["HTML", "CSS", "JavaScript"],
+        highlights: [
+          { icon: "⚙️", text: "Dikerjakan dengan sepenuh hati." },
+          { icon: "🐧", text: "Menampilkan pencatatan keuangan yang interaktif dan keren." }
+        ],
+        demoUrl: "https://syafiqrasyad1606-ops.github.io/Pencatatan-Keuangan/",
+        githubUrl: "https://github.com/syafiqrasyad1606-ops/Pencatatan-Keuangan"
+      },
+      p2: {
+        emoji: "✨",
+        subtitle: "Project #2 · Web Development",
+        title: "Portofolio Web Pribadi",
+        desc: "Website portofolio pribadi yang menampilkan semua project, skill, dan informasi kontak. Dibangun dengan HTML, CSS, dan JavaScript murni.",
+        tags: ["HTML/CSS", "JavaScript", "Responsive Design"],
+        highlights: [
+          { icon: "🎨", text: "Desain dengan animasi CSS yang smooth." },
+          { icon: "📱", text: "Fully responsive untuk HP maupun desktop." },
+          { icon: "⚡", text: "Interaktif: typing animation, scroll reveal, confetti, dan command palette." }
+        ],
+        demoUrl: "https://syafiqrasyad1606-ops.github.io/portofolio-ku/",
+        githubUrl: "https://github.com/syafiqrasyad1606-ops/Portofolio"
+      },
+      p3: {
+        emoji: "🎨",
+        subtitle: "Project #3 · Team Project",
+        title: "Web Kelompok — Sistem Operasi",
+        desc: "Project web kelompok yang dibuat dalam mata kuliah Sistem Operasi. Aplikasi web berbasis PHP dan MySQL.",
+        tags: ["PHP", "MySQL", "HTML/CSS", "Team Project"],
+        highlights: [
+          { icon: "👥", text: "Dikerjakan bersama tim dalam mata kuliah Sistem Operasi." },
+          { icon: "🗄️", text: "Backend PHP dengan database MySQL." },
+          { icon: "📚", text: "Menampilkan materi Sistem Operasi secara visual dan interaktif." }
+        ],
+        demoUrl: "https://syafiqrasyad1606-ops.github.io/Web-Kelompok/",
+        githubUrl: "https://github.com/syafiqrasyad1606-ops/Web-Kelompok"
+      }
+    };
+
+    function openModal(key) {
+      const d = projectData[key];
+      if (!d) return;
+
+      const shot = document.getElementById("modalScreenshot");
+      shot.src =
+        "https://api.microlink.io/?url=" +
+        encodeURIComponent(d.demoUrl) +
+        "&screenshot=true&meta=false&embed=screenshot.url&colorScheme=light&viewport.width=1280&viewport.height=800";
+      shot.alt = "Screenshot " + d.title;
+
+      document.getElementById("modalEmoji").textContent = d.emoji;
+      document.getElementById("modalSubtitle").textContent = d.subtitle;
+      document.getElementById("modalTitle").textContent = d.title;
+      document.getElementById("modalDesc").textContent = d.desc;
+
+      document.getElementById("modalTags").innerHTML =
+        d.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join("");
+
+      document.getElementById("modalHighlights").innerHTML =
+        d.highlights.map(item => `
+          <div class="modal-highlight-item">
+            <span class="icon">${item.icon}</span>
+            <span>${item.text}</span>
+          </div>
+        `).join("");
+
+      document.getElementById("modalActions").innerHTML = `
+        <a href="${d.demoUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary">🌐 Lihat Demo</a>
+        <a href="${d.githubUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-secondary">🐙 GitHub</a>
+      `;
+
+      document.getElementById("modalOverlay").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      document.getElementById("modalOverlay").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    function closeModalOutside(event) {
+      if (event.target.id === "modalOverlay") closeModal();
+    }
+
+    /* =========================
+       SCROLL PROGRESS
+    ========================= */
+    const progressBar = document.getElementById("scroll-progress");
+
+    window.addEventListener("scroll", () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const percent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      progressBar.style.width = percent + "%";
+    }, { passive: true });
+
+    /* =========================
+       TOAST
+    ========================= */
+    function dismissToast() {
+      document.getElementById("welcome-toast").classList.remove("show");
+    }
+
+    setTimeout(() => {
+      document.getElementById("welcome-toast").classList.add("show");
+      setTimeout(dismissToast, 5000);
+    }, 1500);
+
+    /* =========================
+       NOW PLAYING
+    ========================= */
+    const tracks = [
+      { track: "Lofi Coding Beats", artist: "• lo-fi hip hop" },
+      { track: "Study With Me", artist: "• chill vibes" },
+      { track: "Rainy Day Focus", artist: "• ambient lo-fi" },
+      { track: "Midnight Coffee", artist: "• jazz & beats" }
+    ];
+
+    let npPlaying = true;
+    let npIdx = 0;
+
+    function toggleNowPlaying() {
+      npPlaying = !npPlaying;
+
+      const cover = document.getElementById("npCover");
+      const bars = document.querySelectorAll(".np-bar");
+
+      cover.classList.toggle("paused", !npPlaying);
+      bars.forEach(bar => bar.classList.toggle("paused", !npPlaying));
+
+      if (npPlaying) {
+        npIdx = (npIdx + 1) % tracks.length;
+        document.getElementById("npTrack").textContent = tracks[npIdx].track;
+        document.getElementById("npArtist").textContent = tracks[npIdx].artist;
+      }
+    }
+
+    /* =========================
+       REACTIONS
+    ========================= */
+    const RXN_PREFIX = "syafiqrasyad_portfolio_2025";
+    const API_BASE = "https://countapi.mileshilliard.com/api/v1";
+    const PROJECTS = ["p1", "p2", "p3"];
+    const RXN_CLASS = {
+      like: "rxn-active-like",
+      fire: "rxn-active-fire",
+      star: "rxn-active-star"
+    };
+
+    function hasReacted(project, type) {
+      return localStorage.getItem(`rxn_${project}_${type}`) === "1";
+    }
+
+    function setReacted(project, type, value) {
+      if (value) {
+        localStorage.setItem(`rxn_${project}_${type}`, "1");
+      } else {
+        localStorage.removeItem(`rxn_${project}_${type}`);
+      }
+    }
+
+    async function fetchCount(key) {
+      try {
+        const response = await fetch(`${API_BASE}/get/${RXN_PREFIX}_${key}`);
+        if (!response.ok) return 0;
+        const data = await response.json();
+        return parseInt(data.value, 10) || 0;
+      } catch {
+        return 0;
+      }
+    }
+
+    async function hitCount(key) {
+      try {
+        const response = await fetch(`${API_BASE}/hit/${RXN_PREFIX}_${key}`);
+        const data = await response.json();
+        return parseInt(data.value, 10) || 0;
+      } catch {
+        return null;
+      }
+    }
+
+    async function decrementCount(key, currentValue) {
+      try {
+        const newValue = Math.max(0, currentValue - 1);
+        const response = await fetch(`${API_BASE}/set/${RXN_PREFIX}_${key}?value=${newValue}`);
+        const data = await response.json();
+        return parseInt(data.value, 10) || 0;
+      } catch {
+        return null;
+      }
+    }
+
+    function updateBtn(project, type, count, active) {
+      const button = document.getElementById(`rxn-${project}-${type}`);
+      if (!button) return;
+
+      button.querySelector(".rxn-count").textContent = count;
+      button.className = "rxn-btn" + (active ? ` ${RXN_CLASS[type]}` : "");
+    }
+
+    async function initReactions() {
+      for (const project of PROJECTS) {
+        for (const type of ["like", "fire", "star"]) {
+          const count = await fetchCount(`${project}_${type}`);
+          updateBtn(project, type, count, hasReacted(project, type));
+        }
+      }
+    }
+
+    async function handleReaction(project, type, button) {
+      const countEl = button.querySelector(".rxn-count");
+      const isActive = hasReacted(project, type);
+      const key = `${project}_${type}`;
+      const currentValue = parseInt(countEl.textContent, 10) || 0;
+
+      if (isActive) {
+        setReacted(project, type, false);
+        updateBtn(project, type, Math.max(0, currentValue - 1), false);
+        await decrementCount(key, currentValue);
+      } else {
+        setReacted(project, type, true);
+        updateBtn(project, type, currentValue + 1, true);
+        button.classList.add("rxn-pop");
+        button.addEventListener("animationend", () => button.classList.remove("rxn-pop"), { once: true });
+        await hitCount(key);
+      }
+
+      const realCount = await fetchCount(key);
+      updateBtn(project, type, realCount, hasReacted(project, type));
+    }
+
+    initReactions();
+
+    /* =========================
+       PROJECT FILTER
+    ========================= */
+    const filterChips = document.querySelectorAll(".filter-chip");
+    const projectCards = document.querySelectorAll(".project-card[data-tags]");
+
+    filterChips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        filterChips.forEach(item => item.classList.remove("active"));
+        chip.classList.add("active");
+
+        const filter = chip.dataset.filter;
+
+        projectCards.forEach(card => {
+          const tags = (card.dataset.tags || "").split(",");
+          card.style.display = filter === "all" || tags.includes(filter) ? "" : "none";
+        });
+      });
     });
-  });
-  const navObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(l => {
-          const isActive = l.dataset.target === entry.target.id;
-          l.classList.toggle('active', isActive);
-          if (isActive) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
+
+    /* =========================
+       NAVIGATION + SCROLLSPY
+    ========================= */
+    const navLinks = document.querySelectorAll(".nav-link");
+    const navSections = [...navLinks]
+      .map(link => document.getElementById(link.dataset.target))
+      .filter(Boolean);
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        document.getElementById(link.dataset.target)?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        navLinks.forEach(link => {
+          const active = link.dataset.target === entry.target.id;
+          link.classList.toggle("active", active);
+
+          if (active) link.setAttribute("aria-current", "true");
+          else link.removeAttribute("aria-current");
+        });
+      });
+    }, {
+      rootMargin: "-45% 0px -50% 0px",
+      threshold: 0
+    });
+
+    navSections.forEach(section => navObserver.observe(section));
+
+    /* =========================
+       COMMAND PALETTE
+    ========================= */
+    const cmdItems = [
+      { section: "📍 Navigasi", icon: "👤", name: "About Me", sub: "Scroll ke hero", action: () => scrollToSection("section-hero") },
+      { section: "📍 Navigasi", icon: "🛠️", name: "Skills & Tools", sub: "Scroll ke skills", action: () => scrollToSection("section-skills") },
+      { section: "📍 Navigasi", icon: "📊", name: "GitHub Activity", sub: "Scroll ke GitHub", action: () => scrollToSection("section-github") },
+      { section: "📍 Navigasi", icon: "🚀", name: "Projects", sub: "Scroll ke projects", action: () => scrollToSection("section-projects") },
+      { section: "📍 Navigasi", icon: "🔗", name: "Find Me At", sub: "Scroll ke links", action: () => scrollToSection("section-links") },
+      { section: "📍 Navigasi", icon: "✉️", name: "Contact Form", sub: "Scroll ke contact", action: () => scrollToSection("section-contact") },
+      { section: "🗂️ Projects", icon: "🚀", name: "Program Pencatatan Keuangan", sub: "HTML · CSS · JavaScript", action: () => openModal("p1") },
+      { section: "🗂️ Projects", icon: "✨", name: "Portofolio Web", sub: "HTML/CSS · JavaScript", action: () => openModal("p2") },
+      { section: "🗂️ Projects", icon: "🎨", name: "Web Kelompok", sub: "PHP · MySQL · HTML/CSS", action: () => openModal("p3") },
+      { section: "🔗 Links", icon: "💼", name: "LinkedIn", sub: "linkedin.com/in/syafiqrasyad", action: () => window.open("https://linkedin.com/in/syafiqrasyad", "_blank") },
+      { section: "🔗 Links", icon: "🐙", name: "GitHub", sub: "@syafiqrasyad1606-ops", action: () => window.open("https://github.com/syafiqrasyad1606-ops", "_blank") },
+      { section: "🔗 Links", icon: "✉️", name: "Email", sub: "Syadodoi16@gmail.com", action: () => window.location.href = "mailto:Syadodoi16@gmail.com" },
+      { section: "⚡ Actions", icon: "🌙", name: "Toggle Dark/Light Mode", sub: "Ganti tema halaman", action: toggleTheme },
+      { section: "⚡ Actions", icon: "🐾", name: "Meow!", sub: "Easter egg rahasia", action: meow }
+    ];
+
+    let cmdActive = -1;
+    let filteredItems = [...cmdItems];
+
+    function openCmd() {
+      document.getElementById("cmdOverlay").classList.add("open");
+      document.getElementById("cmdInput").value = "";
+      cmdActive = -1;
+      renderCmdResults("");
+      setTimeout(() => document.getElementById("cmdInput").focus(), 80);
+    }
+
+    function closeCmd() {
+      document.getElementById("cmdOverlay").classList.remove("open");
+      cmdActive = -1;
+    }
+
+    function closeCmdOutside(event) {
+      if (event.target.id === "cmdOverlay") closeCmd();
+    }
+
+    function scrollToSection(id) {
+      closeCmd();
+      document.getElementById(id)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    function renderCmdResults(query) {
+      const q = query.toLowerCase().trim();
+
+      filteredItems = q
+        ? cmdItems.filter(item =>
+            item.name.toLowerCase().includes(q) ||
+            item.sub.toLowerCase().includes(q) ||
+            item.section.toLowerCase().includes(q)
+          )
+        : cmdItems;
+
+      const results = document.getElementById("cmdResults");
+
+      if (!filteredItems.length) {
+        results.innerHTML = `<div style="padding:1.5rem;text-align:center;font-family:'Space Mono',monospace;font-size:.75rem;color:#6b6b80">Gak ada hasil untuk "${query}" 😿</div>`;
+        return;
+      }
+
+      const grouped = {};
+
+      filteredItems.forEach(item => {
+        if (!grouped[item.section]) grouped[item.section] = [];
+        grouped[item.section].push(item);
+      });
+
+      let html = "";
+      let globalIndex = 0;
+
+      Object.entries(grouped).forEach(([section, items]) => {
+        html += `<div class="cmd-section-header">${section}</div>`;
+
+        items.forEach(item => {
+          const index = globalIndex++;
+          html += `
+            <div class="cmd-item ${index === cmdActive ? "active" : ""}" data-idx="${index}" onclick="runCmdItem(${index})">
+              <div class="cmd-item-icon">${item.icon}</div>
+              <div class="cmd-item-text">
+                <div class="cmd-item-name">${item.name}</div>
+                <div class="cmd-item-sub">${item.sub}</div>
+              </div>
+              <span>↵</span>
+            </div>
+          `;
+        });
+      });
+
+      results.innerHTML = html;
+    }
+
+    function runCmdItem(index) {
+      const item = filteredItems[index];
+      if (!item) return;
+
+      closeCmd();
+      item.action();
+    }
+
+    document.getElementById("cmdInput").addEventListener("input", event => {
+      cmdActive = -1;
+      renderCmdResults(event.target.value);
+    });
+
+    document.getElementById("cmdInput").addEventListener("keydown", event => {
+      const total = filteredItems.length;
+      if (!total) return;
+
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        cmdActive = (cmdActive + 1) % total;
+        renderCmdResults(event.target.value);
+        document.querySelector(".cmd-item.active")?.scrollIntoView({ block: "nearest" });
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        cmdActive = (cmdActive - 1 + total) % total;
+        renderCmdResults(event.target.value);
+        document.querySelector(".cmd-item.active")?.scrollIntoView({ block: "nearest" });
+      } else if (event.key === "Enter") {
+        event.preventDefault();
+        runCmdItem(cmdActive >= 0 ? cmdActive : 0);
+      } else if (event.key === "Escape") {
+        closeCmd();
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        document.getElementById("cmdOverlay").classList.contains("open") ? closeCmd() : openCmd();
+      }
+
+      if (event.key === "Escape") {
+        closeCmd();
+        closeModal();
+      }
+    });
+
+    /* =========================
+       TYPING
+    ========================= */
+    const roles = [
+      "Web Designer 🎨",
+      "Web Developer ✦",
+      "Problem Solver 🧩",
+      "Open to Work 🚀"
+    ];
+
+    let roleIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+    const typingEl = document.getElementById("typingText");
+
+    function typeLoop() {
+      const current = roles[roleIndex];
+
+      if (deleting) {
+        charIndex--;
+      } else {
+        charIndex++;
+      }
+
+      typingEl.textContent = current.slice(0, charIndex);
+
+      if (!deleting && charIndex === current.length) {
+        deleting = true;
+        setTimeout(typeLoop, 1800);
+        return;
+      }
+
+      if (deleting && charIndex === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+      }
+
+      setTimeout(typeLoop, deleting ? 45 : 90);
+    }
+
+    typeLoop();
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+
+    document.querySelectorAll(".reveal").forEach(element => {
+      revealObserver.observe(element);
+    });
+
+    /* =========================
+       THEME
+    ========================= */
+    const themeIcon = document.getElementById("themeIcon");
+    const themeLabel = document.getElementById("themeLabel");
+
+    function applyTheme(isDarkVariant) {
+      document.body.classList.toggle("light", isDarkVariant);
+      themeIcon.textContent = isDarkVariant ? "☀️" : "🌙";
+      themeLabel.textContent = isDarkVariant ? "Light" : "Dark";
+    }
+
+    const storedTheme = localStorage.getItem("theme");
+
+    if (storedTheme) {
+      applyTheme(storedTheme === "light");
+    } else {
+      applyTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+
+    function toggleTheme() {
+      const isDarkVariant = document.body.classList.toggle("light");
+      themeIcon.textContent = isDarkVariant ? "☀️" : "🌙";
+      themeLabel.textContent = isDarkVariant ? "Light" : "Dark";
+      localStorage.setItem("theme", isDarkVariant ? "light" : "dark");
+    }
+
+    document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+
+    /* =========================
+       FORMSPREE
+       Endpoint dari akun Formspree kamu
+    ========================= */
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljrqqya";
+    const contactForm = document.getElementById("contactForm");
+    const contactStatus = document.getElementById("contactStatus");
+    const contactSubmit = document.getElementById("contactSubmit");
+
+    contactForm.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      contactSubmit.disabled = true;
+      contactSubmit.textContent = "Mengirim...";
+      contactStatus.textContent = "";
+      contactStatus.className = "contact-status";
+
+      try {
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method: "POST",
+          headers: {
+            Accept: "application/json"
+          },
+          body: new FormData(contactForm)
+        });
+
+        if (response.ok) {
+          contactStatus.textContent = "✓ Pesan terkirim! Makasih udah menghubungi.";
+          contactStatus.className = "contact-status success";
+          contactForm.reset();
+        } else {
+          contactStatus.textContent = "Gagal mengirim pesan. Coba lagi ya.";
+          contactStatus.className = "contact-status error";
+        }
+      } catch {
+        contactStatus.textContent = "Gagal mengirim pesan. Cek koneksi internet kamu.";
+        contactStatus.className = "contact-status error";
+      } finally {
+        contactSubmit.disabled = false;
+        contactSubmit.textContent = "Kirim Pesan";
+      }
+    });
+
+    /* =========================
+       MEOW + CONFETTI
+    ========================= */
+    const meows = [
+      "meow~ (artinya: gw siap nerima offer 😸)",
+      "purrr... gw bisa HTML & CSS. lo bisa?",
+      "MEOW!! 🐾 hire me please hehe",
+      "nyaa~ let's build something cool together!",
+      "mrrrow... available for freelance juga lho~",
+      "*knocks your codebase off the table* 😈",
+      "gw punya 9 nyawa. 8 buat debugging. 🐛",
+      "fun fact: kucing tidur 12-16 jam. gw ngoding cuma 5 jam doang hehe."
+    ];
+
+    let lastMeow = -1;
+
+    function meow() {
+      let index;
+
+      do {
+        index = Math.floor(Math.random() * meows.length);
+      } while (index === lastMeow);
+
+      lastMeow = index;
+
+      const output = document.getElementById("meow-out");
+      output.style.opacity = "0";
+
+      setTimeout(() => {
+        output.textContent = meows[index];
+        output.style.opacity = "1";
+      }, 160);
+
+      launchConfetti();
+    }
+
+    const canvas = document.getElementById("confetti-canvas");
+    const ctx = canvas.getContext("2d");
+    const colors = ["#000000", "#333333", "#666666", "#999999", "#ffffff"];
+    let particles = [];
+    let animationFrame = null;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    function launchConfetti() {
+      if (reducedMotion) return;
+
+      resizeCanvas();
+
+      for (let i = 0; i < 90; i++) {
+        particles.push({
+          x: window.innerWidth / 2,
+          y: window.innerHeight * .75,
+          vx: (Math.random() - .5) * 12,
+          vy: -(Math.random() * 10 + 4),
+          color: colors[Math.floor(Math.random() * colors.length)],
+          size: Math.random() * 7 + 4,
+          rot: Math.random() * 360,
+          rotV: (Math.random() - .5) * 8,
+          alpha: 1,
+          shape: Math.random() > .5 ? "rect" : "circle"
         });
       }
-    });
-  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-  navSections.forEach(sec => navObs.observe(sec));
 
-  const cmdItems = [
-    { section: '📍 Navigasi', icon: '👤', name: 'About Me', sub: 'Scroll ke section hero', action: () => scrollTo('section-hero') },
-    { section: '📍 Navigasi', icon: '🛠️', name: 'Skills & Tools', sub: 'Scroll ke section skills', action: () => scrollTo('section-skills') },
-    { section: '📍 Navigasi', icon: '📊', name: 'GitHub Activity', sub: 'Scroll ke section GitHub stats', action: () => scrollTo('section-github') },
-    { section: '📍 Navigasi', icon: '🚀', name: 'Projects', sub: 'Scroll ke section projects', action: () => scrollTo('section-projects') },
-    { section: '📍 Navigasi', icon: '🔗', name: 'Find Me At', sub: 'Scroll ke section links', action: () => scrollTo('section-links') },
-    { section: '📍 Navigasi', icon: '✉️', name: 'Contact Form', sub: 'Scroll ke section contact', action: () => scrollTo('section-contact') },
-    { section: '🗂️ Projects', icon: '🚀', name: 'Program Pencatatan Keuangan', sub: 'HTML · CSS · JavaScript', action: () => { closeCmd(); openModal('p1'); } },
-    { section: '🗂️ Projects', icon: '✨', name: 'Portofolio Web', sub: 'HTML/CSS · JavaScript · UI/UX', action: () => { closeCmd(); openModal('p2'); } },
-    { section: '🗂️ Projects', icon: '🎨', name: 'Web Kelompok', sub: 'PHP · MySQL · HTML/CSS', action: () => { closeCmd(); openModal('p3'); } },
-    { section: '🔗 Links', icon: '💼', name: 'LinkedIn', sub: 'linkedin.com/in/syafiqrasyad', action: () => window.open('https://linkedin.com/in/syafiqrasyad', '_blank') },
-    { section: '🔗 Links', icon: '🐙', name: 'GitHub', sub: '@syafiqrasyad1606-ops', action: () => window.open('https://github.com/syafiqrasyad1606-ops', '_blank') },
-    { section: '🔗 Links', icon: '✉️', name: 'Email', sub: 'Syadodoi16@gmail.com', action: () => window.location.href = 'mailto:Syadodoi16@gmail.com' },
-    { section: '⚡ Actions', icon: '🌙', name: 'Toggle Dark/Light Mode', sub: 'Ganti tema halaman', action: toggleTheme },
-    { section: '⚡ Actions', icon: '🐾', name: 'Meow!', sub: 'Easter egg rahasia~', action: () => { closeCmd(); meow(); } },
-  ];
-  let cmdActive = -1;
-  let filteredItems = [...cmdItems];
-  function openCmd() {
-    document.getElementById('cmdOverlay').classList.add('open');
-    document.getElementById('cmdInput').value = '';
-    cmdActive = -1;
-    renderCmdResults('');
-    setTimeout(() => document.getElementById('cmdInput').focus(), 80);
-  }
-  function closeCmd() {
-    document.getElementById('cmdOverlay').classList.remove('open');
-    cmdActive = -1;
-  }
-  function closeCmdOutside(e) {
-    if (e.target === document.getElementById('cmdOverlay')) closeCmd();
-  }
-  function scrollTo(id) {
-    closeCmd();
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-  function renderCmdResults(query) {
-    const q = query.toLowerCase().trim();
-    filteredItems = q
-      ? cmdItems.filter(i => i.name.toLowerCase().includes(q) || i.sub.toLowerCase().includes(q) || i.section.toLowerCase().includes(q))
-      : cmdItems;
-    if (filteredItems.length === 0) {
-      document.getElementById('cmdResults').innerHTML =
-        `<div style="padding:1.5rem;text-align:center;font-family:'Space Mono',monospace;font-size:0.75rem;color:#6b6b80;">Gak ada hasil untuk "${query}" 😿</div>`;
-      return;
+      if (!animationFrame) animateConfetti();
     }
-    const grouped = {};
-    filteredItems.forEach(item => {
-      if (!grouped[item.section]) grouped[item.section] = [];
-      grouped[item.section].push(item);
-    });
-    let html = '';
-    let globalIdx = 0;
-    for (const [sec, items] of Object.entries(grouped)) {
-      html += `<div class="cmd-section-header">${sec}</div>`;
-      items.forEach(item => {
-        const idx = globalIdx++;
-        html += `
-          <div class="cmd-item ${idx === cmdActive ? 'active' : ''}" data-idx="${idx}" onclick="runCmdItem(${idx})">
-            <div class="cmd-item-icon">${item.icon}</div>
-            <div class="cmd-item-text">
-              <div class="cmd-item-name">${item.name}</div>
-              <div class="cmd-item-sub">${item.sub}</div>
-            </div>
-            <span class="cmd-item-enter">↵</span>
-          </div>`;
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        particle.vy += .35;
+        particle.vx *= .99;
+        particle.rot += particle.rotV;
+        particle.alpha -= .014;
+
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, particle.alpha);
+        ctx.translate(particle.x, particle.y);
+        ctx.rotate(particle.rot * Math.PI / 180);
+        ctx.fillStyle = particle.color;
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = 1;
+
+        if (particle.shape === "rect") {
+          ctx.fillRect(
+            -particle.size / 2,
+            -particle.size / 2,
+            particle.size,
+            particle.size * .5
+          );
+          ctx.strokeRect(
+            -particle.size / 2,
+            -particle.size / 2,
+            particle.size,
+            particle.size * .5
+          );
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, particle.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        }
+
+        ctx.restore();
       });
-    }
-    document.getElementById('cmdResults').innerHTML = html;
-  }
-  function runCmdItem(idx) {
-    const item = filteredItems[idx];
-    if (item) { closeCmd(); item.action(); }
-  }
-  document.getElementById('cmdInput').addEventListener('input', e => {
-    cmdActive = -1;
-    renderCmdResults(e.target.value);
-  });
-  document.getElementById('cmdInput').addEventListener('keydown', e => {
-    const total = filteredItems.length;
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      cmdActive = (cmdActive + 1) % total;
-      renderCmdResults(document.getElementById('cmdInput').value);
-      document.querySelector('.cmd-item.active')?.scrollIntoView({ block: 'nearest' });
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      cmdActive = (cmdActive - 1 + total) % total;
-      renderCmdResults(document.getElementById('cmdInput').value);
-      document.querySelector('.cmd-item.active')?.scrollIntoView({ block: 'nearest' });
-    } else if (e.key === 'Enter') {
-      if (cmdActive >= 0) runCmdItem(cmdActive);
-      else if (filteredItems.length > 0) runCmdItem(0);
-    } else if (e.key === 'Escape') {
-      closeCmd();
-    }
-  });
-  document.addEventListener('keydown', e => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-      e.preventDefault();
-      document.getElementById('cmdOverlay').classList.contains('open') ? closeCmd() : openCmd();
-    }
-    if (e.key === 'Escape') { closeCmd(); closeModal(); }
-  });
-  const roles = ['Web Designer 🎨','Web Developer ✦','Problem Solver 🧩','Open to Work 🚀'];
-  let roleIdx = 0, charIdx = 0, deleting = false;
-  const typingEl = document.getElementById('typingText');
-  function typeLoop() {
-    const cur = roles[roleIdx];
-    typingEl.textContent = cur.slice(0, deleting ? --charIdx : ++charIdx);
-    if (!deleting && charIdx === cur.length)  { deleting = true; setTimeout(typeLoop, 1800); return; }
-    if (deleting && charIdx === 0)            { deleting = false; roleIdx = (roleIdx + 1) % roles.length; }
-    setTimeout(typeLoop, deleting ? 45 : 90);
-  }
-  typeLoop();
-  const revealObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-  const themeIcon  = document.getElementById('themeIcon');
-  const themeLabel = document.getElementById('themeLabel');
-  const storedTheme = localStorage.getItem('theme');
-  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  // if the user never toggled manually, follow the OS setting; otherwise respect their saved choice
-  const useDarkVariant = storedTheme ? storedTheme === 'light' : systemPrefersDark;
-  if (useDarkVariant) {
-    document.body.classList.add('light');
-    themeIcon.textContent  = '☀️';
-    themeLabel.textContent = 'Light';
-  }
-  if (!storedTheme && window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (localStorage.getItem('theme')) return; // user has since chosen manually, stop following OS
-      document.body.classList.toggle('light', e.matches);
-      themeIcon.textContent  = e.matches ? '☀️' : '🌙';
-      themeLabel.textContent = e.matches ? 'Light' : 'Dark';
-    });
-  }
-  function toggleTheme() {
-    const isDark = document.body.classList.toggle('light');
-    themeIcon.textContent  = isDark ? '☀️' : '🌙';
-    themeLabel.textContent = isDark ? 'Light' : 'Dark';
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  }
-  // ── CONTACT FORM (Formspree) ──
-  // Ganti FORMSPREE_ENDPOINT di bawah ini dengan endpoint form kamu sendiri.
-  // Daftar gratis di https://formspree.io -> buat form baru -> copy URL endpoint-nya (bentuknya https://formspree.io/f/xxxxxxx)
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-  const contactForm   = document.getElementById('contactForm');
-  const contactStatus = document.getElementById('contactStatus');
-  const contactSubmit = document.getElementById('contactSubmit');
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
-      contactStatus.textContent = 'Form belum disambungkan ke Formspree — set FORMSPREE_ENDPOINT dulu ya.';
-      contactStatus.className = 'contact-status error';
-      return;
-    }
-    contactSubmit.disabled = true;
-    contactSubmit.textContent = 'Mengirim...';
-    contactStatus.textContent = '';
-    contactStatus.className = 'contact-status';
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(contactForm),
-      });
-      if (res.ok) {
-        contactStatus.textContent = '✓ Pesan terkirim! Makasih udah menghubungi.';
-        contactStatus.className = 'contact-status success';
-        contactForm.reset();
+
+      particles = particles.filter(particle => particle.alpha > 0);
+
+      if (particles.length > 0) {
+        animationFrame = requestAnimationFrame(animateConfetti);
       } else {
-        contactStatus.textContent = 'Gagal mengirim pesan. Coba lagi ya.';
-        contactStatus.className = 'contact-status error';
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        animationFrame = null;
       }
-    } catch {
-      contactStatus.textContent = 'Gagal mengirim pesan. Cek koneksi internet kamu.';
-      contactStatus.className = 'contact-status error';
-    } finally {
-      contactSubmit.disabled = false;
-      contactSubmit.textContent = 'Kirim Pesan';
     }
-  });
-
-  const meows = [
-    'meow~ (artinya: gw siap nerima offer 😸)',
-    'purrr... gw bisa Html & CSS. lo bisa?',
-    'MEOW!! 🐾  hire me please hehe',
-    'nyaa~ let\'s build something cool together!',
-    'mrrrow... available for freelance juga lho~',
-    '*knocks your codebase off the table* 😈',
-    'gw punya 9 nyawa. 8 buat debugging. 🐛',
-    'fun fact: kucing tidur 12-16 jam. gw ngoding cuma 5 jam doang hehe.',
-  ];
-  let lastMeow = -1;
-  function meow() {
-    let idx;
-    do { idx = Math.floor(Math.random() * meows.length); } while (idx === lastMeow);
-    lastMeow = idx;
-    const el = document.getElementById('meow-out');
-    el.style.opacity = 0;
-    setTimeout(() => { el.textContent = meows[idx]; el.style.opacity = 1; }, 160);
-    launchConfetti();
-  }
-  const cCanvas = document.getElementById('confetti-canvas');
-  const cCtx    = cCanvas.getContext('2d');
-  const COLORS  = ['#000000', '#333333', '#666666', '#999999', '#ffffff'];
-  let cParticles = [], cFrame = null;
-  const prefersReducedMotionConfetti = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function resizeC() { cCanvas.width = window.innerWidth; cCanvas.height = window.innerHeight; }
-  resizeC();
-  window.addEventListener('resize', resizeC);
-  function launchConfetti() {
-    if (prefersReducedMotionConfetti) return;
-    resizeC();
-    for (let i = 0; i < 90; i++) {
-      cParticles.push({
-        x: window.innerWidth/2, y: window.innerHeight*0.75,
-        vx: (Math.random()-0.5)*12, vy: -(Math.random()*10+4),
-        color: COLORS[Math.floor(Math.random()*COLORS.length)],
-        size: Math.random()*7+4, rot: Math.random()*360,
-        rotV: (Math.random()-0.5)*8, alpha: 1,
-        shape: Math.random()>0.5 ? 'rect' : 'circle',
-      });
-    }
-    if (!cFrame) animConfetti();
-  }
-  function animConfetti() {
-    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
-    cParticles.forEach(p => {
-      p.x+=p.vx; p.y+=p.vy; p.vy+=0.35; p.vx*=0.99; p.rot+=p.rotV; p.alpha-=0.014;
-      cCtx.save();
-      cCtx.globalAlpha = Math.max(0, p.alpha);
-      cCtx.translate(p.x, p.y);
-      cCtx.rotate(p.rot*Math.PI/180);
-      cCtx.fillStyle = p.color;
-      cCtx.strokeStyle = '#000000';
-      cCtx.lineWidth = 1;
-      if (p.shape==='rect') { cCtx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.5); cCtx.strokeRect(-p.size/2,-p.size/2,p.size,p.size*0.5); }
-      else { cCtx.beginPath(); cCtx.arc(0,0,p.size/2,0,Math.PI*2); cCtx.fill(); cCtx.stroke(); }
-      cCtx.restore();
-    });
-    cParticles = cParticles.filter(p => p.alpha > 0);
-    if (cParticles.length > 0) { cFrame = requestAnimationFrame(animConfetti); }
-    else { cCtx.clearRect(0,0,cCanvas.width,cCanvas.height); cFrame = null; }
-  }
   </script>
 </body>
 </html>
