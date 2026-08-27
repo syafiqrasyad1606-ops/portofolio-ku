@@ -506,6 +506,32 @@
     </div>
   </div><!-- /container -->
   <script>
+
+const backToTop = document.getElementById("backToTop");
+
+
+// Menampilkan / menyembunyikan button
+window.addEventListener("scroll", function () {
+
+    if (window.scrollY > 400) {
+        backToTop.style.display = "block";
+    } else {
+        backToTop.style.display = "none";
+    }
+
+});
+
+
+// Kembali ke atas
+backToTop.addEventListener("click", function () {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+    
   const projectData = {
     p1: {
       emoji: '🚀',
