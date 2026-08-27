@@ -186,6 +186,7 @@
       <div class="np-bar" id="npBar4"></div>
     </div>
   </div>
+  <canvas id="confetti-canvas"></canvas>
   <button class="cmd-hint-btn" onclick="openCmd()" aria-label="Buka command palette">
     <kbd>Ctrl</kbd><kbd>K</kbd> <span>Command palette</span>
   </button>
@@ -932,6 +933,49 @@
     const el = document.getElementById('meow-out');
     el.style.opacity = 0;
     setTimeout(() => { el.textContent = meows[idx]; el.style.opacity = 1; }, 160);
+    launchConfetti();
+  }
+  const cCanvas = document.getElementById('confetti-canvas');
+  const cCtx    = cCanvas.getContext('2d');
+  const COLORS  = ['#000000', '#333333', '#666666', '#999999', '#ffffff'];
+  let cParticles = [], cFrame = null;
+  const prefersReducedMotionConfetti = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function resizeC() { cCanvas.width = window.innerWidth; cCanvas.height = window.innerHeight; }
+  resizeC();
+  window.addEventListener('resize', resizeC);
+  function launchConfetti() {
+    if (prefersReducedMotionConfetti) return;
+    resizeC();
+    for (let i = 0; i < 90; i++) {
+      cParticles.push({
+        x: window.innerWidth/2, y: window.innerHeight*0.75,
+        vx: (Math.random()-0.5)*12, vy: -(Math.random()*10+4),
+        color: COLORS[Math.floor(Math.random()*COLORS.length)],
+        size: Math.random()*7+4, rot: Math.random()*360,
+        rotV: (Math.random()-0.5)*8, alpha: 1,
+        shape: Math.random()>0.5 ? 'rect' : 'circle',
+      });
+    }
+    if (!cFrame) animConfetti();
+  }
+  function animConfetti() {
+    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+    cParticles.forEach(p => {
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.35; p.vx*=0.99; p.rot+=p.rotV; p.alpha-=0.014;
+      cCtx.save();
+      cCtx.globalAlpha = Math.max(0, p.alpha);
+      cCtx.translate(p.x, p.y);
+      cCtx.rotate(p.rot*Math.PI/180);
+      cCtx.fillStyle = p.color;
+      cCtx.strokeStyle = '#000000';
+      cCtx.lineWidth = 1;
+      if (p.shape==='rect') { cCtx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.5); cCtx.strokeRect(-p.size/2,-p.size/2,p.size,p.size*0.5); }
+      else { cCtx.beginPath(); cCtx.arc(0,0,p.size/2,0,Math.PI*2); cCtx.fill(); cCtx.stroke(); }
+      cCtx.restore();
+    });
+    cParticles = cParticles.filter(p => p.alpha > 0);
+    if (cParticles.length > 0) { cFrame = requestAnimationFrame(animConfetti); }
+    else { cCtx.clearRect(0,0,cCanvas.width,cCanvas.height); cFrame = null; }
   }
   </script>
 </body>
