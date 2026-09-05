@@ -24,7 +24,9 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+
+img, svg { max-width: 100%; height: auto; }
 
 body {
   background: var(--bg);
@@ -204,8 +206,11 @@ body::before { content: none; }
 
 .visitor-counter {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  max-width: 100%;
   background: var(--card);
   border: 2px solid var(--ink);
   border-radius: 100px;
@@ -358,11 +363,17 @@ body::before { content: none; }
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
   background: var(--card);
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
   min-height: 120px;
 }
 
-.github-stats-card { width: 100%; height: auto; display: block; }
+.github-stats-card { width: auto; max-width: none; min-width: 280px; height: auto; display: block; }
+
+@media (max-width: 480px) {
+  .github-stats-card { min-width: 260px; }
+}
 
 .github-stats-fallback {
   display: none;
@@ -455,7 +466,7 @@ body::before { content: none; }
 
 .project-card:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--ink); }
 
-.project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 7px; }
+.project-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 4px; margin-bottom: 7px; }
 
 .project-name {
   font-family: "Baloo 2", sans-serif;
@@ -869,7 +880,9 @@ body::before { content: none; }
   width: 100%;
   max-width: 540px;
   max-height: 88vh;
+  max-height: 88dvh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 2rem 1.75rem;
   position: relative;
   box-shadow: 8px 8px 0 #17171f;
@@ -981,7 +994,11 @@ body::before { content: none; }
   border-radius: 18px;
   width: 100%;
   max-width: 520px;
+  max-height: 80vh;
+  max-height: 80dvh;
   margin: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   box-shadow: 8px 8px 0 #17171f;
   transform: translateY(-16px) scale(.97);
@@ -997,6 +1014,7 @@ body::before { content: none; }
   padding: 1rem 1.25rem;
   border-bottom: 2.5px solid #17171f;
   background: #f2f4ee;
+  flex-shrink: 0;
 }
 
 .cmd-input {
@@ -1009,7 +1027,7 @@ body::before { content: none; }
   color: #17171f;
 }
 
-.cmd-results { max-height: 340px; overflow-y: auto; padding: .5rem 0; }
+.cmd-results { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: .5rem 0; }
 
 .cmd-section-header {
   font-family: "Space Mono", monospace;
@@ -1046,6 +1064,8 @@ body::before { content: none; }
   gap: 1.25rem;
   align-items: center;
   background: #f2f4ee;
+  flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
 .cmd-footer-hint { font-family: "Space Mono", monospace; font-size: .6rem; font-weight: 700; color: #6b6b80; }
@@ -1152,11 +1172,28 @@ body.light .cmd-item:hover, body.light .cmd-item.active { background: #21222d; }
   .stat-card { padding: 1rem .75rem; }
   .stat-num { font-size: 1.7rem; }
   .project-card { padding: 1.1rem 1.15rem; }
+  .project-name { font-size: 1.02rem; }
   .link-btn { padding: .85rem 1rem; }
   .site-nav-inner { max-width: calc(100vw - 1.25rem); }
   .nav-link { font-size: .68rem; padding: 6px 11px; }
   #welcome-toast { right: .75rem; left: .75rem; max-width: none; }
   #backToTop { right: 18px; bottom: 18px; width: 44px; height: 44px; font-size: 20px; }
+
+  .filter-row { gap: 6px; }
+  .filter-chip { font-size: .66rem; padding: 5px 12px; }
+
+  .modal-overlay { padding: .75rem; }
+  .modal-box { padding: 1.5rem 1.25rem; border-radius: 18px; }
+  .modal-emoji { font-size: 2.2rem; margin-bottom: .5rem; }
+  .modal-title { font-size: 1.25rem; }
+  .modal-desc { font-size: .85rem; }
+  .modal-actions { flex-direction: column; }
+  .modal-btn { min-width: 100%; }
+
+  .cmd-overlay { padding-top: 2.25rem; padding-left: .5rem; padding-right: .5rem; }
+  .cmd-box { margin: 0; }
+  .cmd-input-wrap { padding: .85rem 1rem; }
+  .cmd-item { padding: .65rem 1rem; }
 }
 
 @media (max-width: 360px) {
