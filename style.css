@@ -60,12 +60,6 @@ body::before { content: none; }
   position: fixed;
   right: 30px;
   bottom: 30px;
-  /* BUG FIX: kept below the modal/command-palette overlays (z-index 500/600)
-     so it never floats on top of an open dialog, but still comfortably
-     above page content (.container is z-index:1), the sticky nav, and the
-     now-playing/cmd-hint widgets. Previously this had no z-index at all
-     (or was set to 500, tying it with the modal), which is why clicks were
-     sometimes swallowed by .container or the button sat oddly over dialogs. */
   z-index: 400;
   width: 50px;
   height: 50px;
@@ -417,8 +411,6 @@ body::before { content: none; }
 
 .filter-chip.active {
   background: var(--accent1);
-  /* BUG FIX: pinned to a fixed dark color instead of var(--ink), which
-     turns white in dark mode and becomes unreadable on the light-green pill */
   color: #0b0f0c;
 }
 
@@ -449,6 +441,7 @@ body::before { content: none; }
 
 .project-card[data-project="p2"]::before { background: var(--accent3); }
 .project-card[data-project="p3"]::before { background: var(--accent2); }
+.project-card[data-project="p4"]::before { background: var(--accent4); }
 
 .project-card::after {
   content: attr(data-icon);
@@ -547,7 +540,6 @@ body::before { content: none; }
 
 .meow-btn:hover {
   background: var(--accent1);
-  /* BUG FIX: pinned dark, same reason as filter-chip.active */
   color: #0b0f0c;
   transform: translate(-2px,-2px);
   box-shadow: 5px 5px 0 var(--ink);
@@ -594,6 +586,8 @@ body::before { content: none; }
   font-size: 1.25rem;
   flex-shrink: 0;
 }
+
+.link-icon img { display: block; width: 22px; height: 22px; }
 
 .link-text { flex: 1; }
 .link-name { font-family: "Baloo 2", sans-serif; font-weight: 700; font-size: .95rem; color: var(--ink); }
@@ -645,8 +639,6 @@ body::before { content: none; }
   font-size: .78rem;
   font-weight: 700;
   background: var(--accent1);
-  /* BUG FIX: pinned dark — was var(--ink), which turns white in dark mode
-     and becomes nearly invisible against the light-green button */
   color: #0b0f0c;
   border: 2.5px solid var(--ink);
   border-radius: 100px;
@@ -698,7 +690,6 @@ body::before { content: none; }
 
 .nav-link.active {
   background: var(--accent1);
-  /* BUG FIX: pinned dark, same contrast fix as above */
   color: #0b0f0c;
 }
 
@@ -1140,9 +1131,6 @@ body.light .cmd-item:hover, body.light .cmd-item.active { background: #21222d; }
   .reveal { opacity: 1; transform: none; }
 }
 
-/* Keep fixed UI clear of notches / the home-indicator on phones.
-   BUG FIX: this whole block was dropped in the last rewrite, so fixed
-   widgets could sit under the notch/home-indicator on iPhones. */
 .container { padding-left: max(1.5rem, env(safe-area-inset-left)); padding-right: max(1.5rem, env(safe-area-inset-right)); }
 .site-nav { padding-top: max(10px, env(safe-area-inset-top)); }
 .cmd-hint-btn { bottom: max(1.25rem, env(safe-area-inset-bottom)); left: max(1.25rem, env(safe-area-inset-left)); }
