@@ -1,1084 +1,1208 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Portfolio Syafiq Rasyad — Web Developer">
-  <meta name="theme-color" content="#ffffff">
-  <title>Portfolio Syafiq Rasyad</title>
-
-  <link rel="icon" type="image/png" href="image/cat.png">
-  <link rel="apple-touch-icon" href="image/cat.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-  <button id="backToTop" aria-label="Kembali ke atas">↑</button>
-  <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
-  <div id="scroll-progress"></div>
-
-  <nav class="site-nav" aria-label="Navigasi utama">
-    <div class="site-nav-inner">
-      <a href="#section-hero" class="nav-link active" data-target="section-hero">Home</a>
-      <a href="#section-skills" class="nav-link" data-target="section-skills">Skills</a>
-      <a href="#section-github" class="nav-link" data-target="section-github">GitHub</a>
-      <a href="#section-projects" class="nav-link" data-target="section-projects">Projects</a>
-      <a href="#section-links" class="nav-link" data-target="section-links">Links</a>
-      <a href="#section-contact" class="nav-link" data-target="section-contact">Contact</a>
-      <button class="nav-theme-toggle" id="themeToggle" type="button">
-        <span id="themeIcon">🌙</span>
-        <span id="themeLabel">Dark</span>
-      </button>
-    </div>
-  </nav>
-
-  <div id="welcome-toast">
-    <div class="toast-dot"></div>
-    <span>👋 Heyy! Thanks for visiting my website~</span>
-    <button class="toast-close" onclick="dismissToast()" aria-label="Tutup">✕</button>
-  </div>
-
-  <div id="now-playing" onclick="toggleNowPlaying()" title="Click to pause/play">
-    <div class="np-cover" id="npCover">🎵</div>
-    <div class="np-info">
-      <div class="np-track" id="npTrack">Lofi Coding Beats</div>
-      <div class="np-artist" id="npArtist">• lo-fi hip hop</div>
-    </div>
-    <div class="np-bars">
-      <div class="np-bar"></div>
-      <div class="np-bar"></div>
-      <div class="np-bar"></div>
-      <div class="np-bar"></div>
-    </div>
-  </div>
-
-  <canvas id="confetti-canvas"></canvas>
-
-  <button class="cmd-hint-btn" onclick="openCmd()" aria-label="Buka command palette">
-    <kbd>Ctrl</kbd><kbd>K</kbd><span>Command palette</span>
-  </button>
-
-  <!-- MODAL PROJECT -->
-  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal()" aria-label="Tutup">✕</button>
-      <div class="modal-screenshot-wrap">
-        <img class="modal-screenshot" id="modalScreenshot" alt="" loading="lazy">
-      </div>
-      <span class="modal-emoji" id="modalEmoji"></span>
-      <div class="modal-subtitle" id="modalSubtitle"></div>
-      <div class="modal-title" id="modalTitle"></div>
-      <div class="modal-desc" id="modalDesc"></div>
-      <div class="modal-section-title">Tech Stack</div>
-      <div class="modal-tags" id="modalTags"></div>
-      <div class="modal-section-title">Highlights</div>
-      <div class="modal-highlights" id="modalHighlights"></div>
-      <div class="modal-actions" id="modalActions"></div>
-    </div>
-  </div>
-
-  <!-- COMMAND PALETTE -->
-  <div class="cmd-overlay" id="cmdOverlay" onclick="closeCmdOutside(event)">
-    <div class="cmd-box">
-      <div class="cmd-input-wrap">
-        <span>⌘</span>
-        <input class="cmd-input" id="cmdInput" placeholder="Cari sesuatu... (project, link, section)" aria-label="Cari section, project, atau link" autocomplete="off">
-        <span class="cmd-kbd">ESC</span>
-      </div>
-      <div class="cmd-results" id="cmdResults"></div>
-      <div class="cmd-footer">
-        <span class="cmd-footer-hint">↑↓ navigasi</span>
-        <span class="cmd-footer-hint">↵ pilih</span>
-        <span class="cmd-footer-hint">ESC tutup</span>
-      </div>
-    </div>
-  </div>
-
-  <main class="container" id="main-content" tabindex="-1">
-    <section class="hero" id="section-hero">
-      <div class="avatar-wrap">
-        <div class="cat-ear cat-ear-left"></div>
-        <div class="cat-ear cat-ear-right"></div>
-        <div class="avatar-ring"></div>
-        <div class="avatar-inner"></div>
-        <img src="SYAD.jpeg" alt="Syafiq Rasyad" decoding="async" fetchpriority="high">
-        <div class="status-badge">🟢</div>
-      </div>
-
-      <h1 class="hero-name">Hello, I'm <span class="highlight">Syafiq Rasyad</span></h1>
-
-      <div class="typing-wrap" style="margin:.6rem 0 .3rem">
-        <span class="typing-text" id="typingText"></span>
-        <span class="typing-cursor"></span>
-      </div>
-
-      <div class="hero-role">
-        <span class="role-tag">💻 Web Developer</span>
-      </div>
-
-      <p class="hero-bio">
-        I am an informatics student, currently studying at Bina Sarana Informatika University.
-        I like to build beautiful and functional things — from wireframes to deployment.
-        Currently open to new opportunities!
-      </p>
-
-      <div class="visitor-counter">
-        <span class="visitor-dot"></span>
-        <span>👀</span>
-        <img src="https://hits.sh/syafiqrasyad1606-ops.github.io/Portofolio.svg?style=flat&label=visitors&color=59c1f0&labelColor=ffffff&extraCount=0" alt="visitor count">
-      </div>
-    </section>
-
-    <div class="marquee-wrap reveal">
-      <div class="marquee-track">
-        <span class="marquee-item">✦ Python</span>
-        <span class="marquee-item">✦ JavaScript</span>
-        <span class="marquee-item">✦ PHP</span>
-        <span class="marquee-item">✦ HTML &amp; CSS</span>
-        <span class="marquee-item">✦ Web Development</span>
-        <span class="marquee-item">✦ Web Design</span>
-        <span class="marquee-item">✦ Python</span>
-        <span class="marquee-item">✦ JavaScript</span>
-        <span class="marquee-item">✦ PHP</span>
-        <span class="marquee-item">✦ HTML &amp; CSS</span>
-        <span class="marquee-item">✦ Web Development</span>
-        <span class="marquee-item">✦ Web Design</span>
-      </div>
-    </div>
-
-    <div class="stats-row">
-      <div class="stat-card reveal" data-icon="🚀">
-        <div class="stat-num">4</div>
-        <div class="stat-label">Projects selesai</div>
-      </div>
-      <div class="stat-card reveal" data-icon="📅">
-        <div class="stat-num">3</div>
-        <div class="stat-label">Semester</div>
-      </div>
-      <div class="stat-card reveal" data-icon="🏸">
-        <div class="stat-num" style="font-size:1.3rem">Hobi</div>
-        <div class="stat-label">Badminton</div>
-      </div>
-    </div>
-
-    <section class="skills-section reveal" id="section-skills">
-      <div class="section-label">✦ Skills &amp; Tools</div>
-
-      <div class="skill-group">
-        <div class="skill-group-title">Languages</div>
-        <div class="skill-icon-grid">
-          <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="36" height="36" loading="lazy">
-            <span>HTML5</span>
-          </div>
-          <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="36" height="36" loading="lazy">
-            <span>CSS3</span>
-          </div>
-          <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="36" height="36" loading="lazy">
-            <span>JavaScript</span>
-          </div>
-          <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="36" height="36" loading="lazy">
-            <span>Python</span>
-          </div>
-          <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" width="36" height="36" loading="lazy">
-            <span>PHP</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-title">Frameworks &amp; Tools</div>
-        <div class="skill-icon-grid">
-          <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" width="36" height="36" loading="lazy">
-            <span>React</span>
-          </div>
-          <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" width="36" height="36" loading="lazy">
-            <span>Node.js</span>
-          </div>
-          <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" width="36" height="36" loading="lazy">
-            <span>MySQL</span>
-          </div>
-          <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" width="36" height="36" loading="lazy">
-            <span>Git</span>
-          </div>
-          <div class="skill-icon-item">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" width="36" height="36" loading="lazy">
-            <span>GitHub</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="github-stats-section reveal" id="section-github">
-      <div class="section-label">✦ GitHub Activity</div>
-      <div class="github-stats-grid">
-        <div class="github-stats-card-wrap">
-          <img class="github-stats-card" loading="lazy"
-               src="https://github-readme-stats.vercel.app/api?username=syafiqrasyad1606-ops&show_icons=true&hide_border=true&bg_color=00000000&title_color=000000&icon_color=000000&text_color=000000&hide_title=true"
-               alt="GitHub stats"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="github-stats-fallback">
-            <span>📊</span>
-            <p>Stats lagi gak bisa dimuat. Cek langsung di GitHub ya.</p>
-          </div>
-        </div>
-
-        <div class="github-stats-card-wrap">
-          <img class="github-stats-card" loading="lazy"
-               src="https://github-readme-stats.vercel.app/api/top-langs/?username=syafiqrasyad1606-ops&layout=compact&hide_border=true&bg_color=00000000&title_color=000000&text_color=000000&hide=jupyter%20notebook"
-               alt="Top languages"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="github-stats-fallback">
-            <span>🧩</span>
-            <p>Top languages lagi gak bisa dimuat. Cek langsung di GitHub ya.</p>
-          </div>
-        </div>
-      </div>
-      <a href="https://github.com/syafiqrasyad1606-ops" target="_blank" rel="noopener noreferrer" class="github-stats-link">Lihat GitHub lengkap →</a>
-    </section>
-
-    <section class="projects-section reveal" id="section-projects">
-      <div class="section-label">✦ Featured Projects</div>
-
-      <div class="filter-row" id="filterRow">
-        <button class="filter-chip active" data-filter="all">Semua</button>
-        <button class="filter-chip" data-filter="html">HTML</button>
-        <button class="filter-chip" data-filter="css">CSS</button>
-        <button class="filter-chip" data-filter="javascript">JavaScript</button>
-        <button class="filter-chip" data-filter="react">React</button>
-        <button class="filter-chip" data-filter="php">PHP</button>
-        <button class="filter-chip" data-filter="mysql">MySQL</button>
-      </div>
-
-      <div class="project-card reveal" data-icon="🐱" data-project="p1" data-tags="css,html,javascript" onclick="openModal('p1')">
-        <div class="project-top">
-          <span class="project-name">Program Pencatatan Keuangan #1 🚀</span>
-          <span class="project-arrow">↗</span>
-        </div>
-        <p class="project-desc">Membuat program pencatatan keuangan yang interaktif.</p>
-        <div class="project-tags">
-          <span class="project-tag">CSS</span>
-          <span class="project-tag">HTML</span>
-          <span class="project-tag">JavaScript</span>
-        </div>
-        <div class="reaction-row" onclick="event.stopPropagation()">
-          <button class="rxn-btn" id="rxn-p1-like" onclick="handleReaction('p1','like',this)">❤️ <span class="rxn-count">0</span></button>
-          <button class="rxn-btn" id="rxn-p1-fire" onclick="handleReaction('p1','fire',this)">🔥 <span class="rxn-count">0</span></button>
-          <button class="rxn-btn" id="rxn-p1-star" onclick="handleReaction('p1','star',this)">⭐ <span class="rxn-count">0</span></button>
-        </div>
-      </div>
-
-      <div class="project-card reveal" data-icon="🐾" data-project="p2" data-tags="html,css,javascript" onclick="openModal('p2')">
-        <div class="project-top">
-          <span class="project-name">Project Portofolio Web #2 ✨</span>
-          <span class="project-arrow">↗</span>
-        </div>
-        <p class="project-desc">Portofolio web pribadi yang menampilkan project-project yang telah saya kerjakan.</p>
-        <div class="project-tags">
-          <span class="project-tag">HTML/CSS</span>
-          <span class="project-tag">JavaScript</span>
-        </div>
-        <div class="reaction-row" onclick="event.stopPropagation()">
-          <button class="rxn-btn" id="rxn-p2-like" onclick="handleReaction('p2','like',this)">❤️ <span class="rxn-count">0</span></button>
-          <button class="rxn-btn" id="rxn-p2-fire" onclick="handleReaction('p2','fire',this)">🔥 <span class="rxn-count">0</span></button>
-          <button class="rxn-btn" id="rxn-p2-star" onclick="handleReaction('p2','star',this)">⭐ <span class="rxn-count">0</span></button>
-        </div>
-      </div>
-
-      <div class="project-card reveal" data-icon="😺" data-project="p3" data-tags="php,mysql,html,css" onclick="openModal('p3')">
-        <div class="project-top">
-          <span class="project-name">Project Web Kelompok #3 🎨</span>
-          <span class="project-arrow">↗</span>
-        </div>
-        <p class="project-desc">Project web kelompok yang dibuat dalam mata kuliah Sistem Operasi.</p>
-        <div class="project-tags">
-          <span class="project-tag">PHP</span>
-          <span class="project-tag">MySQL</span>
-          <span class="project-tag">HTML/CSS</span>
-        </div>
-        <div class="reaction-row" onclick="event.stopPropagation()">
-          <button class="rxn-btn" id="rxn-p3-like" onclick="handleReaction('p3','like',this)">❤️ <span class="rxn-count">0</span></button>
-          <button class="rxn-btn" id="rxn-p3-fire" onclick="handleReaction('p3','fire',this)">🔥 <span class="rxn-count">0</span></button>
-          <button class="rxn-btn" id="rxn-p3-star" onclick="handleReaction('p3','star',this)">⭐ <span class="rxn-count">0</span></button>
-        </div>
-      </div>
-
-      <div class="project-card reveal" data-icon="🌈" data-project="p4" data-tags="javascript,react,html,css" onclick="openModal('p4')">
-        <div class="project-top">
-          <span class="project-name">Web Bimba 🌈</span>
-          <span class="project-arrow">↗</span>
-        </div>
-        <p class="project-desc">Website untuk lembaga bimbingan belajar anak (Bimba), dibuat dengan tampilan ceria dan ramah anak.</p>
-        <div class="project-tags">
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag">React</span>
-          <span class="project-tag">HTML</span>
-          <span class="project-tag">CSS</span>
-        </div>
-        <div class="reaction-row" onclick="event.stopPropagation()">
-          <button class="rxn-btn" id="rxn-p4-like" onclick="handleReaction('p4','like',this)">❤️ <span class="rxn-count">0</span></button>
-          <button class="rxn-btn" id="rxn-p4-fire" onclick="handleReaction('p4','fire',this)">🔥 <span class="rxn-count">0</span></button>
-          <button class="rxn-btn" id="rxn-p4-star" onclick="handleReaction('p4','star',this)">⭐ <span class="rxn-count">0</span></button>
-        </div>
-      </div>
-    </section>
-
-    <div class="meow-section reveal">
-      <button class="meow-btn" onclick="meow()">psst... klik ini dungs 🐾</button>
-      <div class="meow-output" id="meow-out" aria-live="polite"></div>
-    </div>
-
-    <section class="links-section reveal" id="section-links">
-      <div class="section-label">✦ Find Me At</div>
-      <div class="links-grid">
-        <a href="https://linkedin.com/in/syafiqrasyad" target="_blank" rel="noopener noreferrer" class="link-btn">
-          <div class="link-icon" style="background:#0A66C2">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/linkedin.svg" alt="LinkedIn" width="22" height="22">
-          </div>
-          <div class="link-text">
-            <div class="link-name">LinkedIn</div>
-            <div class="link-sub">Syafiq Rasyad</div>
-          </div>
-          <span class="link-arrow">→</span>
-        </a>
-
-        <a href="https://github.com/syafiqrasyad1606-ops" target="_blank" rel="noopener noreferrer" class="link-btn">
-          <div class="link-icon" style="background:#17171f">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/github.svg" alt="GitHub" width="22" height="22">
-          </div>
-          <div class="link-text">
-            <div class="link-name">GitHub</div>
-            <div class="link-sub">@syafiqrasyad1606-ops</div>
-          </div>
-          <span class="link-arrow">→</span>
-        </a>
-
-        <a href="mailto:Syadodoi16@gmail.com" class="link-btn">
-          <div class="link-icon" style="background:#EA4335">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/gmail.svg" alt="Gmail" width="22" height="22">
-          </div>
-          <div class="link-text">
-            <div class="link-name">My Email</div>
-            <div class="link-sub">Syadodoi16@gmail.com</div>
-          </div>
-          <span class="link-arrow">→</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="contact-section reveal" id="section-contact">
-      <div class="section-label">✦ Send a Message</div>
-      <form class="contact-form" id="contactForm">
-        <div class="form-row">
-          <label for="cf-name">Nama</label>
-          <input type="text" id="cf-name" name="name" placeholder="Nama kamu" required>
-        </div>
-
-        <div class="form-row">
-          <label for="cf-email">Email</label>
-          <input type="email" id="cf-email" name="email" placeholder="email@kamu.com" required>
-        </div>
-
-        <div class="form-row">
-          <label for="cf-message">Pesan</label>
-          <textarea id="cf-message" name="message" rows="4" placeholder="Tulis pesan kamu di sini..." required></textarea>
-        </div>
-
-        <button type="submit" class="contact-submit" id="contactSubmit">Kirim Pesan</button>
-        <div class="contact-status" id="contactStatus" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <div class="divider reveal">
-      <div class="divider-line"></div>
-      <div class="divider-icon">🐾</div>
-      <div class="divider-line"></div>
-    </div>
-
-    <footer class="footer reveal">
-      <p>dibuat dengan <span class="heart">♥</span> dan secangkir kopi &nbsp;🐱 © 2025 Syafiq Rasyad</p>
-      <p style="margin-top:6px;opacity:.6">designed &amp; coded by Syafiq Rasyad</p>
-    </footer>
-  </main>
-
-  <script>
-    /* BACK TO TOP */
-    const backToTop = document.getElementById("backToTop");
-
-    window.addEventListener("scroll", () => {
-      backToTop.style.display = window.scrollY > 400 ? "block" : "none";
-    }, { passive: true });
-
-    backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    /* PROJECT DATA + MODAL */
-    const projectData = {
-      p1: {
-        emoji: "🚀",
-        subtitle: "Project #1 · Program Pencatatan Keuangan",
-        title: "Program Pencatatan Keuangan",
-        desc: "Menghasilkan laporan keuangan secara instan (seperti laba rugi dan arus kas).",
-        tags: ["HTML", "CSS", "JavaScript"],
-        highlights: [
-          { icon: "⚙️", text: "Dikerjakan dengan sepenuh hati." },
-          { icon: "🐧", text: "Menampilkan pencatatan keuangan yang interaktif dan keren." }
-        ],
-        demoUrl: "https://syafiqrasyad1606-ops.github.io/Pencatatan-Keuangan/",
-        githubUrl: "https://github.com/syafiqrasyad1606-ops/Pencatatan-Keuangan"
-      },
-      p2: {
-        emoji: "✨",
-        subtitle: "Project #2 · Web Development",
-        title: "Portofolio Web Pribadi",
-        desc: "Website portofolio pribadi yang menampilkan semua project, skill, dan informasi kontak. Dibangun dengan HTML, CSS, dan JavaScript murni.",
-        tags: ["HTML/CSS", "JavaScript", "Responsive Design"],
-        highlights: [
-          { icon: "🎨", text: "Desain dengan animasi CSS yang smooth." },
-          { icon: "📱", text: "Fully responsive untuk HP maupun desktop." },
-          { icon: "⚡", text: "Interaktif: typing animation, scroll reveal, confetti, dan command palette." }
-        ],
-        demoUrl: "https://syafiqrasyad1606-ops.github.io/portofolio-ku/",
-        githubUrl: "https://github.com/syafiqrasyad1606-ops/Portofolio"
-      },
-      p3: {
-        emoji: "🎨",
-        subtitle: "Project #3 · Team Project",
-        title: "Web Kelompok — Sistem Operasi",
-        desc: "Project web kelompok yang dibuat dalam mata kuliah Sistem Operasi. Aplikasi web berbasis PHP dan MySQL.",
-        tags: ["PHP", "MySQL", "HTML/CSS", "Team Project"],
-        highlights: [
-          { icon: "👥", text: "Dikerjakan bersama tim dalam mata kuliah Sistem Operasi." },
-          { icon: "🗄️", text: "Backend PHP dengan database MySQL." },
-          { icon: "📚", text: "Menampilkan materi Sistem Operasi secara visual dan interaktif." }
-        ],
-        demoUrl: "https://syafiqrasyad1606-ops.github.io/Web-Kelompok/",
-        githubUrl: "https://github.com/syafiqrasyad1606-ops/Web-Kelompok"
-      },
-      p4: {
-        emoji: "🌈",
-        subtitle: "Project #4 · Web Bimba",
-        title: "Web Bimba — Rainbow Kids",
-        desc: "Website untuk lembaga bimbingan belajar anak (Bimba) Rainbow Kids Sidomakmur. Dibangun dengan React untuk menampilkan profil lembaga, program belajar, dan informasi pendaftaran dengan tampilan yang ceria dan ramah anak.",
-        tags: ["JavaScript", "React", "HTML", "CSS"],
-        highlights: [
-          { icon: "🎨", text: "Desain colorful dan playful, cocok untuk audiens anak-anak dan orang tua." },
-          { icon: "⚛️", text: "Dibangun dengan React, komponen-komponen UI-nya reusable dan gampang dikembangkan." },
-          { icon: "📱", text: "Responsive, nyaman diakses dari HP maupun desktop." }
-        ],
-        demoUrl: "https://web-bimba-rainbow-kids-sidomakmur.vercel.app/",
-        githubUrl: "https://github.com/syafiqrasyad1606-ops/web-bimba-rainbow-kids-sidomakmur"
-      }
-    };
-
-    function openModal(key) {
-      const d = projectData[key];
-      if (!d) return;
-
-      const shot = document.getElementById("modalScreenshot");
-      if (d.demoUrl) {
-        shot.src =
-          "https://api.microlink.io/?url=" +
-          encodeURIComponent(d.demoUrl) +
-          "&screenshot=true&meta=false&embed=screenshot.url&colorScheme=light&viewport.width=1280&viewport.height=800";
-      } else {
-        shot.removeAttribute("src");
-      }
-      shot.alt = "Screenshot " + d.title;
-
-      document.getElementById("modalEmoji").textContent = d.emoji;
-      document.getElementById("modalSubtitle").textContent = d.subtitle;
-      document.getElementById("modalTitle").textContent = d.title;
-      document.getElementById("modalDesc").textContent = d.desc;
-
-      document.getElementById("modalTags").innerHTML =
-        d.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join("");
-
-      document.getElementById("modalHighlights").innerHTML =
-        d.highlights.map(item => `
-          <div class="modal-highlight-item">
-            <span class="icon">${item.icon}</span>
-            <span>${item.text}</span>
-          </div>
-        `).join("");
-
-      const actionsHtml = [];
-      if (d.demoUrl) {
-        actionsHtml.push(`<a href="${d.demoUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary">🌐 Lihat Demo</a>`);
-      }
-      actionsHtml.push(`<a href="${d.githubUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-secondary">🐙 GitHub</a>`);
-      document.getElementById("modalActions").innerHTML = actionsHtml.join("");
-
-      document.getElementById("modalOverlay").classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeModal() {
-      document.getElementById("modalOverlay").classList.remove("open");
-      document.body.style.overflow = "";
-    }
-
-    function closeModalOutside(event) {
-      if (event.target.id === "modalOverlay") closeModal();
-    }
-
-    /* SCROLL PROGRESS */
-    const progressBar = document.getElementById("scroll-progress");
-
-    window.addEventListener("scroll", () => {
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const percent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-      progressBar.style.width = percent + "%";
-    }, { passive: true });
-
-    /* TOAST */
-    function dismissToast() {
-      document.getElementById("welcome-toast").classList.remove("show");
-    }
-
-    setTimeout(() => {
-      document.getElementById("welcome-toast").classList.add("show");
-      setTimeout(dismissToast, 5000);
-    }, 1500);
-
-    /* NOW PLAYING */
-    const tracks = [
-      { track: "Lofi Coding Beats", artist: "• lo-fi hip hop" },
-      { track: "Study With Me", artist: "• chill vibes" },
-      { track: "Rainy Day Focus", artist: "• ambient lo-fi" },
-      { track: "Midnight Coffee", artist: "• jazz & beats" }
-    ];
-
-    let npPlaying = true;
-    let npIdx = 0;
-
-    function toggleNowPlaying() {
-      npPlaying = !npPlaying;
-
-      const cover = document.getElementById("npCover");
-      const bars = document.querySelectorAll(".np-bar");
-
-      cover.classList.toggle("paused", !npPlaying);
-      bars.forEach(bar => bar.classList.toggle("paused", !npPlaying));
-
-      if (npPlaying) {
-        npIdx = (npIdx + 1) % tracks.length;
-        document.getElementById("npTrack").textContent = tracks[npIdx].track;
-        document.getElementById("npArtist").textContent = tracks[npIdx].artist;
-      }
-    }
-
-    /* REACTIONS */
-    const RXN_PREFIX = "syafiqrasyad_portfolio_2025";
-    const API_BASE = "https://countapi.mileshilliard.com/api/v1";
-    const PROJECTS = ["p1", "p2", "p3", "p4"];
-    const RXN_CLASS = { like: "rxn-active-like", fire: "rxn-active-fire", star: "rxn-active-star" };
-
-    function hasReacted(project, type) {
-      return localStorage.getItem(`rxn_${project}_${type}`) === "1";
-    }
-
-    function setReacted(project, type, value) {
-      if (value) localStorage.setItem(`rxn_${project}_${type}`, "1");
-      else localStorage.removeItem(`rxn_${project}_${type}`);
-    }
-
-    async function fetchCount(key) {
-      try {
-        const response = await fetch(`${API_BASE}/get/${RXN_PREFIX}_${key}`);
-        if (!response.ok) return 0;
-        const data = await response.json();
-        return parseInt(data.value, 10) || 0;
-      } catch {
-        return 0;
-      }
-    }
-
-    async function hitCount(key) {
-      try {
-        const response = await fetch(`${API_BASE}/hit/${RXN_PREFIX}_${key}`);
-        const data = await response.json();
-        return parseInt(data.value, 10) || 0;
-      } catch {
-        return null;
-      }
-    }
-
-    async function decrementCount(key, currentValue) {
-      try {
-        const newValue = Math.max(0, currentValue - 1);
-        const response = await fetch(`${API_BASE}/set/${RXN_PREFIX}_${key}?value=${newValue}`);
-        const data = await response.json();
-        return parseInt(data.value, 10) || 0;
-      } catch {
-        return null;
-      }
-    }
-
-    function updateBtn(project, type, count, active) {
-      const button = document.getElementById(`rxn-${project}-${type}`);
-      if (!button) return;
-
-      button.querySelector(".rxn-count").textContent = count;
-      button.className = "rxn-btn" + (active ? ` ${RXN_CLASS[type]}` : "");
-    }
-
-    async function initReactions() {
-      for (const project of PROJECTS) {
-        for (const type of ["like", "fire", "star"]) {
-          const count = await fetchCount(`${project}_${type}`);
-          updateBtn(project, type, count, hasReacted(project, type));
-        }
-      }
-    }
-
-    async function handleReaction(project, type, button) {
-      const countEl = button.querySelector(".rxn-count");
-      const isActive = hasReacted(project, type);
-      const key = `${project}_${type}`;
-      const currentValue = parseInt(countEl.textContent, 10) || 0;
-
-      if (isActive) {
-        setReacted(project, type, false);
-        updateBtn(project, type, Math.max(0, currentValue - 1), false);
-        await decrementCount(key, currentValue);
-      } else {
-        setReacted(project, type, true);
-        updateBtn(project, type, currentValue + 1, true);
-        button.classList.add("rxn-pop");
-        button.addEventListener("animationend", () => button.classList.remove("rxn-pop"), { once: true });
-        await hitCount(key);
-      }
-
-      const realCount = await fetchCount(key);
-      updateBtn(project, type, realCount, hasReacted(project, type));
-    }
-
-    initReactions();
-
-    /* PROJECT FILTER */
-    const filterChips = document.querySelectorAll(".filter-chip");
-    const projectCards = document.querySelectorAll(".project-card[data-tags]");
-
-    filterChips.forEach(chip => {
-      chip.addEventListener("click", () => {
-        filterChips.forEach(item => item.classList.remove("active"));
-        chip.classList.add("active");
-
-        const filter = chip.dataset.filter;
-
-        projectCards.forEach(card => {
-          const tags = (card.dataset.tags || "").split(",");
-          card.style.display = filter === "all" || tags.includes(filter) ? "" : "none";
-        });
-      });
-    });
-
-    /* NAVIGATION + SCROLLSPY */
-    const navLinks = document.querySelectorAll(".nav-link");
-    const navSections = [...navLinks]
-      .map(link => document.getElementById(link.dataset.target))
-      .filter(Boolean);
-
-    navLinks.forEach(link => {
-      link.addEventListener("click", event => {
-        event.preventDefault();
-        document.getElementById(link.dataset.target)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
-
-    const navObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-
-        navLinks.forEach(link => {
-          const active = link.dataset.target === entry.target.id;
-          link.classList.toggle("active", active);
-
-          if (active) link.setAttribute("aria-current", "true");
-          else link.removeAttribute("aria-current");
-        });
-      });
-    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-
-    navSections.forEach(section => navObserver.observe(section));
-
-    /* COMMAND PALETTE */
-    const cmdItems = [
-      { section: "📍 Navigasi", icon: "👤", name: "About Me", sub: "Scroll ke hero", action: () => scrollToSection("section-hero") },
-      { section: "📍 Navigasi", icon: "🛠️", name: "Skills & Tools", sub: "Scroll ke skills", action: () => scrollToSection("section-skills") },
-      { section: "📍 Navigasi", icon: "📊", name: "GitHub Activity", sub: "Scroll ke GitHub", action: () => scrollToSection("section-github") },
-      { section: "📍 Navigasi", icon: "🚀", name: "Projects", sub: "Scroll ke projects", action: () => scrollToSection("section-projects") },
-      { section: "📍 Navigasi", icon: "🔗", name: "Find Me At", sub: "Scroll ke links", action: () => scrollToSection("section-links") },
-      { section: "📍 Navigasi", icon: "✉️", name: "Contact Form", sub: "Scroll ke contact", action: () => scrollToSection("section-contact") },
-      { section: "🗂️ Projects", icon: "🚀", name: "Program Pencatatan Keuangan", sub: "HTML · CSS · JavaScript", action: () => openModal("p1") },
-      { section: "🗂️ Projects", icon: "✨", name: "Portofolio Web", sub: "HTML/CSS · JavaScript", action: () => openModal("p2") },
-      { section: "🗂️ Projects", icon: "🎨", name: "Web Kelompok", sub: "PHP · MySQL · HTML/CSS", action: () => openModal("p3") },
-      { section: "🗂️ Projects", icon: "🌈", name: "Web Bimba", sub: "JavaScript · React · HTML/CSS", action: () => openModal("p4") },
-      { section: "🔗 Links", icon: "💼", name: "LinkedIn", sub: "linkedin.com/in/syafiqrasyad", action: () => window.open("https://linkedin.com/in/syafiqrasyad", "_blank") },
-      { section: "🔗 Links", icon: "🐙", name: "GitHub", sub: "@syafiqrasyad1606-ops", action: () => window.open("https://github.com/syafiqrasyad1606-ops", "_blank") },
-      { section: "🔗 Links", icon: "✉️", name: "Email", sub: "Syadodoi16@gmail.com", action: () => window.location.href = "mailto:Syadodoi16@gmail.com" },
-      { section: "⚡ Actions", icon: "🌙", name: "Toggle Dark/Light Mode", sub: "Ganti tema halaman", action: toggleTheme },
-      { section: "⚡ Actions", icon: "🐾", name: "Meow!", sub: "Easter egg rahasia", action: meow }
-    ];
-
-    let cmdActive = -1;
-    let filteredItems = [...cmdItems];
-
-    function openCmd() {
-      document.getElementById("cmdOverlay").classList.add("open");
-      document.getElementById("cmdInput").value = "";
-      cmdActive = -1;
-      renderCmdResults("");
-      setTimeout(() => document.getElementById("cmdInput").focus(), 80);
-    }
-
-    function closeCmd() {
-      document.getElementById("cmdOverlay").classList.remove("open");
-      cmdActive = -1;
-    }
-
-    function closeCmdOutside(event) {
-      if (event.target.id === "cmdOverlay") closeCmd();
-    }
-
-    function scrollToSection(id) {
-      closeCmd();
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function renderCmdResults(query) {
-      const q = query.toLowerCase().trim();
-
-      filteredItems = q
-        ? cmdItems.filter(item =>
-            item.name.toLowerCase().includes(q) ||
-            item.sub.toLowerCase().includes(q) ||
-            item.section.toLowerCase().includes(q)
-          )
-        : cmdItems;
-
-      const results = document.getElementById("cmdResults");
-
-      if (!filteredItems.length) {
-        results.innerHTML = `<div style="padding:1.5rem;text-align:center;font-family:'Space Mono',monospace;font-size:.75rem;color:#6b6b80">Gak ada hasil untuk "${query}" 😿</div>`;
-        return;
-      }
-
-      const grouped = {};
-
-      filteredItems.forEach(item => {
-        if (!grouped[item.section]) grouped[item.section] = [];
-        grouped[item.section].push(item);
-      });
-
-      let html = "";
-      let globalIndex = 0;
-
-      Object.entries(grouped).forEach(([section, items]) => {
-        html += `<div class="cmd-section-header">${section}</div>`;
-
-        items.forEach(item => {
-          const index = globalIndex++;
-          html += `
-            <div class="cmd-item ${index === cmdActive ? "active" : ""}" data-idx="${index}" onclick="runCmdItem(${index})">
-              <div class="cmd-item-icon">${item.icon}</div>
-              <div class="cmd-item-text">
-                <div class="cmd-item-name">${item.name}</div>
-                <div class="cmd-item-sub">${item.sub}</div>
-              </div>
-              <span>↵</span>
-            </div>
-          `;
-        });
-      });
-
-      results.innerHTML = html;
-    }
-
-    function runCmdItem(index) {
-      const item = filteredItems[index];
-      if (!item) return;
-
-      closeCmd();
-      item.action();
-    }
-
-    document.getElementById("cmdInput").addEventListener("input", event => {
-      cmdActive = -1;
-      renderCmdResults(event.target.value);
-    });
-
-    document.getElementById("cmdInput").addEventListener("keydown", event => {
-      const total = filteredItems.length;
-      if (!total) return;
-
-      if (event.key === "ArrowDown") {
-        event.preventDefault();
-        cmdActive = (cmdActive + 1) % total;
-        renderCmdResults(event.target.value);
-        document.querySelector(".cmd-item.active")?.scrollIntoView({ block: "nearest" });
-      } else if (event.key === "ArrowUp") {
-        event.preventDefault();
-        cmdActive = (cmdActive - 1 + total) % total;
-        renderCmdResults(event.target.value);
-        document.querySelector(".cmd-item.active")?.scrollIntoView({ block: "nearest" });
-      } else if (event.key === "Enter") {
-        event.preventDefault();
-        runCmdItem(cmdActive >= 0 ? cmdActive : 0);
-      } else if (event.key === "Escape") {
-        closeCmd();
-      }
-    });
-
-    document.addEventListener("keydown", event => {
-      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        document.getElementById("cmdOverlay").classList.contains("open") ? closeCmd() : openCmd();
-      }
-
-      if (event.key === "Escape") {
-        closeCmd();
-        closeModal();
-      }
-    });
-
-    /* TYPING */
-    const roles = ["Web Designer 🎨", "Web Developer ✦", "Problem Solver 🧩", "Open to Work 🚀"];
-
-    let roleIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-    const typingEl = document.getElementById("typingText");
-
-    function typeLoop() {
-      const current = roles[roleIndex];
-
-      if (deleting) charIndex--;
-      else charIndex++;
-
-      typingEl.textContent = current.slice(0, charIndex);
-
-      if (!deleting && charIndex === current.length) {
-        deleting = true;
-        setTimeout(typeLoop, 1800);
-        return;
-      }
-
-      if (deleting && charIndex === 0) {
-        deleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
-      }
-
-      setTimeout(typeLoop, deleting ? 45 : 90);
-    }
-
-    typeLoop();
-
-    /* SCROLL REVEAL */
-    const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: .12 });
-
-    document.querySelectorAll(".reveal").forEach(element => {
-      revealObserver.observe(element);
-    });
-
-    /* THEME */
-    const themeIcon = document.getElementById("themeIcon");
-    const themeLabel = document.getElementById("themeLabel");
-
-    function applyTheme(isDarkVariant) {
-      document.body.classList.toggle("light", isDarkVariant);
-      themeIcon.textContent = isDarkVariant ? "☀️" : "🌙";
-      themeLabel.textContent = isDarkVariant ? "Light" : "Dark";
-    }
-
-    const storedTheme = localStorage.getItem("theme");
-
-    if (storedTheme) {
-      applyTheme(storedTheme === "light");
-    } else {
-      applyTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    }
-
-    function toggleTheme() {
-      const isDarkVariant = document.body.classList.toggle("light");
-      themeIcon.textContent = isDarkVariant ? "☀️" : "🌙";
-      themeLabel.textContent = isDarkVariant ? "Light" : "Dark";
-      localStorage.setItem("theme", isDarkVariant ? "light" : "dark");
-    }
-
-    document.getElementById("themeToggle").addEventListener("click", toggleTheme);
-
-    /* FORMSPREE */
-    const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljrqqya";
-    const contactForm = document.getElementById("contactForm");
-    const contactStatus = document.getElementById("contactStatus");
-    const contactSubmit = document.getElementById("contactSubmit");
-
-    contactForm.addEventListener("submit", async event => {
-      event.preventDefault();
-
-      contactSubmit.disabled = true;
-      contactSubmit.textContent = "Mengirim...";
-      contactStatus.textContent = "";
-      contactStatus.className = "contact-status";
-
-      try {
-        const response = await fetch(FORMSPREE_ENDPOINT, {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          body: new FormData(contactForm)
-        });
-
-        if (response.ok) {
-          contactStatus.textContent = "✓ Pesan terkirim! Makasih udah menghubungi.";
-          contactStatus.className = "contact-status success";
-          contactForm.reset();
-        } else {
-          contactStatus.textContent = "Gagal mengirim pesan. Coba lagi ya.";
-          contactStatus.className = "contact-status error";
-        }
-      } catch {
-        contactStatus.textContent = "Gagal mengirim pesan. Cek koneksi internet kamu.";
-        contactStatus.className = "contact-status error";
-      } finally {
-        contactSubmit.disabled = false;
-        contactSubmit.textContent = "Kirim Pesan";
-      }
-    });
-
-    /* MEOW + CONFETTI */
-    const meows = [
-      "meow~ (artinya: gw siap nerima offer 😸)",
-      "purrr... gw bisa HTML & CSS. lo bisa?",
-      "MEOW!! 🐾 hire me please hehe",
-      "nyaa~ let's build something cool together!",
-      "mrrrow... available for freelance juga lho~",
-      "*knocks your codebase off the table* 😈",
-      "gw punya 9 nyawa. 8 buat debugging. 🐛",
-      "fun fact: kucing tidur 12-16 jam. gw ngoding cuma 5 jam doang hehe."
-    ];
-
-    let lastMeow = -1;
-
-    function meow() {
-      let index;
-
-      do {
-        index = Math.floor(Math.random() * meows.length);
-      } while (index === lastMeow);
-
-      lastMeow = index;
-
-      const output = document.getElementById("meow-out");
-      output.style.opacity = "0";
-
-      setTimeout(() => {
-        output.textContent = meows[index];
-        output.style.opacity = "1";
-      }, 160);
-
-      launchConfetti();
-    }
-
-    const canvas = document.getElementById("confetti-canvas");
-    const ctx = canvas.getContext("2d");
-    const colors = ["#000000", "#333333", "#666666", "#999999", "#ffffff"];
-    let particles = [];
-    let animationFrame = null;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    function launchConfetti() {
-      if (reducedMotion) return;
-
-      resizeCanvas();
-
-      for (let i = 0; i < 90; i++) {
-        particles.push({
-          x: window.innerWidth / 2,
-          y: window.innerHeight * .75,
-          vx: (Math.random() - .5) * 12,
-          vy: -(Math.random() * 10 + 4),
-          color: colors[Math.floor(Math.random() * colors.length)],
-          size: Math.random() * 7 + 4,
-          rot: Math.random() * 360,
-          rotV: (Math.random() - .5) * 8,
-          alpha: 1,
-          shape: Math.random() > .5 ? "rect" : "circle"
-        });
-      }
-
-      if (!animationFrame) animateConfetti();
-    }
-
-    function animateConfetti() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach(particle => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        particle.vy += .35;
-        particle.vx *= .99;
-        particle.rot += particle.rotV;
-        particle.alpha -= .014;
-
-        ctx.save();
-        ctx.globalAlpha = Math.max(0, particle.alpha);
-        ctx.translate(particle.x, particle.y);
-        ctx.rotate(particle.rot * Math.PI / 180);
-        ctx.fillStyle = particle.color;
-        ctx.strokeStyle = "#000000";
-        ctx.lineWidth = 1;
-
-        if (particle.shape === "rect") {
-          ctx.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size * .5);
-          ctx.strokeRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size * .5);
-        } else {
-          ctx.beginPath();
-          ctx.arc(0, 0, particle.size / 2, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.stroke();
-        }
-
-        ctx.restore();
-      });
-
-      particles = particles.filter(particle => particle.alpha > 0);
-
-      if (particles.length > 0) {
-        animationFrame = requestAnimationFrame(animateConfetti);
-      } else {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        animationFrame = null;
-      }
-    }
-  </script>
-</body>
-</html>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --card2: #f7f7f8;
+  --accent1: #34c759;
+  --accent2: #ff6f91;
+  --accent3: #59c1f0;
+  --accent4: #a689ff;
+  --accent5: #ffb238;
+  --text: #000000;
+  --muted: #6b6b80;
+  --border: #000000;
+  --ink: #000000;
+  --shadow-sm: 3px 3px 0 var(--ink);
+  --shadow-md: 5px 5px 0 var(--ink);
+  --shadow-lg: 7px 7px 0 var(--ink);
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+
+img, svg { max-width: 100%; height: auto; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  transition: background .25s ease, color .25s ease;
+}
+
+body::before { content: none; }
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 5rem;
+  position: relative;
+  z-index: 1;
+}
+
+#section-hero, #section-skills, #section-github,
+#section-projects, #section-links, #section-contact {
+  scroll-margin-top: 80px;
+}
+
+/* BACK TO TOP */
+#backToTop {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 400;
+  width: 50px;
+  height: 50px;
+  border: 2.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--accent2);
+  color: var(--ink);
+  font-size: 24px;
+  font-weight: 800;
+  cursor: pointer;
+  display: none;
+  box-shadow: var(--shadow-sm);
+  transition: .25s ease;
+  touch-action: manipulation;
+}
+
+#backToTop:hover {
+  transform: translate(-2px, -3px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+#backToTop:active { transform: scale(.94); }
+
+/* HERO */
+.hero { text-align: center; padding: 3.5rem 0 2rem; animation: fadeUp .8s ease both; }
+
+.avatar-wrap { position: relative; width: 124px; height: 124px; margin: 0 auto 1.75rem; }
+.cat-ear { position: absolute; top: -14px; z-index: 3; width: 0; height: 0; }
+
+.cat-ear-left {
+  left: 12px;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 22px solid var(--accent1);
+  filter: drop-shadow(2px 2px 0 var(--ink));
+  animation: earWiggle 4s ease-in-out infinite;
+}
+
+.cat-ear-right {
+  right: 12px;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 22px solid var(--accent1);
+  filter: drop-shadow(2px 2px 0 var(--ink));
+  animation: earWiggle 4s ease-in-out infinite .4s;
+}
+
+.avatar-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 3px solid var(--ink);
+  box-shadow: var(--shadow-md);
+  z-index: 0;
+}
+
+.avatar-inner { position: absolute; inset: 3px; background: var(--bg); border-radius: 50%; z-index: 1; }
+
+.avatar-wrap img {
+  position: absolute;
+  inset: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 2;
+}
+
+.status-badge {
+  position: absolute;
+  bottom: 0;
+  right: -14px;
+  background: var(--accent1);
+  border: 2.5px solid var(--ink);
+  border-radius: 100px;
+  padding: 3px 11px;
+  font-size: .62rem;
+  font-weight: 800;
+  color: var(--ink);
+  z-index: 4;
+  white-space: nowrap;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.hero-name {
+  font-family: "Baloo 2", sans-serif;
+  font-size: clamp(2.4rem, 9vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: .5rem;
+  color: var(--ink);
+}
+
+.hero-name .highlight { color: var(--accent1); }
+
+.hero-role { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin: .85rem 0; }
+
+.role-tag {
+  background: #fff;
+  border: 2.5px solid #17171f;
+  border-radius: 100px;
+  padding: 5px 16px;
+  font-size: .8rem;
+  font-weight: 700;
+  color: #17171f;
+  box-shadow: 3px 3px 0 #17171f;
+  transition: .2s cubic-bezier(.34,1.56,.64,1);
+  user-select: none;
+}
+
+.role-tag:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #17171f; }
+
+.hero-bio {
+  font-size: clamp(.875rem, .78rem + .5vw, 1rem);
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 460px;
+  margin: .85rem auto 0;
+  overflow-wrap: break-word;
+}
+
+.typing-wrap { display: inline-flex; align-items: center; justify-content: center; min-height: 1.6em; }
+
+.typing-text {
+  font-family: "Space Mono", monospace;
+  font-size: clamp(.85rem, 3vw, 1.05rem);
+  font-weight: 700;
+  color: var(--accent1);
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.1em;
+  background: var(--ink);
+  margin-left: 3px;
+  border-radius: 2px;
+  animation: blink .75s step-end infinite;
+}
+
+.visitor-counter {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-family: "Space Mono", monospace;
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: .8rem auto 0;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.visitor-counter img { height: 18px; vertical-align: middle; border-radius: 4px; max-width: 170px; }
+
+.visitor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent1);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease infinite;
+}
+
+/* SECTION */
+.section-label {
+  font-family: "Baloo 2", sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::after {
+  content: "";
+  flex: 1;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 6px, transparent 6px 12px);
+  opacity: .35;
+  border-radius: 3px;
+}
+
+/* MARQUEE */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 3px solid #17171f;
+  border-bottom: 3px solid #17171f;
+  background: var(--accent5);
+  padding: 11px 0;
+  margin: 2.25rem 0;
+}
+
+.marquee-track { display: flex; gap: 2rem; width: max-content; animation: marquee 24s linear infinite; }
+
+.marquee-item {
+  font-family: "Space Mono", monospace;
+  font-size: .72rem;
+  font-weight: 700;
+  color: #17171f;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* STATS */
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 2.25rem 0; }
+
+.stat-card {
+  background: var(--card);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: .2s cubic-bezier(.34,1.56,.64,1);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: attr(data-icon);
+  position: absolute;
+  bottom: -4px;
+  right: 8px;
+  font-size: 2.2rem;
+  opacity: .14;
+  transform: rotate(8deg);
+}
+
+.stat-card:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--ink); }
+
+.stat-num { font-family: "Baloo 2", sans-serif; font-size: 2.1rem; font-weight: 700; color: var(--accent1); }
+
+.stat-label { font-size: .72rem; color: var(--muted); margin-top: 5px; font-weight: 700; }
+
+/* SKILLS */
+.skills-section,
+.github-stats-section,
+.projects-section,
+.links-section,
+.contact-section { margin: 2.25rem 0; }
+
+.skill-group { margin-bottom: 1.5rem; }
+.skill-group:last-child { margin-bottom: 0; }
+
+.skill-group-title {
+  font-family: "Space Mono", monospace;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.skill-icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 10px; }
+
+.skill-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 14px 8px;
+  box-shadow: var(--shadow-sm);
+  transition: .2s cubic-bezier(.34,1.56,.64,1);
+}
+
+.skill-icon-item:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
+
+.skill-icon-item img { width: 36px; height: 36px; object-fit: contain; background: #fff; border-radius: 8px; padding: 4px; }
+
+.skill-icon-item span {
+  font-family: "Space Mono", monospace;
+  font-size: .66rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+}
+
+/* GITHUB */
+.github-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+
+.github-stats-card-wrap {
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  background: var(--card);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  min-height: 120px;
+}
+
+.github-stats-card { width: auto; max-width: none; min-width: 280px; height: auto; display: block; }
+
+@media (max-width: 480px) {
+  .github-stats-card { min-width: 260px; }
+}
+
+.github-stats-fallback {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+  min-height: 120px;
+}
+
+.github-stats-fallback span { font-size: 1.8rem; }
+.github-stats-fallback p { font-size: .75rem; color: var(--muted); line-height: 1.6; max-width: 260px; }
+
+.github-stats-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: "Space Mono", monospace;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--ink);
+}
+
+/* PROJECTS */
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+
+.filter-chip {
+  font-family: "Space Mono", monospace;
+  font-size: .7rem;
+  font-weight: 700;
+  background: var(--card);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 100px;
+  padding: 6px 15px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: .2s cubic-bezier(.34,1.56,.64,1);
+  touch-action: manipulation;
+}
+
+.filter-chip:hover, .filter-chip.active { transform: translate(-1px, -1px); }
+
+.filter-chip.active {
+  background: var(--accent1);
+  color: #0b0f0c;
+}
+
+.project-card {
+  background: var(--card);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 1.35rem 1.5rem;
+  margin-bottom: 1.1rem;
+  box-shadow: var(--shadow-md);
+  transition: .2s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: var(--accent1);
+}
+
+.project-card[data-project="p2"]::before { background: var(--accent3); }
+.project-card[data-project="p3"]::before { background: var(--accent2); }
+.project-card[data-project="p4"]::before { background: var(--accent4); }
+
+.project-card::after {
+  content: attr(data-icon);
+  position: absolute;
+  right: 1.25rem;
+  bottom: .5rem;
+  font-size: 3rem;
+  opacity: .1;
+  pointer-events: none;
+}
+
+.project-card:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--ink); }
+
+.project-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 4px; margin-bottom: 7px; }
+
+.project-name {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+
+.project-arrow { font-size: 1.1rem; color: var(--ink); flex-shrink: 0; margin-left: 8px; }
+
+.project-desc { font-size: .86rem; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+
+.project-tags, .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.project-tag, .modal-tag {
+  font-family: "Space Mono", monospace;
+  font-size: .62rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: var(--card2);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+}
+
+/* REACTIONS */
+.reaction-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 1rem;
+  padding-top: .85rem;
+  border-top: 2px dashed rgba(23,23,31,.18);
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.rxn-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--card2);
+  border: 2px solid var(--ink);
+  border-radius: 100px;
+  padding: 5px 13px;
+  font-family: "Space Mono", monospace;
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: .2s cubic-bezier(.34,1.56,.64,1);
+  touch-action: manipulation;
+}
+
+.rxn-btn:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+
+.rxn-btn.rxn-active-like { background: var(--accent2); }
+.rxn-btn.rxn-active-fire { background: var(--accent5); }
+.rxn-btn.rxn-active-star { background: var(--accent4); }
+.rxn-btn.rxn-pop { animation: rxnPop .3s cubic-bezier(.34,1.56,.64,1); }
+
+/* MEOW */
+.meow-section { text-align: center; margin: 2.5rem 0 .5rem; }
+
+.meow-btn {
+  font-family: "Space Mono", monospace;
+  font-size: .75rem;
+  font-weight: 700;
+  background: var(--card);
+  color: var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: 100px;
+  padding: 9px 22px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: .2s cubic-bezier(.34,1.56,.64,1);
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+.meow-btn:hover {
+  background: var(--accent1);
+  color: #0b0f0c;
+  transform: translate(-2px,-2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.meow-output {
+  margin-top: .65rem;
+  font-family: "Space Mono", monospace;
+  font-size: .72rem;
+  color: var(--muted);
+  min-height: 1.2rem;
+  padding: 0 1rem;
+}
+
+/* LINKS */
+.links-grid { display: flex; flex-direction: column; gap: 12px; }
+
+.link-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--card);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  transition: .2s cubic-bezier(.34,1.56,.64,1);
+  min-height: 64px;
+  touch-action: manipulation;
+}
+
+.link-btn:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 var(--ink); }
+
+.link-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  border: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.link-icon img { display: block; width: 22px; height: 22px; filter: brightness(0) invert(1); }
+
+.link-text { flex: 1; }
+.link-name { font-family: "Baloo 2", sans-serif; font-weight: 700; font-size: .95rem; color: var(--ink); }
+.link-sub { font-size: .72rem; color: var(--muted); font-family: "Space Mono", monospace; margin-top: 2px; overflow-wrap: break-word; }
+.link-arrow { color: var(--ink); font-size: 1rem; }
+
+/* CONTACT */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--card);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.form-row { display: flex; flex-direction: column; gap: 6px; }
+
+.form-row label {
+  font-family: "Space Mono", monospace;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form-row input,
+.form-row textarea {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: .9rem;
+  color: var(--text);
+  background: var(--card2);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 10px 14px;
+  outline: none;
+  resize: vertical;
+  transition: box-shadow .2s ease;
+}
+
+.form-row input:focus, .form-row textarea:focus { box-shadow: 3px 3px 0 var(--ink); }
+
+.contact-submit {
+  align-self: flex-start;
+  font-family: "Space Mono", monospace;
+  font-size: .78rem;
+  font-weight: 700;
+  background: var(--accent1);
+  color: #0b0f0c;
+  border: 2.5px solid var(--ink);
+  border-radius: 100px;
+  padding: 10px 24px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: .2s cubic-bezier(.34,1.56,.64,1);
+  touch-action: manipulation;
+}
+
+.contact-submit:hover:not(:disabled) { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--ink); }
+.contact-submit:disabled { opacity: .6; cursor: not-allowed; }
+
+.contact-status { font-family: "Space Mono", monospace; font-size: .75rem; font-weight: 700; min-height: 1rem; }
+.contact-status.success { color: var(--accent1); }
+.contact-status.error { color: var(--accent2); }
+
+/* NAV */
+.site-nav { position: sticky; top: 5px; z-index: 80; display: flex; justify-content: center; padding: 10px 0; }
+
+.site-nav-inner {
+  display: flex;
+  gap: 4px;
+  background: var(--card);
+  border: 2.5px solid var(--ink);
+  border-radius: 100px;
+  padding: 5px;
+  box-shadow: var(--shadow-sm);
+  max-width: calc(100vw - 2rem);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.site-nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-link {
+  flex-shrink: 0;
+  font-family: "Space Mono", monospace;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.nav-link:hover { color: var(--ink); }
+
+.nav-link.active {
+  background: var(--accent1);
+  color: #0b0f0c;
+}
+
+.nav-theme-toggle {
+  flex-shrink: 0;
+  margin-left: 4px;
+  padding: 7px 10px 7px 14px;
+  border: none;
+  border-left: 2px solid rgba(23,23,31,.15);
+  background: transparent;
+  font-size: .78rem;
+  font-weight: 700;
+  font-family: "Space Mono", monospace;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+/* FIXED WIDGETS */
+#now-playing,
+.cmd-hint-btn {
+  position: fixed;
+  left: 1.25rem;
+  z-index: 90;
+  background: var(--card);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+#now-playing {
+  bottom: 4.5rem;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  cursor: pointer;
+  max-width: 220px;
+  touch-action: manipulation;
+}
+
+.np-cover {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 2px solid var(--ink);
+  background: var(--accent3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  animation: npSpin 5s linear infinite;
+}
+
+.np-cover.paused { animation-play-state: paused; }
+.np-info { flex: 1; min-width: 0; }
+
+.np-track {
+  font-family: "Space Mono", monospace;
+  font-size: .62rem;
+  color: var(--ink);
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.np-artist { font-family: "Space Mono", monospace; font-size: .58rem; color: var(--muted); }
+
+.np-bars { display: flex; align-items: flex-end; gap: 2px; height: 16px; flex-shrink: 0; }
+.np-bar { width: 3px; background: var(--accent1); border-radius: 2px; animation: npBar .7s ease infinite; }
+.np-bar:nth-child(2) { animation-delay: .15s; }
+.np-bar:nth-child(3) { animation-delay: .30s; }
+.np-bar:nth-child(4) { animation-delay: .45s; }
+.np-bar.paused { animation-play-state: paused; height: 4px; }
+
+.cmd-hint-btn {
+  bottom: 1.25rem;
+  padding: 6px 12px;
+  font-family: "Space Mono", monospace;
+  font-size: .62rem;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  touch-action: manipulation;
+}
+
+.cmd-hint-btn kbd, .cmd-kbd {
+  background: var(--card2);
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: .6rem;
+}
+
+/* TOAST */
+#welcome-toast {
+  position: fixed;
+  bottom: -100px;
+  right: 1.25rem;
+  z-index: 9998;
+  background: var(--card);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "Space Mono", monospace;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--ink);
+  max-width: 300px;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transition: bottom .5s cubic-bezier(.34,1.56,.64,1), opacity .4s ease;
+}
+
+#welcome-toast.show { bottom: 1.5rem; opacity: 1; }
+
+.toast-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent1);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse-dot 1.8s ease infinite;
+}
+
+.toast-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: .85rem; margin-left: 4px; }
+
+/* PROGRESS */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0;
+  height: 5px;
+  background: var(--accent1);
+  border-bottom: 2px solid var(--ink);
+  z-index: 9999;
+  transition: width .08s linear;
+}
+
+/* MODAL */
+.modal-overlay, .cmd-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+
+.modal-overlay {
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(23,23,31,.55);
+  backdrop-filter: blur(6px);
+}
+
+.modal-overlay.open, .cmd-overlay.open { opacity: 1; pointer-events: auto; }
+
+.modal-box {
+  background: #fff;
+  border: 3px solid #17171f;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 540px;
+  max-height: 88vh;
+  max-height: 88dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 2rem 1.75rem;
+  position: relative;
+  box-shadow: 8px 8px 0 #17171f;
+  transform: translateY(24px) scale(.97);
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+
+.modal-overlay.open .modal-box { transform: translateY(0) scale(1); }
+
+.modal-close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  background: var(--accent5);
+  border: 2px solid #17171f;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #17171f;
+  box-shadow: 2px 2px 0 #17171f;
+}
+
+.modal-screenshot-wrap {
+  width: 100%;
+  aspect-ratio: 16/10;
+  border: 2.5px solid #000;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f2f4ee;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.modal-screenshot { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+
+.modal-emoji { font-size: 2.8rem; margin-bottom: .75rem; display: block; }
+
+.modal-title { font-family: "Baloo 2", sans-serif; font-size: 1.5rem; font-weight: 700; color: #17171f; margin-bottom: .5rem; }
+
+.modal-subtitle {
+  font-family: "Space Mono", monospace;
+  font-size: .7rem;
+  font-weight: 700;
+  color: #34c759;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.modal-desc { font-size: .92rem; color: #55556b; line-height: 1.8; margin-bottom: 1.25rem; }
+
+.modal-section-title {
+  font-family: "Space Mono", monospace;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #6b6b80;
+  margin-bottom: .6rem;
+}
+
+.modal-tags { margin-bottom: 1.4rem; }
+
+.modal-highlights { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+
+.modal-highlight-item { display: flex; align-items: flex-start; gap: 10px; font-size: .87rem; color: #55556b; line-height: 1.6; }
+.modal-highlight-item .icon { flex-shrink: 0; }
+
+.modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.modal-btn {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 12px;
+  font-family: "Space Mono", monospace;
+  font-size: .75rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2.5px solid #17171f;
+  box-shadow: 3px 3px 0 #17171f;
+  color: #17171f;
+  touch-action: manipulation;
+}
+
+.modal-btn-primary { background: var(--accent3); }
+.modal-btn-secondary { background: var(--accent5); }
+
+/* COMMAND PALETTE */
+.cmd-overlay {
+  z-index: 600;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: clamp(3rem, 12vh, 8rem);
+  background: rgba(23,23,31,.5);
+  backdrop-filter: blur(8px);
+}
+
+.cmd-box {
+  background: #fff;
+  border: 3px solid #17171f;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 80vh;
+  max-height: 80dvh;
+  margin: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 8px 8px 0 #17171f;
+  transform: translateY(-16px) scale(.97);
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+
+.cmd-overlay.open .cmd-box { transform: translateY(0) scale(1); }
+
+.cmd-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem 1.25rem;
+  border-bottom: 2.5px solid #17171f;
+  background: #f2f4ee;
+  flex-shrink: 0;
+}
+
+.cmd-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: "Space Mono", monospace;
+  font-size: .9rem;
+  color: #17171f;
+}
+
+.cmd-results { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: .5rem 0; }
+
+.cmd-section-header {
+  font-family: "Space Mono", monospace;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #6b6b80;
+  padding: .5rem 1.25rem .3rem;
+}
+
+.cmd-item { display: flex; align-items: center; gap: 12px; padding: .7rem 1.25rem; cursor: pointer; transition: background .15s ease; }
+.cmd-item:hover, .cmd-item.active { background: #f2f4ee; }
+
+.cmd-item-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 2px solid #17171f;
+}
+
+.cmd-item-text { flex: 1; }
+.cmd-item-name { font-size: .88rem; color: #17171f; font-weight: 700; }
+.cmd-item-sub { font-family: "Space Mono", monospace; font-size: .65rem; color: #6b6b80; }
+
+.cmd-footer {
+  border-top: 2.5px solid #17171f;
+  padding: .6rem 1.25rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  background: #f2f4ee;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.cmd-footer-hint { font-family: "Space Mono", monospace; font-size: .6rem; font-weight: 700; color: #6b6b80; }
+
+/* FOOTER */
+.divider { display: flex; align-items: center; gap: 1rem; margin: 2.5rem 0 0; }
+.divider-line { flex: 1; height: 3px; background: repeating-linear-gradient(90deg, var(--ink) 0 6px, transparent 6px 12px); opacity: .3; }
+.divider-icon { font-size: 1.1rem; opacity: .6; }
+
+.footer { text-align: center; padding-top: 2.5rem; font-family: "Space Mono", monospace; font-size: .66rem; color: var(--muted); }
+.footer .heart { color: var(--accent2); }
+
+/* ACCESSIBILITY */
+.skip-link {
+  position: fixed;
+  top: -60px;
+  left: 1rem;
+  z-index: 10000;
+  background: var(--accent1);
+  color: #0b0f0c;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 2.5px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+}
+
+.skip-link:focus { top: 1rem; }
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--accent3);
+  outline-offset: 3px;
+}
+
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
+/* DARK VARIANT */
+body.light {
+  --bg: #000000;
+  --surface: #000000;
+  --card: #111217;
+  --card2: #1c1d27;
+  --text: #ffffff;
+  --muted: #9a9ab0;
+  --ink: #ffffff;
+  --accent1: #4ade80;
+  --accent2: #ff8fab;
+  --accent3: #7eb8ff;
+  --accent4: #c9b1ff;
+  --accent5: #ffc966;
+}
+
+body.light .role-tag, body.light .modal-box, body.light .cmd-box { background: #1c1d27; color: #fff; }
+body.light .role-tag, body.light .modal-box, body.light .cmd-box,
+body.light .cmd-input-wrap, body.light .cmd-footer { border-color: #fff; }
+body.light .modal-title, body.light .modal-desc, body.light .modal-highlight-item,
+body.light .cmd-item-name, body.light .cmd-input { color: #f4f4fb; }
+body.light .modal-tag, body.light .cmd-item-icon { background: #21222d; color: #fff; border-color: #fff; }
+body.light .cmd-input-wrap, body.light .cmd-footer,
+body.light .cmd-item:hover, body.light .cmd-item.active { background: #21222d; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes earWiggle { 0%,100%{transform:rotate(0)} 20%{transform:rotate(-6deg)} 60%{transform:rotate(5deg)} }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes pulse-dot { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:.5} }
+@keyframes marquee { to{transform:translateX(-50%)} }
+@keyframes rxnPop { 0%{transform:scale(1)} 50%{transform:scale(1.25)} 100%{transform:scale(1)} }
+@keyframes npSpin { to{transform:rotate(360deg)} }
+@keyframes npBar { 0%,100%{height:3px} 50%{height:14px} }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+.container { padding-left: max(1.5rem, env(safe-area-inset-left)); padding-right: max(1.5rem, env(safe-area-inset-right)); }
+.site-nav { padding-top: max(10px, env(safe-area-inset-top)); }
+.cmd-hint-btn { bottom: max(1.25rem, env(safe-area-inset-bottom)); left: max(1.25rem, env(safe-area-inset-left)); }
+#now-playing { bottom: max(4.5rem, calc(4.5rem + env(safe-area-inset-bottom))); left: max(1.25rem, env(safe-area-inset-left)); }
+#welcome-toast.show { bottom: max(1.5rem, calc(1.5rem + env(safe-area-inset-bottom))); }
+#backToTop { bottom: max(30px, calc(30px + env(safe-area-inset-bottom))); right: max(30px, env(safe-area-inset-right)); }
+
+@media (max-width: 640px) {
+  #now-playing, .cmd-hint-btn { display: none; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 1.25rem 1rem 4rem; }
+  .hero { padding: 2.5rem 0 1.5rem; }
+  .hero-name { font-size: 2rem; }
+  .avatar-wrap { width: 108px; height: 108px; }
+  .status-badge { right: -6px; }
+  .stats-row { gap: 8px; }
+  .stat-card { padding: 1rem .75rem; }
+  .stat-num { font-size: 1.7rem; }
+  .project-card { padding: 1.1rem 1.15rem; }
+  .project-name { font-size: 1.02rem; }
+  .link-btn { padding: .85rem 1rem; }
+  .site-nav-inner { max-width: calc(100vw - 1.25rem); }
+  .nav-link { font-size: .68rem; padding: 6px 11px; }
+  #welcome-toast { right: .75rem; left: .75rem; max-width: none; }
+  #backToTop { right: 18px; bottom: 18px; width: 44px; height: 44px; font-size: 20px; }
+
+  .filter-row { gap: 6px; }
+  .filter-chip { font-size: .66rem; padding: 5px 12px; }
+
+  .modal-overlay { padding: .75rem; }
+  .modal-box { padding: 1.5rem 1.25rem; border-radius: 18px; }
+  .modal-emoji { font-size: 2.2rem; margin-bottom: .5rem; }
+  .modal-title { font-size: 1.25rem; }
+  .modal-desc { font-size: .85rem; }
+  .modal-actions { flex-direction: column; }
+  .modal-btn { min-width: 100%; }
+
+  .cmd-overlay { padding-top: 2.25rem; padding-left: .5rem; padding-right: .5rem; }
+  .cmd-box { margin: 0; }
+  .cmd-input-wrap { padding: .85rem 1rem; }
+  .cmd-item { padding: .65rem 1rem; }
+}
+
+@media (max-width: 360px) {
+  .hero-name { font-size: 1.75rem; }
+  .stat-num { font-size: 1.5rem; }
+  .stat-card { padding: .85rem .5rem; }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+  #now-playing { display: none; }
+  .cmd-hint-btn span { display: none; }
+}
