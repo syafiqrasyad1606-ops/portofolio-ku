@@ -150,7 +150,7 @@
 
     <div class="stats-row">
       <div class="stat-card reveal" data-icon="🚀">
-        <div class="stat-num">3</div>
+        <div class="stat-num">4</div>
         <div class="stat-label">Projects selesai</div>
       </div>
       <div class="stat-card reveal" data-icon="📅">
@@ -255,6 +255,7 @@
         <button class="filter-chip" data-filter="html">HTML</button>
         <button class="filter-chip" data-filter="css">CSS</button>
         <button class="filter-chip" data-filter="javascript">JavaScript</button>
+        <button class="filter-chip" data-filter="react">React</button>
         <button class="filter-chip" data-filter="php">PHP</button>
         <button class="filter-chip" data-filter="mysql">MySQL</button>
       </div>
@@ -311,6 +312,25 @@
           <button class="rxn-btn" id="rxn-p3-star" onclick="handleReaction('p3','star',this)">⭐ <span class="rxn-count">0</span></button>
         </div>
       </div>
+
+      <div class="project-card reveal" data-icon="🌈" data-project="p4" data-tags="javascript,react,html,css" onclick="openModal('p4')">
+        <div class="project-top">
+          <span class="project-name">Web Bimba 🌈</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <p class="project-desc">Website untuk lembaga bimbingan belajar anak (Bimba), dibuat dengan tampilan ceria dan ramah anak.</p>
+        <div class="project-tags">
+          <span class="project-tag">JavaScript</span>
+          <span class="project-tag">React</span>
+          <span class="project-tag">HTML</span>
+          <span class="project-tag">CSS</span>
+        </div>
+        <div class="reaction-row" onclick="event.stopPropagation()">
+          <button class="rxn-btn" id="rxn-p4-like" onclick="handleReaction('p4','like',this)">❤️ <span class="rxn-count">0</span></button>
+          <button class="rxn-btn" id="rxn-p4-fire" onclick="handleReaction('p4','fire',this)">🔥 <span class="rxn-count">0</span></button>
+          <button class="rxn-btn" id="rxn-p4-star" onclick="handleReaction('p4','star',this)">⭐ <span class="rxn-count">0</span></button>
+        </div>
+      </div>
     </section>
 
     <div class="meow-section reveal">
@@ -322,7 +342,9 @@
       <div class="section-label">✦ Find Me At</div>
       <div class="links-grid">
         <a href="https://linkedin.com/in/syafiqrasyad" target="_blank" rel="noopener noreferrer" class="link-btn">
-          <div class="link-icon" style="background:#59c1f0">💼</div>
+          <div class="link-icon" style="background:#0A66C2">
+            <img src="https://cdn.simpleicons.org/linkedin/ffffff" alt="LinkedIn" width="22" height="22">
+          </div>
           <div class="link-text">
             <div class="link-name">LinkedIn</div>
             <div class="link-sub">Syafiq Rasyad</div>
@@ -331,7 +353,9 @@
         </a>
 
         <a href="https://github.com/syafiqrasyad1606-ops" target="_blank" rel="noopener noreferrer" class="link-btn">
-          <div class="link-icon" style="background:#ff6f91">🐙</div>
+          <div class="link-icon" style="background:#17171f">
+            <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub" width="22" height="22">
+          </div>
           <div class="link-text">
             <div class="link-name">GitHub</div>
             <div class="link-sub">@syafiqrasyad1606-ops</div>
@@ -340,7 +364,9 @@
         </a>
 
         <a href="mailto:Syadodoi16@gmail.com" class="link-btn">
-          <div class="link-icon" style="background:#a689ff">✉️</div>
+          <div class="link-icon" style="background:#EA4335">
+            <img src="https://cdn.simpleicons.org/gmail/ffffff" alt="Gmail" width="22" height="22">
+          </div>
           <div class="link-text">
             <div class="link-name">My Email</div>
             <div class="link-sub">Syadodoi16@gmail.com</div>
@@ -439,6 +465,20 @@
         ],
         demoUrl: "https://syafiqrasyad1606-ops.github.io/Web-Kelompok/",
         githubUrl: "https://github.com/syafiqrasyad1606-ops/Web-Kelompok"
+      },
+      p4: {
+        emoji: "🌈",
+        subtitle: "Project #4 · Web Bimba",
+        title: "Web Bimba — Rainbow Kids",
+        desc: "Website untuk lembaga bimbingan belajar anak (Bimba) Rainbow Kids Sidomakmur. Dibangun dengan React untuk menampilkan profil lembaga, program belajar, dan informasi pendaftaran dengan tampilan yang ceria dan ramah anak.",
+        tags: ["JavaScript", "React", "HTML", "CSS"],
+        highlights: [
+          { icon: "🎨", text: "Desain colorful dan playful, cocok untuk audiens anak-anak dan orang tua." },
+          { icon: "⚛️", text: "Dibangun dengan React, komponen-komponen UI-nya reusable dan gampang dikembangkan." },
+          { icon: "📱", text: "Responsive, nyaman diakses dari HP maupun desktop." }
+        ],
+        demoUrl: "https://web-bimba-rainbow-kids-sidomakmur.vercel.app/",
+        githubUrl: "https://github.com/syafiqrasyad1606-ops/web-bimba-rainbow-kids-sidomakmur"
       }
     };
 
@@ -447,10 +487,14 @@
       if (!d) return;
 
       const shot = document.getElementById("modalScreenshot");
-      shot.src =
-        "https://api.microlink.io/?url=" +
-        encodeURIComponent(d.demoUrl) +
-        "&screenshot=true&meta=false&embed=screenshot.url&colorScheme=light&viewport.width=1280&viewport.height=800";
+      if (d.demoUrl) {
+        shot.src =
+          "https://api.microlink.io/?url=" +
+          encodeURIComponent(d.demoUrl) +
+          "&screenshot=true&meta=false&embed=screenshot.url&colorScheme=light&viewport.width=1280&viewport.height=800";
+      } else {
+        shot.removeAttribute("src");
+      }
       shot.alt = "Screenshot " + d.title;
 
       document.getElementById("modalEmoji").textContent = d.emoji;
@@ -469,10 +513,12 @@
           </div>
         `).join("");
 
-      document.getElementById("modalActions").innerHTML = `
-        <a href="${d.demoUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary">🌐 Lihat Demo</a>
-        <a href="${d.githubUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-secondary">🐙 GitHub</a>
-      `;
+      const actionsHtml = [];
+      if (d.demoUrl) {
+        actionsHtml.push(`<a href="${d.demoUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-primary">🌐 Lihat Demo</a>`);
+      }
+      actionsHtml.push(`<a href="${d.githubUrl}" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn-secondary">🐙 GitHub</a>`);
+      document.getElementById("modalActions").innerHTML = actionsHtml.join("");
 
       document.getElementById("modalOverlay").classList.add("open");
       document.body.style.overflow = "hidden";
@@ -537,7 +583,7 @@
     /* REACTIONS */
     const RXN_PREFIX = "syafiqrasyad_portfolio_2025";
     const API_BASE = "https://countapi.mileshilliard.com/api/v1";
-    const PROJECTS = ["p1", "p2", "p3"];
+    const PROJECTS = ["p1", "p2", "p3", "p4"];
     const RXN_CLASS = { like: "rxn-active-like", fire: "rxn-active-fire", star: "rxn-active-star" };
 
     function hasReacted(project, type) {
@@ -680,6 +726,7 @@
       { section: "🗂️ Projects", icon: "🚀", name: "Program Pencatatan Keuangan", sub: "HTML · CSS · JavaScript", action: () => openModal("p1") },
       { section: "🗂️ Projects", icon: "✨", name: "Portofolio Web", sub: "HTML/CSS · JavaScript", action: () => openModal("p2") },
       { section: "🗂️ Projects", icon: "🎨", name: "Web Kelompok", sub: "PHP · MySQL · HTML/CSS", action: () => openModal("p3") },
+      { section: "🗂️ Projects", icon: "🌈", name: "Web Bimba", sub: "JavaScript · React · HTML/CSS", action: () => openModal("p4") },
       { section: "🔗 Links", icon: "💼", name: "LinkedIn", sub: "linkedin.com/in/syafiqrasyad", action: () => window.open("https://linkedin.com/in/syafiqrasyad", "_blank") },
       { section: "🔗 Links", icon: "🐙", name: "GitHub", sub: "@syafiqrasyad1606-ops", action: () => window.open("https://github.com/syafiqrasyad1606-ops", "_blank") },
       { section: "🔗 Links", icon: "✉️", name: "Email", sub: "Syadodoi16@gmail.com", action: () => window.location.href = "mailto:Syadodoi16@gmail.com" },
